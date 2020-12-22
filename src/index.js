@@ -1,4 +1,6 @@
 import App from './App.svelte';
+import moment from 'moment';
+import momentID from './libs/momen-id';
 
 /* --------------------------------- STYLE'S -------------------------------- */
 import './styles/buttons.scss';
@@ -14,7 +16,7 @@ const app = new App({
   target: document.body,
 });
 
-// console.log(moment([2007, 0, 29]).fromNow());
-// moment.locale('id');
+moment.defineLocale('id', momentID);
+moment.locale('ID');
 
 export default app;
