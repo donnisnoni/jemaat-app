@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "paths": {
+      "/@components/*": [
+        "./src/components/*"
+      ],
+      "/@actions/*": [
+        "./src/actions/*"
+      ],
+      "/@views/*": [
+        "./src/views/*"
+      ],
+      "/@shared/*": [
+        "./src/shared/*"
+      ],
+      "/@store/*": [
+        "./src/store/*"
+      ]
+    }
+  }
+}

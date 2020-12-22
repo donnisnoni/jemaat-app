@@ -1,0 +1,7 @@
+{
+  "validation": {
+    "namaRayon": {
+      "minlength": 5
+    }
+  }
+}

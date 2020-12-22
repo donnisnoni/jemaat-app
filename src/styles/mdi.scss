@@ -1,0 +1,12 @@
+/* ------------------------------- MDI TWEAKS ------------------------------- */
+.mdi-xl::before {
+  @apply text-xl;
+}
+
+.mdi-2xl::before {
+  @apply text-2xl;
+}
+
+.mdi-rotate-180 {
+  transition: all 0.3s ease-in;
+}

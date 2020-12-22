@@ -1,0 +1,67 @@
+.sidenav {
+  @apply bg-white;
+  @apply flex-col;
+  @apply flex;
+  @apply max-w-max;
+  @apply p-2;
+  @apply shadow-md;
+  @apply w-full;
+  @apply max-h-screen;
+
+  li {
+    &:first-child {
+      a {
+        @apply mt-0;
+      }
+    }
+
+    &:last-child {
+      a {
+        @apply mb-0;
+      }
+    }
+  }
+
+  a {
+    @apply block;
+    @apply items-center;
+    @apply my-1;
+    @apply rounded-md;
+    display: flex;
+
+    &:hover {
+      @apply bg-gradient-to-l;
+      @apply from-blue-100;
+      @apply to-blue-200;
+    }
+
+    &.active {
+      @apply bg-gradient-to-r;
+      @apply from-blue-200;
+      @apply to-blue-300;
+      /*  */
+      @apply font-bold;
+      @apply shadow-sm;
+    }
+
+    .mdi {
+      @apply m-2;
+      @apply px-2;
+      @apply text-xl;
+    }
+  }
+
+  .link-label {
+    @apply hidden;
+  }
+}
+
+@screen lg {
+  .sidenav.expand {
+    max-width: 230px;
+
+    .link-label {
+      display: block;
+    }
+  }
+}

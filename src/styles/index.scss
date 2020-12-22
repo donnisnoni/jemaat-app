@@ -1,0 +1,50 @@
+@import 'tailwindcss/base.css';
+@import 'tailwindcss/components.css';
+@import 'tailwindcss/utilities.css';
+
+:root *,
+button:focus {
+  outline-color: #19191aa9;
+}
+
+body {
+  font-family: 'Google Sans', Roboto, 'Noto Sans', 'Noto Sans JP', 'Noto Sans KR', 'Noto Naskh Arabic', 'Noto Sans Thai',
+    'Noto Sans Hebrew', 'Noto Sans Bengali', sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  @apply text-sm;
+}
+
+.card {
+  @apply rounded-md;
+  @apply shadow-md;
+}
+
+.rayon-info--jumlah-kk {
+  width: 100%;
+  max-width: 30px;
+  max-height: 30px;
+}
+
+.page-header {
+  @apply bg-white;
+  @apply p-3;
+  @apply card;
+  @apply text-base;
+  // @apply font-bold;
+}
+
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 5;
+}
+
+.simple-dialog {
+  width: 100%;
+  max-width: 400px;
+  height: max-content;
+}

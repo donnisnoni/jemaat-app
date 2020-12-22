@@ -1,0 +1,82 @@
+[
+  {
+    "id_rayon": 1,
+    "nama": "Kasih",
+    "tgl_buat": "2020-09-05T19:28:47.000Z",
+    "tgl_terakhir_update": "2020-12-21T12:32:21.000Z",
+    "jumlah_kk": 0,
+    "kepala_keluarga": []
+  },
+  {
+    "id_rayon": 2,
+    "nama": "Sukacita",
+    "tgl_buat": "2020-12-13T13:28:43.000Z",
+    "tgl_terakhir_update": "2020-12-21T15:04:39.000Z",
+    "jumlah_kk": 0,
+    "kepala_keluarga": []
+  },
+  {
+    "id_rayon": 3,
+    "nama": "Damai Sejahtera",
+    "tgl_buat": "2020-12-13T13:29:03.000Z",
+    "tgl_terakhir_update": "2020-12-21T15:04:52.000Z",
+    "jumlah_kk": 0,
+    "kepala_keluarga": []
+  },
+  {
+    "id_rayon": 4,
+    "nama": "Kesabaran",
+    "tgl_buat": "2020-12-13T13:29:18.000Z",
+    "tgl_terakhir_update": "2020-12-21T15:04:55.000Z",
+    "jumlah_kk": 0,
+    "kepala_keluarga": []
+  },
+  {
+    "id_rayon": 5,
+    "nama": "Kemurahan",
+    "tgl_buat": "2020-12-13T13:31:40.000Z",
+    "tgl_terakhir_update": "2020-12-21T15:04:58.000Z",
+    "jumlah_kk": 0,
+    "kepala_keluarga": []
+  },
+  {
+    "id_rayon": 6,
+    "nama": "Kebaikan",
+    "tgl_buat": "2020-12-13T13:31:49.000Z",
+    "tgl_terakhir_update": "2020-12-21T15:05:02.000Z",
+    "jumlah_kk": 0,
+    "kepala_keluarga": []
+  },
+  {
+    "id_rayon": 7,
+    "nama": "Kesetiaan",
+    "tgl_buat": "2020-12-13T13:32:00.000Z",
+    "tgl_terakhir_update": "2020-12-21T15:05:07.000Z",
+    "jumlah_kk": 0,
+    "kepala_keluarga": []
+  },
+  {
+    "id_rayon": 8,
+    "nama": "Kelemahlembutan",
+    "tgl_buat": "2020-12-21T15:05:36.000Z",
+    "tgl_terakhir_update": "2020-12-21T15:05:39.000Z",
+    "jumlah_kk": 0,
+    "kepala_keluarga": []
+  },
+  {
+    "id_rayon": 9,
+    "nama": "Penguasaan Diri",
+    "tgl_buat": "2020-12-13T13:32:37.000Z",
+    "tgl_terakhir_update": "2020-12-21T15:05:21.000Z",
+    "jumlah_kk": 0,
+    "kepala_keluarga": []
+  },
+  {
+    "id_rayon": 57,
+    "nama": "Tesx Mama",
+    "tgl_buat": "2020-12-22T08:01:59.000Z",
+    "tgl_terakhir_update": "2020-12-22T08:01:59.000Z",
+    "jumlah_kk": 0,
+    "kepala_keluarga": []
+  }
+]

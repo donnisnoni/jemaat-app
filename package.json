@@ -1,0 +1,49 @@
+{
+  "name": "jemaat-app",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vite",
+    "compile": "cross-env NODE_ENV=production vite build",
+    "check": "svelte-check --human && tsc --noEmit",
+    "watch:svelte": "svelte-check --human --watch",
+    "watch:ts": "tsc --noEmit --watch",
+    "start": "run-p watch:* dev",
+    "build": "run-s check compile",
+    "serve": "sirv dist",
+    "postinstall": "rm -rf ./node_modules/@vue/compiler-sfc/node_modules/postcss/ &&  cp -r ./node_modules/postcss/ ./node_modules/@vue/compiler-sfc/node_modules/"
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^3.1.3",
+    "@tsconfig/svelte": "^1.0.10",
+    "@types/node": "^14.14.14",
+    "autoprefixer": "^10.1.0",
+    "cross-env": "^7.0.3",
+    "cssnano": "^4.1.10",
+    "cssnano-preset-advanced": "^4.0.7",
+    "postcss": "^8.2.1",
+    "postcss-import": "^14.0.0",
+    "prettier": "^2.2.1",
+    "prettier-plugin-svelte": "^1.4.2",
+    "purgecss-from-html": "^3.1.3",
+    "purgecss-from-svelte": "^2.0.2",
+    "sass": "^1.30.0",
+    "sequelize-cli": "^6.2.0",
+    "sirv-cli": "^1.0.10",
+    "svelte": "^3.31.0",
+    "svelte-check": "^1.1.23",
+    "svelte-preprocess": "^4.6.1",
+    "svelte-spa-router": "^3.1.0",
+    "tailwindcss": "^2.0.2",
+    "typescript": "^4.1.3",
+    "vite": "^1.0.0-rc.13",
+    "vite-aliases": "^0.1.3",
+    "vite-plugin-svelte": "^3.0.1"
+  },
+  "dependencies": {
+    "ajv-errors": "^2.0.0",
+    "axios": "^0.21.1",
+    "fastify": "^3.9.2",
+    "mariadb": "^2.5.2",
+    "sequelize": "^6.3.5"
+  }
+}
