@@ -3,6 +3,7 @@
   import { onDestroy } from 'svelte';
   import AddRayonDialog from './AddRayonDialog.svelte';
   import Button from '/@components/Button.svelte';
+  import moment from 'moment';
   import { fade, fly } from 'svelte/transition';
   import { linear } from 'svelte/easing';
 
@@ -63,7 +64,7 @@
           <div class="flex flex-col">
             <div class="font-bold">{rayon.nama}</div>
             <!-- svelte-ignore missing-declaration -->
-            <div class="text-xs place-self-end">{rayon.tgl_terakhir_update}</div>
+            <div class="text-xs place-self-end">{moment(rayon.tgl_terakhir_update).fromNow()}</div>
           </div>
           <div
             class="flex items-center justify-center p-1 ml-auto text-white bg-blue-500 rounded-full rayon-info--jumlah-kk"
