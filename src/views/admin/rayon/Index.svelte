@@ -54,7 +54,7 @@
   <div class="flex flex-col flex-1 overflow-y-auto">
     {#await response}
       <div class="flex justify-center flex-1 hidden-100">
-        <div class="self-center text-lg text-gray-600 animate-pulse">Loading...</div>
+        <div class="self-center text-lg text-gray-600 animate-pulse">Memuat...</div>
       </div>
     {:then dataRayon}
       {#each dataRayon as rayon}
