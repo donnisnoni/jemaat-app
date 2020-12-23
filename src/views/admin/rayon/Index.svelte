@@ -58,9 +58,8 @@
       </div>
     {:then dataRayon}
       {#each dataRayon as rayon}
-        <div
-          transition:fly={{ duration: 200, easing: linear }}
-          class="flex p-3 border-b cursor-pointer border-gray-10 ">
+        <!-- transition:fly={{ duration: 200, easing: linear }} -->
+        <div class="flex p-3 border-b cursor-pointer border-gray-10 ">
           <div class="flex flex-col">
             <div class="font-bold">{rayon.nama}</div>
             <!-- svelte-ignore missing-declaration -->
