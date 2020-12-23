@@ -53,13 +53,13 @@
 
   <div class="flex flex-col flex-1 overflow-y-auto">
     {#await response}
-      <div class="flex justify-center flex-1">
-        <div class="self-center text-lg text-gray-600">Loading...</div>
+      <div class="flex justify-center flex-1 hidden-100">
+        <div class="self-center text-lg text-gray-600 animate-pulse">Loading...</div>
       </div>
     {:then dataRayon}
       {#each dataRayon as rayon}
         <!-- transition:fly={{ duration: 200, easing: linear }} -->
-        <div class="flex p-3 border-b cursor-pointer border-gray-10 ">
+        <div class="flex p-3 border-b cursor-pointer">
           <div class="flex flex-col">
             <div class="font-bold">{rayon.nama}</div>
             <!-- svelte-ignore missing-declaration -->
