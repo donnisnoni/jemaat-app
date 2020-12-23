@@ -1,6 +1,5 @@
 const db = require('../models');
 const { fn, col } = require('sequelize');
-const moment = require('../libs/moment-with-locales');
 
 /**
  * Rayon get controller
