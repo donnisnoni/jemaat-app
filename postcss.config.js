@@ -9,6 +9,6 @@ module.exports = {
     // PRODUCTION && require('@fullhuman/postcss-purgecss')(tailwindConfig.purge),
     require('tailwindcss'),
     PRODUCTION && require('autoprefixer'),
-    PRODUCTION && require('cssnano')({ preset: 'advanced' }),
+    PRODUCTION && require('cssnano')(),
   ],
 };
