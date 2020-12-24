@@ -50,7 +50,7 @@
   bind:this={_this}
   on:blur={close}
   tabindex="0"
-  class="fixed bg-white card"
+  class="fixed bg-white card{$$props.class || ''}"
   style="min-height:20px; min-width:20px; top:{y}px; left:{x}px; z-index:8; outline:none"
   class:hidden={!visible}>
   <slot />
