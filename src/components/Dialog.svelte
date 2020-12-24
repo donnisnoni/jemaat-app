@@ -33,7 +33,7 @@
     visible = true;
     const animation = dialogEl.animate(ANIMATIONS.FADE_IN.KEYFRAMES, {
       duration: 150,
-      easing: ANIMATIONS.FADE_IN.EASING,
+      easing: 'linear',
     });
     animation.onfinish = async () => {
       await tick();
@@ -45,7 +45,7 @@
     if (typeof cancel == 'function' && cancel()) return;
     const animation = dialogEl.animate(ANIMATIONS.FADE_IN.KEYFRAMES, {
       duration: 150,
-      easing: ANIMATIONS.FADE_IN.EASING,
+      easing: 'linear',
       direction: 'reverse',
     });
     animation.onfinish = async () => {
