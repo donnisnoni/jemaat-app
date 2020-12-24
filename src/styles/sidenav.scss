@@ -1,3 +1,5 @@
+/* purgecss start ignore */
+
 .sidenav {
   @apply bg-white;
   @apply flex-col;
@@ -65,3 +67,5 @@
     }
   }
 }
+
+/* purgecss end ignore */
