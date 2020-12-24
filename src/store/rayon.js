@@ -5,17 +5,6 @@ import http from '/@shared/http';
 import axios from 'axios';
 
 let cancelTokenSrc = axios.CancelToken.source();
-
-/** The data/store */
-// export const store = writable(undefined);
-
-/** The state of request */
-// export const state = writable('INITIAL');
-
-/** Get the data */
-// export async function get() {
-//   return store
-// }
 const url = '/api/data/rayon';
 
 /** Trigger fetch data from server */
