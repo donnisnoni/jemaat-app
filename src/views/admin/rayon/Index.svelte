@@ -25,7 +25,8 @@
   }
 
   function showSuccessAlert() {
-    window.alert('Berhasil menambahkan ' + lastRayonSuccesCreated.nama + ' sebagai rayon baru kita!');
+    lastRayonSuccesCreated &&
+      window.alert('Berhasil menambahkan ' + lastRayonSuccesCreated.nama + ' sebagai rayon baru kita!');
   }
 
   onDestroy(() => {
