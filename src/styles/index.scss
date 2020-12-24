@@ -19,6 +19,7 @@ body {
   @apply shadow-md;
 }
 
+/* purgecss start ignore */
 .rayon-info--jumlah-kk {
   width: 100%;
   max-width: 25px;
@@ -26,6 +27,7 @@ body {
   font-size: 12px;
   align-self: center;
 }
+/* purgecss end ignore */
 
 .page-header {
   @apply bg-white;
