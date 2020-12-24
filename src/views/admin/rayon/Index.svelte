@@ -29,9 +29,7 @@
       window.alert('Berhasil menambahkan ' + lastRayonSuccesCreated.nama + ' sebagai rayon baru kita!');
   }
 
-  onDestroy(() => {
-    rayonStore.cancel('Component is destroyed');
-  });
+  onDestroy(rayonStore.cancel);
 </script>
 
 <div class="flex flex-col flex-1 overflow-hidden bg-white card">
