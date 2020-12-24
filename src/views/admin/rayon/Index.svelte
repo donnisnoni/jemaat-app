@@ -22,11 +22,13 @@
 
   function onSuccessCreateRayon({ detail }) {
     lastRayonSuccesCreated = detail.dataRayon;
+    refetchData();
   }
 
   function showSuccessAlert() {
     lastRayonSuccesCreated &&
       alert('Berhasil menambahkan ' + lastRayonSuccesCreated.nama + ' sebagai rayon baru kita!');
+    lastRayonSuccesCreated = null;
   }
 
   onDestroy(rayonStore.cancel);
