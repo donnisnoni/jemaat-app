@@ -4,8 +4,6 @@
   import AddRayonDialog from './AddRayonDialog.svelte';
   import Button from '/@components/Button.svelte';
   import moment from 'moment';
-  import { fade, fly } from 'svelte/transition';
-  import { linear } from 'svelte/easing';
 
   let addRayonDialog;
   let lastRayonSuccesCreated = null;
@@ -58,7 +56,6 @@
       </div>
     {:then dataRayon}
       {#each dataRayon as rayon}
-        <!-- transition:fly={{ duration: 200, easing: linear }} -->
         <div class="flex p-3 border-b cursor-pointer">
           <div class="flex flex-col">
             <div class="font-bold">{rayon.nama}</div>
