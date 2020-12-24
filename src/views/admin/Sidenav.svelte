@@ -24,7 +24,7 @@
 <nav
   class="relative sidenav sm:m-2 sm:rounded-md sm:text:lg"
   class:expand={expanded}
-  style={!hidden || 'display:none'}
+  style={hidden && 'display:none'}
   id="admin-sidenav">
   <ul>
     <li>
