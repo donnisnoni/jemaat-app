@@ -8,9 +8,7 @@
     visible = false
 
   let //
-    /** @type {HTMLDivElement} */
     _this,
-    /** @type {HTMLDivElement} */
     lastActiveElement,
     closeAnimation
 
