@@ -1,5 +1,5 @@
-import { writable } from 'svelte/store';
+import { writable } from 'svelte/store'
 
-let store = writable([]);
+let store = writable([])
 
-export default store;
+export default store

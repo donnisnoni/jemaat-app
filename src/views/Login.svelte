@@ -1,25 +1,23 @@
 <script>
-  'use strict';
-  import { autoSelectOnFocus, blurOnEsc } from '/@actions/inputDirectives.js';
-  import { push } from 'svelte-spa-router';
+  'use strict'
+  import { autoSelectOnFocus, blurOnEsc } from '/@actions/inputDirectives.js'
+  import { push } from 'svelte-spa-router'
 
   let refs = { fieldSandi: null },
     revealPass = false,
     username = 'donnisnononi',
-    sandi = 'don@r34lm4dr1d';
+    sandi = 'don@r34lm4dr1d'
 
   function login() {
-    push('/admin');
+    push('/admin')
   }
 
   function handleInputSandi(event) {
-    sandi = event.target.value;
+    sandi = event.target.value
   }
 </script>
 
-<div
-  class="min-w-full min-h-full"
-  style="background-image: url('/img/login-bg.jpg')">
+<div class="min-w-full min-h-full" style="background-image: url('/img/login-bg.jpg')">
   <div
     class="flex items-center justify-center min-w-full min-h-full"
     style="background-color:#00000063;backdrop-filter:blur(3px)">
@@ -67,20 +65,14 @@
             role="button">
             <!-- on:mousedown={() => (revealPass = true)} -->
             <!-- on:mouseup={() => (revealPass = false)} -->
-            <i
-              class="mdi {revealPass ? 'mdi-eye-off-outline' : 'mdi-eye-outline'} my-auto mdi-2xl" />
+            <i class="mdi {revealPass ? 'mdi-eye-off-outline' : 'mdi-eye-outline'} my-auto mdi-2xl" />
           </div>
         </div>
       </div>
 
       <hr class="my-3" />
 
-      <div class="flex flex-col">
-        <button
-          aria-label="Login"
-          class="btn btn-primary"
-          type="submit">LOGIN</button>
-      </div>
+      <div class="flex flex-col"><button aria-label="Login" class="btn btn-primary" type="submit">LOGIN</button></div>
     </form>
   </div>
 </div>

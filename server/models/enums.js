@@ -22,26 +22,11 @@ const pekerjaan = [
   'Ibu Rumah Tangga',
   'Pegawai Kontrak/Honor',
   'Lainnya',
-];
+]
 
-const kedudukan_di_jemaat = [
-  'Pendeta',
-  'Penatua',
-  'Diaken',
-  'Jemaat',
-  'Jemaat Tamu',
-];
+const kedudukan_di_jemaat = ['Pendeta', 'Penatua', 'Diaken', 'Jemaat', 'Jemaat Tamu']
 
-const pendidikan = [
-  'Tidak Sekolah',
-  'SD',
-  'SMP',
-  'SMA',
-  'Diploma',
-  'Strata 1',
-  'Strata 2',
-  'Strata 3',
-];
+const pendidikan = ['Tidak Sekolah', 'SD', 'SMP', 'SMA', 'Diploma', 'Strata 1', 'Strata 2', 'Strata 3']
 
 const status_dalam_keluarga = [
   'Suami',
@@ -52,10 +37,10 @@ const status_dalam_keluarga = [
   'Orang Tua',
   'Mertua',
   'Lainnya',
-];
+]
 
-const keterangan = ['Janda', 'Duda', 'Yatim', 'Piatu', 'Penyandang Cacat'];
-const jaminan_kesehatan = ['BPJS/ASKES', 'Asuransi Lain'];
+const keterangan = ['Janda', 'Duda', 'Yatim', 'Piatu', 'Penyandang Cacat']
+const jaminan_kesehatan = ['BPJS/ASKES', 'Asuransi Lain']
 const penghasilan = [
   'Tidak Ada',
   'sd. Rp. 750.000',
@@ -63,7 +48,7 @@ const penghasilan = [
   'Rp. 1.500.000 - Rp. 2.500.000',
   'Rp. 2.500.000 - Rp. 5.000.000',
   '> Rp. 5.000.000',
-];
+]
 
 module.exports = {
   kedudukan_di_jemaat,
@@ -73,4 +58,4 @@ module.exports = {
   pekerjaan,
   pendidikan,
   status_dalam_keluarga,
-};
+}

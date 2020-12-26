@@ -1,32 +1,32 @@
 <script>
-  import { convertToUnit } from './utils';
+  import { convertToUnit } from './utils'
 
   export let value = 0,
     size = 32,
     button = false,
     indeterminate = false,
     width = 4,
-    rotate = 0;
+    rotate = 0
 
-  let radius = 20;
+  let radius = 20
 
   function normalizeValue(_value) {
     if (_value < 0) {
-      return 0;
+      return 0
     }
     if (_value > 100) {
-      return 100;
+      return 100
     }
-    return parseFloat(_value);
+    return parseFloat(_value)
   }
 
-  $: calculatedSize = +size + (button ? 8 : 0);
-  $: circumference = 2 * Math.PI * +radius;
-  $: normalizedValue = normalizeValue(value);
-  $: strokeDashArray = Math.round(circumference * 1000) / 1000;
-  $: strokeDashOffset = ((100 - normalizedValue) / 100) * circumference + 'px';
-  $: viewBoxSize = radius / (1 - +width / +size);
-  $: strokeWidth = (+width / +size) * viewBoxSize * 2;
+  $: calculatedSize = +size + (button ? 8 : 0)
+  $: circumference = 2 * Math.PI * +radius
+  $: normalizedValue = normalizeValue(value)
+  $: strokeDashArray = Math.round(circumference * 1000) / 1000
+  $: strokeDashOffset = ((100 - normalizedValue) / 100) * circumference + 'px'
+  $: viewBoxSize = radius / (1 - +width / +size)
+  $: strokeWidth = (+width / +size) * viewBoxSize * 2
 </script>
 
 <div

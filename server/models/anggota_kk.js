@@ -1,8 +1,8 @@
-'use strict';
-const { DATE } = require('sequelize');
-const { Model, Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('./sequelize');
-const enums = require('./enums');
+'use strict'
+const { DATE } = require('sequelize')
+const { Model, Sequelize, DataTypes } = require('sequelize')
+const sequelize = require('./sequelize')
+const enums = require('./enums')
 
 class AnggotaKepalaKeluarga extends Model {}
 
@@ -110,7 +110,7 @@ const attributes = {
     type: 'TIMESTAMP',
     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
   },
-};
+}
 
 AnggotaKepalaKeluarga.init(attributes, {
   freezeTableName: true,
@@ -118,6 +118,6 @@ AnggotaKepalaKeluarga.init(attributes, {
   sequelize,
   tableName: 'anggota_kk',
   timestamps: false,
-});
+})
 
-module.exports = AnggotaKepalaKeluarga;
+module.exports = AnggotaKepalaKeluarga

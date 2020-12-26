@@ -1,6 +1,6 @@
-'use strict';
-const { Model, Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('./sequelize');
+'use strict'
+const { Model, Sequelize, DataTypes } = require('sequelize')
+const sequelize = require('./sequelize')
 
 class KepalaKeluarga extends Model {}
 
@@ -48,7 +48,7 @@ const attributes = {
     type: 'TIMESTAMP',
     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
   },
-};
+}
 
 KepalaKeluarga.init(attributes, {
   freezeTableName: true,
@@ -56,6 +56,6 @@ KepalaKeluarga.init(attributes, {
   sequelize,
   tableName: 'kepala_keluarga',
   timestamps: false,
-});
+})
 
-module.exports = KepalaKeluarga;
+module.exports = KepalaKeluarga

@@ -15,25 +15,25 @@ const id = {
   meridiemParse: /pagi|siang|sore|malam/,
   meridiemHour: function (hour, meridiem) {
     if (hour === 12) {
-      hour = 0;
+      hour = 0
     }
     if (meridiem === 'pagi') {
-      return hour;
+      return hour
     } else if (meridiem === 'siang') {
-      return hour >= 11 ? hour : hour + 12;
+      return hour >= 11 ? hour : hour + 12
     } else if (meridiem === 'sore' || meridiem === 'malam') {
-      return hour + 12;
+      return hour + 12
     }
   },
   meridiem: function (hours, minutes, isLower) {
     if (hours < 11) {
-      return 'pagi';
+      return 'pagi'
     } else if (hours < 15) {
-      return 'siang';
+      return 'siang'
     } else if (hours < 19) {
-      return 'sore';
+      return 'sore'
     } else {
-      return 'malam';
+      return 'malam'
     }
   },
   calendar: {
@@ -64,6 +64,6 @@ const id = {
     dow: 0, // Sunday is the first day of the week.
     doy: 6, // The week that contains Jan 6th is the first week of the year.
   },
-};
+}
 
-export default id;
+export default id

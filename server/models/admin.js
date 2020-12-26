@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('./sequelize');
+const { Model, DataTypes } = require('sequelize')
+const sequelize = require('./sequelize')
 
 class Admin extends Model {}
 
@@ -22,13 +22,13 @@ const attributes = {
     type: DataTypes.STRING,
     allowNull: false,
   },
-};
+}
 
 Admin.init(attributes, {
   sequelize,
   modelName: 'admin',
   timestamps: false,
   freezeTableName: true,
-});
+})
 
-module.exports = Admin;
+module.exports = Admin

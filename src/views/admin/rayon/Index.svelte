@@ -1,37 +1,36 @@
 <script>
-  import * as rayonStore from '/@store/rayon.js';
-  import { onDestroy } from 'svelte';
-  import AddRayonDialog from './AddRayonDialog.svelte';
-  import Button from '/@components/Button.svelte';
-  import moment from 'moment';
+  import * as rayonStore from '/@store/rayon.js'
+  import { onDestroy } from 'svelte'
+  import AddRayonDialog from './AddRayonDialog.svelte'
+  import Button from '/@components/Button.svelte'
+  import moment from 'moment'
 
-  let addRayonDialog;
-  let lastRayonSuccesCreated = null;
+  let addRayonDialog
+  let lastRayonSuccesCreated = null
 
-  let response = rayonStore.fetch();
+  let response = rayonStore.fetch()
 
   function openAddDialog() {
-    addRayonDialog.open();
+    addRayonDialog.open()
   }
 
   function refetchData() {
-    rayonStore.deleteCache();
-    rayonStore.cancel();
-    response = rayonStore.fetch();
+    rayonStore.deleteCache()
+    rayonStore.cancel()
+    response = rayonStore.fetch()
   }
 
   function onSuccessCreateRayon({ detail }) {
-    lastRayonSuccesCreated = detail.dataRayon;
-    refetchData();
+    lastRayonSuccesCreated = detail.dataRayon
+    refetchData()
   }
 
   function showSuccessAlert() {
-    lastRayonSuccesCreated &&
-      alert('Berhasil menambahkan ' + lastRayonSuccesCreated.nama + ' sebagai rayon baru kita!');
-    lastRayonSuccesCreated = null;
+    lastRayonSuccesCreated && alert('Berhasil menambahkan ' + lastRayonSuccesCreated.nama + ' sebagai rayon baru kita!')
+    lastRayonSuccesCreated = null
   }
 
-  onDestroy(rayonStore.cancel);
+  onDestroy(rayonStore.cancel)
 </script>
 
 <div class="flex flex-col flex-1 overflow-hidden bg-white card">

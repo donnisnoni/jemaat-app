@@ -1,4 +1,4 @@
-const appConfig = require('../../app.config.json');
+const appConfig = require('../../app.config.json')
 
 /**
  * Get rayon schema
@@ -10,7 +10,7 @@ const getRayonSchema = {
       type: 'array',
     },
   },
-};
+}
 
 /**
  * Create rayon schema
@@ -39,9 +39,9 @@ const createRayonSchema = {
       },
     },
   },
-};
+}
 
 module.exports = {
   getRayonSchema,
   createRayonSchema,
-};
+}

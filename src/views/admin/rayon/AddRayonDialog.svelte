@@ -1,72 +1,65 @@
 <script>
-  import { autoCapitalizeWords } from '/@actions/inputDirectives.js';
-  import Dialog from '/@components/Dialog.svelte';
-  import Button from '/@components/Button.svelte';
-  import http from '/@shared/http.js';
-  import axios from 'axios';
-  import { createEventDispatcher, onDestroy } from 'svelte';
-  import * as appConfig from '../../../../app.config.json';
+  import { autoCapitalizeWords } from '/@actions/inputDirectives.js'
+  import Dialog from '/@components/Dialog.svelte'
+  import Button from '/@components/Button.svelte'
+  import http from '/@shared/http.js'
+  import axios from 'axios'
+  import { createEventDispatcher, onDestroy } from 'svelte'
+  import * as appConfig from '../../../../app.config.json'
 
-  const emit = createEventDispatcher();
+  const emit = createEventDispatcher()
 
   let dialog,
     namaRayon = '',
     loading = false,
-    cancelTokenSrc = axios.CancelToken.source();
+    cancelTokenSrc = axios.CancelToken.source()
 
   /** @type {HTMLFormElement} */
-  let formAddRayon;
+  let formAddRayon
 
   export function open() {
-    dialog.open();
+    dialog.open()
   }
 
   function createRayon() {
-    loading = true;
-    if (!formAddRayon.checkValidity()) return;
-    cancelTokenSrc = axios.CancelToken.source();
-    const dataRayon = { nama: namaRayon };
+    loading = true
+    if (!formAddRayon.checkValidity()) return
+    cancelTokenSrc = axios.CancelToken.source()
+    const dataRayon = { nama: namaRayon }
     http
       .post('/api/data/rayon', dataRayon, { cancelToken: cancelTokenSrc.token })
       .then(async (resp) => {
-        console.log(resp);
-        resetData();
-        emit('success', { dataRayon });
-        dialog.close();
+        console.log(resp)
+        resetData()
+        emit('success', { dataRayon })
+        dialog.close()
       })
       .catch((err) => {
-        console.error(err);
+        console.error(err)
       })
       .finally(() => {
-        loading = false;
-      });
+        loading = false
+      })
   }
 
   function resetData() {
-    namaRayon = '';
+    namaRayon = ''
   }
 
   function cancelClosingDialog() {
-    return namaRayon.length;
+    return namaRayon.length
   }
 
   onDestroy(() => {
-    cancelTokenSrc.cancel('Component is destroyed');
-  });
+    cancelTokenSrc.cancel('Component is destroyed')
+  })
 </script>
 
-<Dialog
-  bind:this={dialog}
-  class="simple-dialog"
-  on:closed
-  cancel={cancelClosingDialog}>
+<Dialog bind:this={dialog} class="simple-dialog" on:closed cancel={cancelClosingDialog}>
   <h3 class="px-3 py-2 text-lg">Tambah Rayon</h3>
   <!-- <hr /> -->
   <div class="flex flex-col px-3 py-2 overflow-y-auto">
-    <form
-      id="form-add-rayon"
-      bind:this={formAddRayon}
-      on:submit|preventDefault={createRayon}>
+    <form id="form-add-rayon" bind:this={formAddRayon} on:submit|preventDefault={createRayon}>
       <label class="block" for="nama-rayon">Nama Rayon</label>
       <input
         autocomplete="off"

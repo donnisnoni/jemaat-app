@@ -1,5 +1,5 @@
-const controllers = require('../controllers');
-const schemas = require('../schemas');
+const controllers = require('../controllers')
+const schemas = require('../schemas')
 
 /**
  * Routes
@@ -27,6 +27,6 @@ const routes = [
     attachValidation: true,
     handler: controllers.Rayon.remove,
   },
-];
+]
 
-module.exports = routes;
+module.exports = routes

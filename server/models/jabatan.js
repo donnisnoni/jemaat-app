@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('./sequelize');
+const { Model, DataTypes } = require('sequelize')
+const sequelize = require('./sequelize')
 
 class Jabatan extends Model {}
 
@@ -18,13 +18,13 @@ const attributes = {
     type: DataTypes.TINYINT,
     allowNull: false,
   },
-};
+}
 
 Jabatan.init(attributes, {
   sequelize,
   modelName: 'jabatan',
   timestamps: false,
   freezeTableName: true,
-});
+})
 
-module.exports = Jabatan;
+module.exports = Jabatan

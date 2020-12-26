@@ -1,5 +1,5 @@
-const { Model, Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('./sequelize');
+const { Model, Sequelize, DataTypes } = require('sequelize')
+const sequelize = require('./sequelize')
 
 class Rayon extends Model {}
 
@@ -22,13 +22,13 @@ const attributes = {
     type: 'TIMESTAMP',
     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
   },
-};
+}
 
 Rayon.init(attributes, {
   freezeTableName: true,
   modelName: 'rayon',
   sequelize,
   timestamps: false,
-});
+})
 
-module.exports = Rayon;
+module.exports = Rayon

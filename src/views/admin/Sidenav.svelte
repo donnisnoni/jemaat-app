@@ -1,16 +1,16 @@
 <script>
-  import { link } from 'svelte-spa-router';
-  import active from 'svelte-spa-router/active';
+  import { link } from 'svelte-spa-router'
+  import active from 'svelte-spa-router/active'
 
   let hidden = false,
-    expanded = localStorage.getItem('admin-sidenav') == 'true' || localStorage.setItem('admin-sidenav', false);
+    expanded = localStorage.getItem('admin-sidenav') == 'true' || localStorage.setItem('admin-sidenav', false)
 
   function toggleExpand() {
-    expanded = !expanded;
-    localStorage.setItem('admin-sidenav', expanded);
+    expanded = !expanded
+    localStorage.setItem('admin-sidenav', expanded)
   }
 
-  $: expandButtonCaption = expanded ? 'Perkecil' : 'Perbesar';
+  $: expandButtonCaption = expanded ? 'Perkecil' : 'Perbesar'
 </script>
 
 <span

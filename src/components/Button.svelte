@@ -1,12 +1,12 @@
 <script>
-  import { current_component } from 'svelte/internal';
-  import { forwardEventsBuilder } from '/@actions/forwardEvents.js';
+  import { current_component } from 'svelte/internal'
+  import { forwardEventsBuilder } from '/@actions/forwardEvents.js'
 
   export let icon = '',
-    primary = false;
+    primary = false
   // loading = false;
 
-  const forwardEvents = forwardEventsBuilder(current_component);
+  const forwardEvents = forwardEventsBuilder(current_component)
 </script>
 
 <button class="btn" class:btn-primary={primary} use:forwardEvents {...$$props}>

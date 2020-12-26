@@ -1,9 +1,9 @@
 <script>
-  import Button from '/@components/Button.svelte';
-  import Dialog from '/@components/Dialog.svelte';
+  import Button from '/@components/Button.svelte'
+  import Dialog from '/@components/Dialog.svelte'
 
   let dialog,
-    loading = false;
+    loading = false
 </script>
 
 <Dialog bind:this={dialog} class="simple-dialog" on:closed cancel={() => true}>
