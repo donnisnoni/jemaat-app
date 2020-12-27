@@ -1,6 +1,6 @@
 <script>
   import ANIMATIONS from '../shared/animation.js'
-  import { tick } from 'svelte'
+  import { onMount, tick } from 'svelte'
 
   export let //
     x = 0,
@@ -13,6 +13,15 @@
   let lastActiveElement
   /** @type {Animation}*/
   let closeAnimation
+
+  onMount(() => {
+    /** @param {KeyboardEvent} event */
+    const handleEscKey = (event) => {
+      if (event.code === 'Escape') close()
+    }
+    document.addEventListener('keydown', handleEscKey)
+    return () => document.removeEventListener('keydown', handleEscKey)
+  })
 
   export async function open(x_, y_) {
     visible && closeAnimation && closeAnimation.cancel() && close()
