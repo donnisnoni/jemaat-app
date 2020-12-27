@@ -37,15 +37,15 @@
    * @param {number} y_
    * @param {MouseEvent} event
    */
-  export async function open(x_, y_, event) {
+  export async function open(event) {
     visible && closeAnimation && closeAnimation.cancel() && close()
 
     if (event && event.target) {
       searchScrollableElement(event.target)
     }
 
-    x = x_
-    y = y_
+    x = event.clientX
+    y = event.clientY
 
     visible = true
 
