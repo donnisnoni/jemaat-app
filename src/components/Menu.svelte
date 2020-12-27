@@ -66,7 +66,7 @@
   bind:this={_this}
   tabindex="0"
   class="absolute bg-white card"
-  style="min-height:20px; min-width:20px; top:{y + 5}px; left:{x + 5}px; z-index:8; outline:none"
+  style="min-height:20px; min-width:20px; top:{y}px; left:{x}px; z-index:8; outline:none"
   class:hidden={!visible}
   {...$$props}>
   <slot />
