@@ -7,10 +7,12 @@
     y = 0,
     visible = false
 
-  let //
-    _this,
-    lastActiveElement,
-    closeAnimation
+  /** @type {Element} */
+  let _this
+  /** @type {Element} */
+  let lastActiveElement
+  /** @type {Animation}*/
+  let closeAnimation
 
   export async function open(x_, y_) {
     visible && closeAnimation && closeAnimation.cancel() && close()
@@ -23,16 +25,17 @@
     await tick()
     const rect = _this.getBoundingClientRect()
 
-    if (x + rect.width >= window.innerWidth) {
-      x = x - rect.width
+    if (x + rect.width > window.innerWidth) {
+      x = x - rect.width - 10
+    } else {
+      x = x + 10
     }
 
-    if (y + rect.width >= window.innerHeight) {
-      y = y - rect.width
+    if (y + rect.height > window.innerHeight) {
+      y = y - rect.height - 10
+    } else {
+      y = y + 10
     }
-
-    // Centering from current cursor
-    y = y - rect.width / 2
 
     const animation = _this.animate(ANIMATIONS.SLIDE_TOP.KEYFRAMES, {
       easing: ANIMATIONS.SLIDE_TOP.EASING,
@@ -65,7 +68,7 @@
   on:blur={close}
   bind:this={_this}
   tabindex="0"
-  class="absolute bg-white card"
+  class="fixed bg-white card"
   style="min-height:20px; min-width:20px; top:{y}px; left:{x}px; z-index:8; outline:none"
   class:hidden={!visible}
   {...$$props}>
