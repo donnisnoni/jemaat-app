@@ -1,6 +1,6 @@
 <script>
   import ANIMATIONS from '../shared/animation.js'
-  import { onMount, tick } from 'svelte'
+  import { onDestroy, onMount, tick } from 'svelte'
 
   export let //
     x = 0,
@@ -13,6 +13,9 @@
   let lastActiveElement
   /** @type {Animation}*/
   let closeAnimation
+  /** @type {Element} */
+  let scrollingParrentElement
+  let lastScrollingParrentElementAxis = { x: 0, y: 0 }
 
   onMount(() => {
     /** @param {KeyboardEvent} event */
@@ -23,8 +26,23 @@
     return () => document.removeEventListener('keydown', handleEscKey)
   })
 
-  export async function open(x_, y_) {
+  /** @param {Event} event */
+  const handleScrollingParentElement = (event) => {
+    const { x, y } = lastScrollingParrentElementAxis
+    scrollingParrentElement.scrollTo(x, y)
+  }
+
+  /**
+   * @param {number} x_
+   * @param {number} y_
+   * @param {MouseEvent} event
+   */
+  export async function open(x_, y_, event) {
     visible && closeAnimation && closeAnimation.cancel() && close()
+
+    if (event && event.target) {
+      searchScrollableElement(event.target)
+    }
 
     x = x_
     y = y_
@@ -58,6 +76,24 @@
     }
   }
 
+  /**
+   * Search if element is scrollable and stop.
+   * If not, will look to it's parent element.
+   * It will stop searching after found `body` element
+   * @param {Element} el
+   */
+  function searchScrollableElement(el) {
+    if (el === document.body) return
+    if (el.scrollHeight > el.clientHeight) {
+      scrollingParrentElement = el
+      lastScrollingParrentElementAxis.x = scrollingParrentElement.scrollLeft
+      lastScrollingParrentElementAxis.y = scrollingParrentElement.scrollTop
+      el.addEventListener('scroll', handleScrollingParentElement)
+      return
+    }
+    searchScrollableElement(el.parentElement)
+  }
+
   export async function close() {
     closeAnimation = _this.animate(ANIMATIONS.SLIDE_TOP.KEYFRAMES, {
       easing: ANIMATIONS.SLIDE_TOP.EASING,
@@ -65,12 +101,17 @@
       fill: 'both',
       direction: 'reverse',
     })
+    scrollingParrentElement.removeEventListener('scroll', handleScrollingParentElement)
     closeAnimation.onfinish = () => {
       visible = false
       lastActiveElement && lastActiveElement.focus()
       lastActiveElement = null
     }
   }
+
+  onDestroy(() => {
+    scrollingParrentElement && scrollingParrentElement.removeEventListener('scroll', handleScrollingParentElement)
+  })
 </script>
 
 <div
