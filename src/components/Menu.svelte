@@ -19,9 +19,24 @@
     y = y_
 
     visible = true
+
+    await tick()
+    const rect = _this.getBoundingClientRect()
+
+    if (x + rect.width >= window.innerWidth) {
+      x = x - rect.width
+    }
+
+    if (y + rect.width >= window.innerHeight) {
+      y = y - rect.width
+    }
+
+    // Centering from current cursor
+    y = y - rect.width / 2
+
     _this.animate(ANIMATIONS.SLIDE_TOP.KEYFRAMES, {
       easing: ANIMATIONS.SLIDE_TOP.EASING,
-      duration: 200,
+      duration: 100,
       fill: 'forwards',
     })
 
@@ -33,23 +48,25 @@
   export async function close() {
     closeAnimation = _this.animate(ANIMATIONS.SLIDE_TOP.KEYFRAMES, {
       easing: ANIMATIONS.SLIDE_TOP.EASING,
-      duration: 200,
+      duration: 100,
       fill: 'both',
       direction: 'reverse',
     })
-    closeAnimation.onfinish = () => (visible = false)
-    await tick()
-    lastActiveElement && lastActiveElement.focus()
-    lastActiveElement = null
+    closeAnimation.onfinish = () => {
+      visible = false
+      lastActiveElement && lastActiveElement.focus()
+      lastActiveElement = null
+    }
   }
 </script>
 
 <div
-  bind:this={_this}
   on:blur={close}
+  bind:this={_this}
   tabindex="0"
-  class="fixed bg-white card{$$props.class || ''}"
-  style="min-height:20px; min-width:20px; top:{y}px; left:{x}px; z-index:8; outline:none"
-  class:hidden={!visible}>
+  class="fixed bg-white card"
+  style="min-height:20px; min-width:20px; top:{y + 5}px; left:{x + 5}px; z-index:8; outline:none"
+  class:hidden={!visible}
+  {...$$props}>
   <slot />
 </div>
