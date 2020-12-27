@@ -34,15 +34,16 @@
     // Centering from current cursor
     y = y - rect.width / 2
 
-    _this.animate(ANIMATIONS.SLIDE_TOP.KEYFRAMES, {
+    const animation = _this.animate(ANIMATIONS.SLIDE_TOP.KEYFRAMES, {
       easing: ANIMATIONS.SLIDE_TOP.EASING,
       duration: 100,
       fill: 'forwards',
     })
 
-    await tick()
-    lastActiveElement = document.activeElement
-    _this.focus()
+    animation.onfinish = () => {
+      lastActiveElement = document.activeElement
+      _this.focus()
+    }
   }
 
   export async function close() {
@@ -64,7 +65,7 @@
   on:blur={close}
   bind:this={_this}
   tabindex="0"
-  class="fixed bg-white card"
+  class="absolute bg-white card"
   style="min-height:20px; min-width:20px; top:{y + 5}px; left:{x + 5}px; z-index:8; outline:none"
   class:hidden={!visible}
   {...$$props}>
