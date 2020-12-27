@@ -3,10 +3,14 @@
   import { onDestroy } from 'svelte'
   import AddRayonDialog from './AddRayonDialog.svelte'
   import Button from '/@components/Button.svelte'
+  import Menu from '/@components/Menu.svelte'
   import moment from 'moment'
 
+  /** @type {AddRayonDialog} */
   let addRayonDialog
   let lastRayonSuccesCreated = null
+  /** @type {Menu} */
+  let menu
 
   let response = rayonStore.fetch()
 
@@ -30,6 +34,10 @@
     lastRayonSuccesCreated = null
   }
 
+  function openContextMenu(event) {
+    menu.open(event.clientX, event.clientY)
+  }
+
   onDestroy(rayonStore.cancel)
 </script>
 
@@ -47,6 +55,15 @@
     </div>
   </div>
 
+  <Menu bind:this={menu}>
+    <ul class="p-1">
+      <!-- svelte-ignore a11y-missing-attribute -->
+      <li><a class="inline-flex p-2"> <i class="ml-auto mdi mdi-pencil" />Ubah</a></li>
+      <!-- svelte-ignore a11y-missing-attribute -->
+      <li><a class="inline-flex p-2"> <i class="ml-auto mdi mdi-delete" />Hapus</a></li>
+    </ul>
+  </Menu>
+
   <AddRayonDialog bind:this={addRayonDialog} on:success={onSuccessCreateRayon} on:closed={showSuccessAlert} />
 
   <div class="flex flex-col flex-1 overflow-y-auto">
@@ -56,7 +73,7 @@
       </div>
     {:then dataRayon}
       {#each dataRayon as rayon}
-        <div class="flex p-3 border-b cursor-pointer">
+        <div class="flex p-3 border-b cursor-pointer" on:contextmenu|preventDefault={openContextMenu}>
           <div class="flex flex-col">
             <div class="font-bold">{rayon.nama}</div>
             <!-- svelte-ignore missing-declaration -->
