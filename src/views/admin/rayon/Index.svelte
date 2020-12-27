@@ -35,7 +35,7 @@
   }
 
   function openContextMenu(event) {
-    menu.open(event.clientX, event.clientY)
+    menu.open(event)
   }
 
   onDestroy(rayonStore.cancel)
