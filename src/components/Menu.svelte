@@ -34,16 +34,16 @@
     await tick()
     const rect = _this.getBoundingClientRect()
 
-    if (x + rect.width > window.innerWidth) {
+    if (x + rect.width >= window.innerWidth) {
       x = x - rect.width - 10
     } else {
       x = x + 10
     }
 
-    if (y + rect.height > window.innerHeight) {
+    if (y + rect.height >= window.innerHeight) {
       y = y - rect.height - 10
     } else {
-      y = y + 10
+      y = y - rect.height / 2 + 10
     }
 
     const animation = _this.animate(ANIMATIONS.SLIDE_TOP.KEYFRAMES, {
