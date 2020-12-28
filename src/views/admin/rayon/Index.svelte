@@ -34,7 +34,7 @@
   }
 
   function showSuccessAlert() {
-    lastRayonSuccesCreated && alert('Berhasil menambahkan ' + lastRayonSuccesCreated.nama + ' sebagai rayon baru kita!')
+    lastRayonSuccesCreated && alert(`Berhasil menambahkan ${lastRayonSuccesCreated.nama} sebagai rayon baru kita!`)
     lastRayonSuccesCreated = null
   }
 
