@@ -9,12 +9,20 @@
 
   /** @type {AddRayonDialog} */
   let addRayonDialog
+  let currentSelectedKey = 0
   /** @type {DeleteRayonDialog} */
   let deleteRayonDialog
-  let lastRayonSuccesCreated = null
+  let lastRayonActionSuccess
   /** @type {Menu} */
   let menu
-  let currentSelectedKey = 0
+  /**  Type of succes event.
+   *
+   * `1` for Create data succes;
+   * `2` for Update data success;
+   * `3` for Delete data success;
+   * @type {1|2|3}
+   */
+  let successType
 
   let response = rayonStore.fetch()
 
@@ -28,14 +36,30 @@
     response = rayonStore.fetch()
   }
 
-  function onSuccessCreateRayon({ detail }) {
-    lastRayonSuccesCreated = detail.dataRayon
+  function onActionSuccess({ detail }) {
+    lastRayonActionSuccess = detail.dataRayon
+    successType = detail.successType
     refetchData()
   }
 
   function showSuccessAlert() {
-    lastRayonSuccesCreated && alert(`Berhasil menambahkan ${lastRayonSuccesCreated.nama} sebagai rayon baru kita!`)
-    lastRayonSuccesCreated = null
+    if (!lastRayonActionSuccess) return
+    let message
+    switch (successType) {
+      case 1:
+        message = `Sukses menambahkan ${lastRayonActionSuccess.nama} sebagai rayon baru kita!`
+        break
+      case 2:
+        message = `Sukses memperbaharui data rayon!`
+        break
+      case 3:
+        message = `Sukses menghapus rayon ${lastRayonActionSuccess.nama}!`
+        break
+      default:
+        break
+    }
+    alert(message)
+    lastRayonActionSuccess = null
   }
 
   function openContextMenu(event) {
@@ -82,8 +106,8 @@
     </ul>
   </Menu>
 
-  <AddRayonDialog bind:this={addRayonDialog} on:success={onSuccessCreateRayon} on:closed={showSuccessAlert} />
-  <DeleteRayonDialog bind:this={deleteRayonDialog} />
+  <AddRayonDialog bind:this={addRayonDialog} on:success={onActionSuccess} on:closed={showSuccessAlert} />
+  <DeleteRayonDialog bind:this={deleteRayonDialog} on:success={onActionSuccess} on:closed={showSuccessAlert} />
 
   <div class="flex flex-col flex-1 overflow-y-auto">
     {#await response}
