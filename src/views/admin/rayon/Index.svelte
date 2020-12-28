@@ -4,13 +4,17 @@
   import AddRayonDialog from './AddRayonDialog.svelte'
   import Button from '/@components/Button.svelte'
   import Menu from '/@components/Menu.svelte'
+  import DeleteRayonDialog from './DeleteRayonDialog.svelte'
   import moment from 'moment'
 
   /** @type {AddRayonDialog} */
   let addRayonDialog
+  /** @type {DeleteRayonDialog} */
+  let deleteRayonDialog
   let lastRayonSuccesCreated = null
   /** @type {Menu} */
   let menu
+  let currentSelectedKey = 0
 
   let response = rayonStore.fetch()
 
@@ -36,6 +40,16 @@
 
   function openContextMenu(event) {
     menu.open(event)
+    if (currentSelectedKey != event.target.dataset.key) {
+      currentSelectedKey = event.target.dataset.key
+    }
+  }
+
+  async function openDeleteRayonDialog() {
+    const dataRayon = await response
+    const currentSelectedRayon = dataRayon[currentSelectedKey]
+    // console.log(currentSelectedRayon)
+    deleteRayonDialog.open(currentSelectedRayon)
   }
 
   onDestroy(rayonStore.cancel)
@@ -58,13 +72,18 @@
   <Menu bind:this={menu}>
     <ul class="p-1">
       <!-- svelte-ignore a11y-missing-attribute -->
-      <li><a class="inline-flex p-2"> <i class="ml-auto mdi mdi-pencil" />Ubah</a></li>
+      <li><a class="inline-flex p-2 cursor-pointer"> <i class="ml-auto mdi mdi-pencil" />Ubah</a></li>
       <!-- svelte-ignore a11y-missing-attribute -->
-      <li><a class="inline-flex p-2"> <i class="ml-auto mdi mdi-delete" />Hapus</a></li>
+      <li>
+        <a class="inline-flex p-2 cursor-pointer" on:click={openDeleteRayonDialog}>
+          <i class="ml-auto mdi mdi-delete" />Hapus
+        </a>
+      </li>
     </ul>
   </Menu>
 
   <AddRayonDialog bind:this={addRayonDialog} on:success={onSuccessCreateRayon} on:closed={showSuccessAlert} />
+  <DeleteRayonDialog bind:this={deleteRayonDialog} />
 
   <div class="flex flex-col flex-1 overflow-y-auto">
     {#await response}
@@ -72,8 +91,8 @@
         <div class="self-center text-lg text-gray-600 animate-pulse">Memuat...</div>
       </div>
     {:then dataRayon}
-      {#each dataRayon as rayon}
-        <div class="flex p-3 border-b cursor-pointer" on:contextmenu|preventDefault={openContextMenu}>
+      {#each dataRayon as rayon, key}
+        <div class="flex p-3 border-b cursor-pointer" data-key={key} on:contextmenu|preventDefault={openContextMenu}>
           <div class="flex flex-col">
             <div class="font-bold">{rayon.nama}</div>
             <!-- svelte-ignore missing-declaration -->
