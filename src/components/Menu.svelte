@@ -33,8 +33,7 @@
   }
 
   /**
-   * @param {number} x_
-   * @param {number} y_
+   * Open the menu
    * @param {MouseEvent} event
    */
   export async function open(event) {
