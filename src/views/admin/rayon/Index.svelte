@@ -104,6 +104,11 @@
             {rayon.jumlah_kk}
           </div>
         </div>
+      {:else}
+        <div class="flex flex-col items-center justify-center flex-1 text-gray-600 hidden-100">
+          <div class=""><i class="mdi mdi-database-outline" style="vertical-align:unset;font-size:100px" /></div>
+          <div class="text-lg">Uh oh... Belum ada data</div>
+        </div>
       {/each}
     {/await}
   </div>
