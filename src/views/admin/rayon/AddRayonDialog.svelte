@@ -31,7 +31,7 @@
       .then(async (resp) => {
         // console.log(resp)
         resetData()
-        emit('success', { dataRayon, succesType: 1 })
+        emit('success', { dataRayon, successType: 1 })
         dialog.close()
       })
       .catch((err) => {
