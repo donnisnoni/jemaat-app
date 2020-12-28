@@ -29,7 +29,7 @@
     http
       .post('/api/data/rayon', dataRayon, { cancelToken: cancelTokenSrc.token })
       .then(async (resp) => {
-        console.log(resp)
+        // console.log(resp)
         resetData()
         emit('success', { dataRayon })
         dialog.close()
