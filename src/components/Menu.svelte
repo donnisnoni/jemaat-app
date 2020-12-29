@@ -17,11 +17,12 @@
   let scrollingParrentElement
   let lastScrollingParrentElementAxis = { x: 0, y: 0 }
 
+  const handleEscKey = (event) => {
+    if (event.code === 'Escape' && visible) close()
+  }
+
   onMount(() => {
     /** @param {KeyboardEvent} event */
-    const handleEscKey = (event) => {
-      if (event.code === 'Escape') close()
-    }
     document.addEventListener('keydown', handleEscKey)
     return () => document.removeEventListener('keydown', handleEscKey)
   })
@@ -103,6 +104,7 @@
     scrollingParrentElement.removeEventListener('scroll', handleScrollingParentElement)
     closeAnimation.onfinish = () => {
       visible = false
+      document.removeEventListener('keydown', handleEscKey)
       lastActiveElement && lastActiveElement.focus()
       lastActiveElement = null
     }
