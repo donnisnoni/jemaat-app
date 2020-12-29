@@ -42,7 +42,7 @@ export function autoCapitalizeWords(node) {
       const newWord = letters.join('')
       newValueArray.push(newWord)
     })
-    node.value = newValueArray.join(' ')
+    event.target.value = newValueArray.join(' ')
   }
 
   node.addEventListener('input', handleInput)
