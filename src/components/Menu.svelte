@@ -1,5 +1,4 @@
 <script>
-  import ANIMATIONS from '../shared/animation.js'
   import { onDestroy, onMount, tick } from 'svelte'
 
   export let //
@@ -8,17 +7,16 @@
     visible = false
 
   /** @type {Element} */
-  let _this
+  let root
   /** @type {Element} */
   let lastActiveElement
-  /** @type {Animation}*/
-  let closeAnimation
   /** @type {Element} */
   let scrollingParrentElement
   let lastScrollingParrentElementAxis = { x: 0, y: 0 }
 
   const handleEscKey = (event) => {
-    if (event.code === 'Escape' && visible) close()
+    if (!visible) return
+    if (event.code == 'Escape') close()
   }
 
   onMount(() => {
@@ -28,7 +26,7 @@
   })
 
   /** @param {Event} event */
-  const handleScrollingParentElement = (event) => {
+  const handleScrollingParentElement = (/* event */) => {
     const { x, y } = lastScrollingParrentElementAxis
     scrollingParrentElement.scrollTo(x, y)
   }
@@ -38,11 +36,9 @@
    * @param {MouseEvent} event
    */
   export async function open(event) {
-    visible && closeAnimation && closeAnimation.cancel() && close()
+    visible && close()
 
-    if (event && event.target) {
-      searchScrollableElement(event.target)
-    }
+    event && event.target && searchScrollableElement(event.target)
 
     x = event.clientX
     y = event.clientY
@@ -50,7 +46,7 @@
     visible = true
 
     await tick()
-    const rect = _this.getBoundingClientRect()
+    const rect = root.getBoundingClientRect()
 
     if (x + rect.width >= window.innerWidth) {
       x = x - rect.width - 10
@@ -64,16 +60,9 @@
       y = y - rect.height / 2 + 10
     }
 
-    const animation = _this.animate(ANIMATIONS.SLIDE_TOP.KEYFRAMES, {
-      easing: ANIMATIONS.SLIDE_TOP.EASING,
-      duration: 100,
-      fill: 'forwards',
-    })
-
-    animation.onfinish = () => {
-      lastActiveElement = document.activeElement
-      _this.focus()
-    }
+    await tick()
+    lastActiveElement = document.activeElement
+    root.focus()
   }
 
   /**
@@ -95,29 +84,22 @@
   }
 
   export async function close() {
-    closeAnimation = _this.animate(ANIMATIONS.SLIDE_TOP.KEYFRAMES, {
-      easing: ANIMATIONS.SLIDE_TOP.EASING,
-      duration: 100,
-      fill: 'both',
-      direction: 'reverse',
-    })
-    scrollingParrentElement.removeEventListener('scroll', handleScrollingParentElement)
-    closeAnimation.onfinish = () => {
-      visible = false
-      document.removeEventListener('keydown', handleEscKey)
-      lastActiveElement && lastActiveElement.focus()
+    visible = false
+    if (lastActiveElement) {
+      lastActiveElement.focus()
       lastActiveElement = null
     }
   }
 
   onDestroy(() => {
+    document.removeEventListener('keydown', handleEscKey)
     scrollingParrentElement && scrollingParrentElement.removeEventListener('scroll', handleScrollingParentElement)
   })
 </script>
 
 <div
   on:blur={close}
-  bind:this={_this}
+  bind:this={root}
   tabindex="0"
   class="fixed bg-white card"
   style="min-height:20px;min-width:20px;top:{y}px;left:{x}px;outline:none"
