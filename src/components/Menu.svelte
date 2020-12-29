@@ -85,15 +85,20 @@
 
   export async function close() {
     visible = false
+    removeScrollingEvent()
     if (lastActiveElement) {
       lastActiveElement.focus()
       lastActiveElement = null
     }
   }
 
+  function removeScrollingEvent() {
+    scrollingParrentElement && scrollingParrentElement.removeEventListener('scroll', handleScrollingParentElement)
+  }
+
   onDestroy(() => {
     document.removeEventListener('keydown', handleEscKey)
-    scrollingParrentElement && scrollingParrentElement.removeEventListener('scroll', handleScrollingParentElement)
+    removeScrollingEvent()
   })
 </script>
 
