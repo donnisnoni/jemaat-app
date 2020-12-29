@@ -109,14 +109,14 @@
   <AddRayonDialog bind:this={addRayonDialog} on:success={onActionSuccess} on:closed={showSuccessAlert} />
   <DeleteRayonDialog bind:this={deleteRayonDialog} on:success={onActionSuccess} on:closed={showSuccessAlert} />
 
-  <div class="flex flex-col flex-1 overflow-y-auto">
+  <div class="flex flex-col flex-1 overflow-y-auto" role="list">
     {#await response}
       <div class="flex justify-center flex-1 hidden-100">
         <div class="self-center text-lg text-gray-600 animate-pulse">Memuat...</div>
       </div>
     {:then dataRayon}
       {#each dataRayon as rayon, key}
-        <div class="flex p-3 border-b cursor-pointer" data-key={key} on:contextmenu|preventDefault={openContextMenu}>
+        <div class="list--item" data-key={key} on:contextmenu|preventDefault={openContextMenu} role="listitem">
           <div class="flex flex-col">
             <div class="font-bold">{rayon.nama}</div>
             <!-- svelte-ignore missing-declaration -->

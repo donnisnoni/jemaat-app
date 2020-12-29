@@ -52,3 +52,18 @@ body {
   max-width: 400px;
   height: max-content;
 }
+
+
+/* purgecss start ignore */
+.list--item {
+  outline: none;
+  @apply flex;
+  @apply p-3;
+  @apply border-b;
+  @apply cursor-pointer;
+}
+/* purgecss end ignore */
+
+// .list--item:focus {
+//   background-color: #3e3e4214;
+// }
