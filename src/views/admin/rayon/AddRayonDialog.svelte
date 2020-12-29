@@ -28,8 +28,7 @@
     const dataRayon = { nama: namaRayon }
     http
       .post('/api/data/rayon', dataRayon, { cancelToken: cancelTokenSrc.token })
-      .then(async (resp) => {
-        // console.log(resp)
+      .then(async (/* resp */) => {
         resetData()
         emit('success', { dataRayon, successType: 1 })
         dialog.close()
