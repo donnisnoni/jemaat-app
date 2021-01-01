@@ -44,6 +44,7 @@ body {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
+  user-select: none;
   z-index: 5;
 }
 
@@ -52,7 +53,6 @@ body {
   max-width: 400px;
   height: max-content;
 }
-
 
 /* purgecss start ignore */
 .list--item {
