@@ -48,6 +48,10 @@
     namaRayon = ''
   }
 
+  function cancel() {
+    dialog.close(true)
+  }
+
   function cancelClosingDialog() {
     if (namaRayon == '') return false
     return namaRayon !== namaRayonBefore
@@ -79,6 +83,7 @@
     </form>
   </div>
   <div class="flex px-3 py-2 mt-auto">
+    <Button on:click={cancel} icon="cancel">{loading || namaRayon !== namaRayonBefore ? 'batalkan' : 'tutup'}</Button>
     <Button
       class="ml-auto btn btn-primary btn-scale"
       disabled={loading || namaRayon === namaRayonBefore}
