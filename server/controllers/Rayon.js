@@ -57,7 +57,7 @@ const create = async (req, reply) => {
 const remove = async (req, reply) => {
   const id = +req.params.id
 
-  if (id < 1) {
+  if (isNaN(id) || id < 1) {
     return reply.code(400).send({ error: true, errors: [], message: 'Bad request' })
   }
   db.rayon
