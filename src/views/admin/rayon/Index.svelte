@@ -6,6 +6,7 @@
   import DeleteRayonDialog from './DeleteRayonDialog.svelte'
   import Button from '/@components/Button.svelte'
   import Menu from '/@components/Menu.svelte'
+  import { link } from 'svelte-spa-router'
   import moment from 'moment'
 
   /** @type {AddRayonDialog} */
@@ -131,7 +132,14 @@
       </div>
     {:then dataRayon}
       {#each dataRayon as rayon, key}
-        <div class="list--item" data-key={key} on:contextmenu|preventDefault={openContextMenu} role="listitem">
+        <a
+          class="list--item"
+          data-key={key}
+          href={`/admin/rayon/${rayon.id_rayon}`}
+          on:contextmenu|preventDefault={openContextMenu}
+          role="listitem"
+          use:link>
+          <!--  -->
           <div class="flex flex-col">
             <div class="font-bold">{rayon.nama}</div>
             <!-- svelte-ignore missing-declaration -->
@@ -142,7 +150,7 @@
             title="Jumlah kepala keluarga">
             {rayon.jumlah_kk}
           </div>
-        </div>
+        </a>
       {:else}
         <div class="flex flex-col items-center justify-center flex-1 text-gray-600 hidden-100">
           <div class=""><i class="mdi mdi-database-outline" style="vertical-align:unset;font-size:100px" /></div>
