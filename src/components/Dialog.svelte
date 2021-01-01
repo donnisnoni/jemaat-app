@@ -41,8 +41,8 @@
     }
   }
 
-  export function close() {
-    if (typeof cancel == 'function' && cancel()) {
+  export function close(force = false) {
+    if (!force && typeof cancel == 'function' && cancel()) {
       dialogEl.animate([{ transform: 'scale(1.05)' }], {
         duration: 150,
         easing: 'ease-out',
