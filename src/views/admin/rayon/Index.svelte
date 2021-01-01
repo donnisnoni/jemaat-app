@@ -2,16 +2,20 @@
   import * as rayonStore from '/@store/rayon.js'
   import { onDestroy } from 'svelte'
   import AddRayonDialog from './AddRayonDialog.svelte'
+  import UpdateRayonDialog from './UpdateRayonDialog.svelte'
+  import DeleteRayonDialog from './DeleteRayonDialog.svelte'
   import Button from '/@components/Button.svelte'
   import Menu from '/@components/Menu.svelte'
-  import DeleteRayonDialog from './DeleteRayonDialog.svelte'
   import moment from 'moment'
 
   /** @type {AddRayonDialog} */
   let addRayonDialog
-  let currentSelectedKey = 0
+  /** @type {UpdateRayonDialog} */
+  let updateRayonDialog
   /** @type {DeleteRayonDialog} */
   let deleteRayonDialog
+
+  let currentSelectedKey = 0
   let lastRayonActionSuccess
   /** @type {Menu} */
   let menu
@@ -64,16 +68,22 @@
 
   function openContextMenu(event) {
     menu.open(event)
-    if (currentSelectedKey != event.target.dataset.key) {
-      currentSelectedKey = event.target.dataset.key
-    }
+    currentSelectedKey = +event.target.dataset.key
+  }
+
+  async function openUpdateRayonDialog() {
+    const currentSelectedRayon = await getCurrenSelectedRayon()
+    updateRayonDialog.open(currentSelectedRayon)
   }
 
   async function openDeleteRayonDialog() {
-    const dataRayon = await response
-    const currentSelectedRayon = dataRayon[currentSelectedKey]
-    // console.log(currentSelectedRayon)
+    const currentSelectedRayon = await getCurrenSelectedRayon()
     deleteRayonDialog.open(currentSelectedRayon)
+  }
+
+  async function getCurrenSelectedRayon() {
+    const dataRayon = await rayonStore.fetch()
+    return dataRayon[currentSelectedKey]
   }
 
   onDestroy(rayonStore.cancel)
@@ -96,7 +106,11 @@
   <Menu bind:this={menu}>
     <ul class="p-1">
       <!-- svelte-ignore a11y-missing-attribute -->
-      <li><a class="inline-flex p-2 cursor-pointer"> <i class="ml-auto mdi mdi-pencil" />Ubah</a></li>
+      <li>
+        <a class="inline-flex p-2 cursor-pointer" on:click={openUpdateRayonDialog}>
+          <i class="ml-auto mdi mdi-pencil" />Ubah
+        </a>
+      </li>
       <!-- svelte-ignore a11y-missing-attribute -->
       <li>
         <a class="inline-flex p-2 cursor-pointer" on:click={openDeleteRayonDialog}>
@@ -107,6 +121,7 @@
   </Menu>
 
   <AddRayonDialog bind:this={addRayonDialog} on:success={onActionSuccess} on:closed={showSuccessAlert} />
+  <UpdateRayonDialog bind:this={updateRayonDialog} on:success={onActionSuccess} on:closed={showSuccessAlert} />
   <DeleteRayonDialog bind:this={deleteRayonDialog} on:success={onActionSuccess} on:closed={showSuccessAlert} />
 
   <div class="flex flex-col flex-1 overflow-y-auto" role="list">
@@ -120,7 +135,7 @@
           <div class="flex flex-col">
             <div class="font-bold">{rayon.nama}</div>
             <!-- svelte-ignore missing-declaration -->
-            <div class="text-xs place-self-end">{moment(rayon.tgl_terakhir_update).fromNow()}</div>
+            <div class="text-xs">{moment(rayon.tgl_terakhir_update).fromNow()}</div>
           </div>
           <div
             class="flex items-center justify-center p-1 ml-auto text-white bg-blue-500 rounded-full rayon-info--jumlah-kk"

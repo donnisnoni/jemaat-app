@@ -21,6 +21,13 @@ const routes = [
     handler: controllers.Rayon.create,
   },
   {
+    method: 'PUT',
+    url: '/api/data/rayon/:id',
+    // schema: schemas.rayon.createRayonSchema,
+    // attachValidation: true,
+    handler: controllers.Rayon.update,
+  },
+  {
     method: 'DELETE',
     url: '/api/data/rayon/:id',
     schema: null,

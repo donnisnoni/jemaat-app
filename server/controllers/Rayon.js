@@ -6,7 +6,6 @@ const { fn, col } = require('sequelize')
  * @type {import("fastify").RouteHandler}
  */
 const get = (req, reply) => {
-  console.log(db.rayon.prototype)
   db.rayon
     .findAll({
       attributes: {
@@ -82,8 +81,30 @@ const remove = async (req, reply) => {
   // reply.send('ok');
 }
 
+/**
+ * Update rayon controller
+ * @type {import("fastify").RouteHandler}
+ */
+const update = async (req, reply) => {
+  const id = +req.params.id
+
+  if (isNaN(id) || id < 1) {
+    return reply.code(400).send({ error: true, errors: [], message: 'Bad request' })
+  }
+
+  db.rayon
+    .findByPk(id)
+    .then((foundedRayon) => {
+      foundedRayon.update({ nama: req.body.nama }).then((editedRayon) => {
+        reply.send(editedRayon)
+      })
+    })
+    .catch((err) => console.error(err) && reply.code(500).send())
+}
+
 module.exports = {
   create,
   get,
+  update,
   remove,
 }
