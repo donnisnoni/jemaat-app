@@ -42,7 +42,13 @@
   }
 
   export function close() {
-    if (typeof cancel == 'function' && cancel()) return
+    if (typeof cancel == 'function' && cancel()) {
+      dialogEl.animate([{ transform: 'scale(1.05)' }], {
+        duration: 150,
+        easing: 'ease-out',
+      })
+      return
+    }
     const animation = dialogEl.animate(ANIMATIONS.FADE_IN.KEYFRAMES, {
       duration: 150,
       easing: 'linear',
