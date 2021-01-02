@@ -3,7 +3,7 @@
 }
 
 .hidden-100 {
-  animation: hide 200ms linear;
+  animation: hide 200ms;
 }
 
 @keyframes scale-up-ver-center {
@@ -17,6 +17,6 @@
 
 @keyframes hide {
   0% {
-    transform: scale(0);
+    opacity: 0;
   }
 }
