@@ -1,5 +1,5 @@
 <script>
-  import * as rayonStore from '/@store/rayon.js'
+  import * as fetchService from '/@store/fetch.service.js'
   import { onDestroy } from 'svelte'
   import AddRayonDialog from './AddRayonDialog.svelte'
   import UpdateRayonDialog from './UpdateRayonDialog.svelte'
@@ -8,6 +8,8 @@
   import Menu from '/@components/Menu.svelte'
   import { link } from 'svelte-spa-router'
   import moment from 'moment'
+
+  const fetchURL = '/api/data/rayon'
 
   /** @type {AddRayonDialog} */
   let addRayonDialog
@@ -29,16 +31,16 @@
    */
   let successType
 
-  let response = rayonStore.fetch()
+  let response = fetchService.fetch(fetchURL)
 
   function openAddDialog() {
     addRayonDialog.open()
   }
 
   function refetchData() {
-    rayonStore.deleteCache()
-    rayonStore.cancel()
-    response = rayonStore.fetch()
+    fetchService.deleteCache(fetchURL)
+    fetchService.cancel()
+    response = fetchService.fetch(fetchURL)
   }
 
   function onActionSuccess({ detail }) {
@@ -83,11 +85,11 @@
   }
 
   async function getCurrenSelectedRayon() {
-    const dataRayon = await rayonStore.fetch()
+    const dataRayon = await fetchService.fetch(fetchURL)
     return dataRayon[currentSelectedKey]
   }
 
-  onDestroy(rayonStore.cancel)
+  onDestroy(fetchService.cancel)
 </script>
 
 <div class="flex flex-col flex-1 overflow-hidden bg-white card">

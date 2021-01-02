@@ -5,23 +5,22 @@ import http from '/@shared/http'
 import axios from 'axios'
 
 let cancelTokenSrc = axios.CancelToken.source()
-const url = '/api/data/rayon'
 
 /** Trigger fetch data from server */
-export async function fetch() {
+export async function fetch(url) {
   if (cache.has(url)) {
     return cache.get(url)
   } else {
     cancelTokenSrc = axios.CancelToken.source()
     return http.get(url, { cancelToken: cancelTokenSrc.token }).then((response) => {
       cache.set(url, response.data)
-      return Promise.resolve(response.data)
+      return response.data
     })
   }
 }
 
 /** Delete the cache */
-export function deleteCache() {
+export function deleteCache(url) {
   cache.delete(url)
 }
 
