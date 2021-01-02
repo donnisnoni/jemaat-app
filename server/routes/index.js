@@ -40,6 +40,14 @@ const routes = [
     attachValidation: true,
     handler: controllers.Rayon.remove,
   },
+
+  /* ------------------------- KEPALA KELUARGA ROUTES ------------------------- */
+  {
+    method: 'GET',
+    url: '/api/data/kk',
+    // schema: schemas.rayon.getRayonSchema,
+    handler: controllers.KK.get,
+  },
 ]
 
 module.exports = routes

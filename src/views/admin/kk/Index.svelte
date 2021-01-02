@@ -1,5 +1,73 @@
 <script>
-  //
+  import * as fetchService from '/@store/fetch.service.js'
+  import Button from '/@components/Button.svelte'
+  // import { link } from 'svelte-spa-router'
+  import moment from 'moment'
+
+  // import { Datatable, rows } from 'svelte-simple-datatables'
+
+  const fetchURL = '/api/data/kk'
+
+  fetchService.deleteCache(fetchURL)
+
+  function refetchData() {
+    fetchService.deleteCache(fetchURL)
+    fetchService.cancel()
+    response = fetchService.fetch(fetchURL)
+  }
+
+  let response = fetchService.fetch(fetchURL)
 </script>
 
-<h3 class="page-header">Data Kepala Keluarga</h3>
+<div class="flex flex-col flex-1 overflow-hidden bg-white card">
+  <div class="flex flex-col flex-wrap p-3 bg-white border-b border-gray-200 md:flex-row ">
+    <div class="mb-2 md:place-self-center md:mb-0">
+      <h3 class="text-lg">Kepala Keluarga</h3>
+    </div>
+    <div class="w-full border border-t md:hidden">
+      <!--  -->
+    </div>
+    <div class="mt-2 ml-auto md:mt-0">
+      <Button icon="refresh" on:click={refetchData} title="Muat ulang Data" />
+      <Button icon="plus" primary title="Tambah rayon" />
+    </div>
+  </div>
+  <div class="flex px-3 py-1 border-b border-gray-200">
+    <input class="p-1" placeholder="Cari..." spellcheck="false" style="min-height:25px" type="text" />
+    <div class="flex ml-2">
+      <label class="self-center mr-1" for="sort-select">Urutkan:</label>
+      <select id="sort-select" class="bg-white">
+        <option value="Terbaru">Terbaru</option>
+        <option value="Terbaru">Terlama</option>
+      </select>
+    </div>
+    <!--  -->
+  </div>
+
+  <div class="flex flex-col flex-1 overflow-y-auto" role="list">
+    {#await response}
+      <!--  -->
+    {:then dataKK}
+      {#each dataKK as KK, key}
+        <div class="list--item" data-key={key} role="listitem">
+          <!--  -->
+          <div class="flex flex-col">
+            <div class="font-bold">{KK.nama}</div>
+            <!-- svelte-ignore missing-declaration -->
+            <div class="text-xs">{moment(KK.tgl_terakhir_update).fromNow()}</div>
+          </div>
+          <div
+            class="flex items-center justify-center p-1 ml-auto text-white bg-blue-500 rounded-full rayon-info--jumlah-kk"
+            title="Jumlah kepala keluarga">
+            {KK.jumlah_anggota_kk}
+          </div>
+        </div>
+      {:else}
+        <div class="flex flex-col items-center justify-center flex-1 text-gray-600 hidden-100">
+          <div class=""><i class="mdi mdi-database-outline" style="vertical-align:unset;font-size:100px" /></div>
+          <div class="text-lg">Uh oh... Belum ada data</div>
+        </div>
+      {/each}
+    {/await}
+  </div>
+</div>
