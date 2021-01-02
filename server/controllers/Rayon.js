@@ -30,6 +30,24 @@ const get = (req, reply) => {
 }
 
 /**
+ * Rayon get by id controller
+ * @type {import("fastify").RouteHandler}
+ */
+const getByID = (req, reply) => {
+  const id = +req.params.id
+  if (isNaN(id) || id < 1) {
+    return reply.code(400).send({ error: true, errors: [], message: 'Bad request' })
+  }
+
+  db.rayon
+    .findByPk(id)
+    .then((foundedRayon) => {
+      reply.send(foundedRayon)
+    })
+    .catch((err) => console.error(err) && reply.code(500).send())
+}
+
+/**
  * Create rayon controller
  * @type {import("fastify").RouteHandler}
  */
@@ -105,6 +123,7 @@ const update = async (req, reply) => {
 module.exports = {
   create,
   get,
+  getByID,
   update,
   remove,
 }

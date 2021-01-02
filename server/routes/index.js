@@ -14,6 +14,12 @@ const routes = [
     handler: controllers.Rayon.get,
   },
   {
+    method: 'GET',
+    url: '/api/data/rayon/:id',
+    // schema: schemas.rayon.getRayonSchema,
+    handler: controllers.Rayon.getByID,
+  },
+  {
     method: 'POST',
     url: '/api/data/rayon',
     schema: schemas.rayon.createRayonSchema,
