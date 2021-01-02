@@ -14,6 +14,12 @@ body {
   @apply text-sm;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .link {
   @apply text-blue-700;
   &:hover {
