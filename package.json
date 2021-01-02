@@ -33,6 +33,7 @@
     "svelte": "^3.31.0",
     "svelte-check": "^1.1.23",
     "svelte-preprocess": "^4.6.1",
+    "svelte-simple-datatables": "^0.1.25",
     "svelte-spa-router": "^3.1.0",
     "tailwindcss": "^2.0.2",
     "typescript": "^4.1.3",

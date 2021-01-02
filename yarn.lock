@@ -3982,6 +3982,11 @@ svelte-preprocess@^4.0.0, svelte-preprocess@^4.6.1:
     detect-indent "^6.0.0"
     strip-indent "^3.0.0"
 
+svelte-simple-datatables@^0.1.25:
+  version "0.1.25"
+  resolved "https://registry.yarnpkg.com/svelte-simple-datatables/-/svelte-simple-datatables-0.1.25.tgz#161870afc0dbb479fc039b169bafcbb33158c142"
+  integrity sha512-Ep+P9ZYJUyQRc3cwLZXN6rR+3sspNzDef6oce3t55E9kytFEQOdTt7dIKkfmRnRxdI7CUPNAZTfKYBOlwdL/dw==
+
 svelte-spa-router@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/svelte-spa-router/-/svelte-spa-router-3.1.0.tgz#a929f0def7e12c41f32bc356f91685aeadcd75bf"
