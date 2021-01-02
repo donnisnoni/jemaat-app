@@ -1,4 +1,5 @@
 {
+  "app_name": "Aplikasi Jemaat Maranatha",
   "validation": {
     "namaRayon": {
       "minlength": 5
