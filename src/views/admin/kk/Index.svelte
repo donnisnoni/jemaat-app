@@ -29,7 +29,7 @@
     </div>
     <div class="mt-2 ml-auto md:mt-0">
       <Button icon="refresh" on:click={refetchData} title="Muat ulang Data" />
-      <Button icon="plus" primary title="Tambah rayon" />
+      <Button icon="plus" primary title="Tambah Kepala Keluarga" />
     </div>
   </div>
   <div class="flex px-3 py-1 border-b border-gray-200">
@@ -58,7 +58,7 @@
           </div>
           <div
             class="flex items-center justify-center p-1 ml-auto text-white bg-blue-500 rounded-full rayon-info--jumlah-kk"
-            title="Jumlah kepala keluarga">
+            title="Jumlah anggota kepala keluarga">
             {KK.jumlah_anggota_kk}
           </div>
         </div>
