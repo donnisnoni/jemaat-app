@@ -22,7 +22,7 @@
 </span>
 
 <nav
-  class="relative sidenav sm:m-2 sm:rounded-md sm:text:lg"
+  class="relative sidenav md:m-2 md:mr-1 md:rounded-md"
   class:expand={expanded}
   style={hidden && 'display:none'}
   id="admin-sidenav">
