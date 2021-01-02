@@ -1,4 +1,4 @@
-import { wrap } from 'svelte-spa-router/wrap';
+import { wrap } from 'svelte-spa-router/wrap'
 
 const routes = {
   '/': wrap({
@@ -10,9 +10,12 @@ const routes = {
   '/admin/rayon': wrap({
     asyncComponent: () => import('./views/admin/rayon/Index.svelte'),
   }),
+  '/admin/rayon/:id': wrap({
+    asyncComponent: () => import('./views/admin/rayon/ViewRayon.svelte'),
+  }),
   '/admin/kk': wrap({
     asyncComponent: () => import('./views/admin/kk/Index.svelte'),
   }),
-};
+}
 
-export default routes;
+export default routes
