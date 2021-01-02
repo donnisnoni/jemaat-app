@@ -17,8 +17,15 @@ models.rayon.kk = models.rayon.hasMany(models.kk, {
   as: 'kepala_keluarga',
   foreignKey: 'id_rayon',
 })
-models.anggota_kk.belongsTo(models.kk)
-models.kk.hasMany(models.anggota_kk)
+
+models.rayon.kk = models.anggota_kk.belongsTo(models.kk, {
+  as: 'anggota_kk',
+  foreignKey: 'id_kk',
+})
+models.kk.anggota_kk = models.kk.hasMany(models.anggota_kk, {
+  as: 'anggota_kk',
+  foreignKey: 'id_kk',
+})
 models.anggota_kk.hasOne(models.jabatan)
 
 module.exports = { sequelize, ...models }
