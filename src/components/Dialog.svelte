@@ -29,7 +29,7 @@
     focusedElBeforeOpen = document.activeElement
     document.body.classList.add('overflow-y-hidden')
     dialogEl.addEventListener('keydown', handleDialogKeyDown)
-    document.addEventListener('keydown', handleDocumentKeyDown, { once: true })
+    document.addEventListener('keydown', handleDocumentKeyDown)
     visible = true
     const animation = dialogEl.animate(ANIMATIONS.FADE_IN.KEYFRAMES, {
       duration: 150,
@@ -63,6 +63,8 @@
       }
     }
     emit('closed')
+    document.removeEventListener('keydown', handleDocumentKeyDown)
+    dialogEl.removeEventListener('keydown', handleDialogKeyDown)
   }
 
   function handleDocumentKeyDown(e) {
