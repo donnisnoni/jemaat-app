@@ -7,14 +7,9 @@
 
   // API for cancel the dialog for closing
   export let cancel = () => false
+  export let visible = false
 
-  let dialogEl,
-    overlayEl,
-    focusableEls,
-    firstFocusableEl,
-    lastFocusableEl,
-    focusedElBeforeOpen,
-    visible = false
+  let dialogEl, overlayEl, focusableEls, firstFocusableEl, lastFocusableEl, focusedElBeforeOpen
 
   onMount(() => {
     const _focusableEls = dialogEl.querySelectorAll(
