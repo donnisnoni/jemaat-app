@@ -5,9 +5,9 @@
   const emit = createEventDispatcher()
   const KEYS = { TAB: 9, ESC: 27 }
 
-  // API for cancel the dialog for closing
-  export let cancel = () => false
-  export let visible = false
+  export let //
+    visible = false,
+    persistent = false
 
   let dialogEl, overlayEl, focusableEls, firstFocusableEl, lastFocusableEl, focusedElBeforeOpen
 
@@ -37,11 +37,8 @@
   }
 
   export function close(force = false) {
-    if (!force && typeof cancel == 'function' && cancel()) {
-      dialogEl.animate([{ transform: 'scale(1.05)' }], {
-        duration: 150,
-        easing: 'ease-out',
-      })
+    if (!force && persistent) {
+      dialogEl.animate([{ transform: 'scale(1.05)' }], { duration: 150, easing: 'ease-out' })
       return
     }
     const animation = dialogEl.animate(ANIMATIONS.FADE_IN.KEYFRAMES, {
