@@ -31,7 +31,7 @@
       .then(async (/* resp */) => {
         resetData()
         emit('success', { dataRayon, successType: 1 })
-        dialog.close()
+        dialog.close(true)
       })
       .catch((err) => {
         console.error(err)
@@ -45,16 +45,14 @@
     namaRayon = ''
   }
 
-  function cancelClosingDialog() {
-    return namaRayon.length
-  }
-
   onDestroy(() => {
     cancelTokenSrc.cancel('Component is destroyed')
   })
+
+  $: persistent = namaRayon.length
 </script>
 
-<Dialog bind:this={dialog} class="simple-dialog" on:closed cancel={cancelClosingDialog}>
+<Dialog bind:this={dialog} class="simple-dialog" on:closed {persistent}>
   <h3 class="px-3 py-2 text-lg">Tambah Rayon</h3>
   <!-- <hr /> -->
   <div class="flex flex-col px-3 py-2 overflow-y-auto">

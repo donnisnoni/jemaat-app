@@ -52,17 +52,14 @@
     dialog.close(true)
   }
 
-  function cancelClosingDialog() {
-    if (namaRayon == '') return false
-    return namaRayon !== namaRayonBefore
-  }
-
   onDestroy(() => {
     cancelTokenSrc.cancel('Component is destroyed')
   })
+
+  $: persistent = !namaRayon.length ? false : namaRayon != namaRayonBefore
 </script>
 
-<Dialog bind:this={dialog} class="simple-dialog" on:closed cancel={cancelClosingDialog}>
+<Dialog bind:this={dialog} class="simple-dialog" on:closed {persistent}>
   <h3 class="px-3 py-2 text-lg">Ubah Rayon {namaRayonBefore}</h3>
   <!-- <hr /> -->
   <div class="flex flex-col px-3 py-2 overflow-y-auto">

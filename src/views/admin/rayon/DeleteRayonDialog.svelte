@@ -10,7 +10,6 @@
   /** @type {Dialog} */
   let dialog
   let loading = false
-  let preventDialogClosingState = false
   let dataRayon = { nama: '' }
   /** @type {import('axios').CancelTokenSource} */
   let cancelTokenSrc
@@ -29,7 +28,7 @@
         if (response.status == 200) {
           preventDialogClosing = false
           emit('success', { dataRayon, successType: 3 })
-          dialog.close()
+          dialog.close(true)
         }
       })
       .catch((err) => {
@@ -42,17 +41,13 @@
     if (loading) {
       cancelTokenSrc.cancel()
     } else {
-      dialog.close()
+      dialog.close(true)
     }
     loading = false
   }
-
-  function preventDialogClosing() {
-    return preventDialogClosingState
-  }
 </script>
 
-<Dialog bind:this={dialog} class="simple-dialog" on:closed cancel={preventDialogClosing}>
+<Dialog bind:this={dialog} class="simple-dialog" on:closed persistent>
   <h3 class="px-3 py-2 text-lg">Hapus Rayon {dataRayon.nama}?</h3>
   <div class="px-3 py-2">
     Apakah kamu yakin akan menghapus data ini? Data yang telah dihapus tidak dapat dikembalikan.
