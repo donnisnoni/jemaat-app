@@ -7,7 +7,8 @@
 
   export let //
     visible = false,
-    persistent = false
+    persistent = false,
+    full = false
 
   let dialogEl, overlayEl, focusableEls, firstFocusableEl, lastFocusableEl, focusedElBeforeOpen
 
@@ -106,12 +107,16 @@
   bind:this={overlayEl}
   on:click={handleOverlayClick}
   class:hidden={!visible}
-  class="flex justify-center p-2 align-middle lg:p-6 dialog-overlay justify-items-center"
+  class="flex justify-center align-middle dialog-overlay justify-items-center"
+  class:lg:p-6={!full}
+  class:p-2={!full}
   aria-hidden={!visible}>
   <!--  -->
 
   <div
     bind:this={dialogEl}
+    class:w-full={full}
+    class:h-full={full}
     class="dialog bg-white rounded-sm flex flex-col z-10 {$$props.class || ''}"
     role="dialog"
     aria-hidden={!visible}>
