@@ -26,12 +26,10 @@
     dialogEl.addEventListener('keydown', handleDialogKeyDown)
     document.addEventListener('keydown', handleDocumentKeyDown)
     visible = true
-    const animation = dialogEl.animate(ANIMATIONS.FADE_IN.KEYFRAMES, {
-      duration: 150,
-      easing: 'linear',
-    })
+    const animation = dialogEl.animate(ANIMATIONS.FADE_IN.KEYFRAMES, { duration: 150, easing: 'linear' })
     animation.onfinish = async () => {
       await tick()
+      document.activeElement && document.activeElement.blur()
       firstFocusableEl && firstFocusableEl.focus()
     }
   }
