@@ -1,5 +1,5 @@
-const PRODUCTION = process.env.NODE_ENV === 'production';
-const PurgeSvelte = require('./purgecss-from-svelte.js');
+// const PRODUCTION = process.env.NODE_ENV === 'production'
+const PurgeSvelte = require('./purgecss-from-svelte.js')
 
 /** @type {import('tailwindcss').TailwindConfig} */
 module.exports = {
@@ -13,10 +13,13 @@ module.exports = {
   },
   purge: {
     // enable: true,
-    content: ['./src/**/*.svelte', './index.html'],
-    css: ['./src/styles/**/*.scss', './src/styles/**/*.css'],
+    content: ['./src/**/*.svelte', './index.html', './node_modules/svelte-simple-datatables/src/**/*.svelte'],
+    css: ['./src/styles/**/*.css'],
     extractors: [{ extractor: PurgeSvelte, extensions: ['svelte'] }],
-    whitelistPatterns: [/^svelte.*/],
+    // safelist: [/svelte-/],
+    // options: {
+    //   safelist: [/svelte-/],
+    // },
   },
   theme: {
     screens: {
@@ -39,4 +42,4 @@ module.exports = {
       // => @media (min-width: 1536px) { ... }
     },
   },
-};
+}

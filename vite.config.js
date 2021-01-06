@@ -1,14 +1,14 @@
-import { svelte } from 'vite-plugin-svelte';
-// import sveltePreprocess from 'svelte-preprocess';
-import { getAliases } from 'vite-aliases';
+import { svelte } from 'vite-plugin-svelte'
+import sveltePreprocess from 'svelte-preprocess'
+import { getAliases } from 'vite-aliases'
 
-const aliases = getAliases();
+const aliases = getAliases()
 
-// const preprocess = sveltePreprocess();
+const preprocess = sveltePreprocess({ postcss: true })
 
 /** @type {import('vite').UserConfig} */
 export default {
-  plugins: [svelte()],
+  plugins: [svelte({ preprocess })],
   rollupDedupe: ['svelte'],
   alias: aliases,
   optimizeDeps: {
@@ -17,4 +17,4 @@ export default {
   proxy: {
     '/api': { target: 'http://localhost:8080', changeOrigin: true },
   },
-};
+}
