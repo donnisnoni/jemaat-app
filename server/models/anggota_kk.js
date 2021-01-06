@@ -80,11 +80,11 @@ const attributes = {
     type: DataTypes.ENUM(enums.kedudukan_di_jemaat),
     allowNull: false,
   },
-  id_jabatan: {
-    type: DataTypes.INTEGER.UNSIGNED,
-    allowNull: false,
-    key: true,
-  },
+  // id_jabatan: {
+  //   type: DataTypes.INTEGER.UNSIGNED,
+  //   allowNull: false,
+  //   key: true,
+  // },
   pekerjaan: {
     type: DataTypes.ENUM(enums.pekerjaan),
     allowNull: false,
