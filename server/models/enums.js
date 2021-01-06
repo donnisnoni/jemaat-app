@@ -26,7 +26,7 @@ const pekerjaan = [
 
 const kedudukan_di_jemaat = ['Pendeta', 'Penatua', 'Diaken', 'Jemaat', 'Jemaat Tamu']
 
-const pendidikan = ['Tidak Sekolah', 'SD', 'SMP', 'SMA', 'Diploma', 'Strata 1', 'Strata 2', 'Strata 3']
+const pendidikan = ['Tidak/Belum Sekolah', 'SD', 'SMP', 'SMA', 'Diploma', 'Strata 1', 'Strata 2', 'Strata 3']
 
 const status_dalam_keluarga = [
   'Suami',
