@@ -61,10 +61,11 @@
       <label for="nama-anggota-kk">Nama Lengkap</label>
       <input
         autocomplete="off"
+        bind:value={data.nama}
         class="p-1 border border-gray-200 rounded-sm bg-gray-50"
         id="nama-anggota-kk"
         required
-        bind:value={data.nama}
+        spellcheck="false"
         use:autoCapitalizeWords />
     </section>
 
