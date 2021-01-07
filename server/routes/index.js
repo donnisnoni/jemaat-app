@@ -48,6 +48,12 @@ const routes = [
     // schema: schemas.rayon.getRayonSchema,
     handler: controllers.KK.get,
   },
+  {
+    method: 'POST',
+    url: '/api/data/kk',
+    // schema: schemas.rayon.getRayonSchema,
+    handler: controllers.KK.create,
+  },
 ]
 
 module.exports = routes

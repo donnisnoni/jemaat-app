@@ -2,10 +2,19 @@ const db = require('../models')
 const { fn, col } = require('sequelize')
 
 /**
- * KK get controller
+ * Anggota KK get controller
  * @type {import("fastify").RouteHandler}
  */
 const get = (req, reply) => {
+  const id = +req.params.id
+
+  if (!isNaN(id) && id > 0) {
+    db.anggota_kk.findByPk(id).then((foundedAnggotaKK) => {
+      reply.send(foundedAnggotaKK)
+    })
+    return
+  }
+
   db.kk
     .findAll({
       attributes: {
@@ -18,9 +27,9 @@ const get = (req, reply) => {
       group: 'kepala_keluarga.id_kk',
       // order: [['tgl_buat', 'DESC']],
     })
-    .then((foundedKKs) => {
+    .then((dataKK) => {
       // setTimeout(() => {
-      reply.send(foundedKKs)
+      reply.send(dataKK)
       // }, 5000);
     })
     .catch((err) => {
@@ -29,25 +38,6 @@ const get = (req, reply) => {
     })
 }
 
-/**
- * KK create controller
- * @type {import("fastify").RouteHandler}
- */
-const create = (req, reply) => {
-  console.log(req.body)
-  db.kk
-    .create(req.body)
-    .then((kk) => {
-      kk.save()
-      reply.send(kk)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  // reply.send('ok')
-}
-
 module.exports = {
   get,
-  create,
 }

@@ -22,19 +22,20 @@
   function doDelete() {
     loading = true
     cancelTokenSrc = axios.CancelToken.source()
-    http
-      .delete('/api/data/rayon/' + dataRayon.id_rayon)
-      .then((response) => {
-        if (response.status == 200) {
-          preventDialogClosing = false
-          emit('success', { dataRayon, successType: 3 })
-          dialog.close(true)
-        }
-      })
-      .catch((err) => {
-        console.error(err)
-      })
-      .finally(() => (loading = false))
+    dataRayon &&
+      http
+        .delete('/api/data/rayon/' + dataRayon.id_rayon)
+        .then((response) => {
+          if (response.status == 200) {
+            // preventDialogClosing = false
+            emit('success', { dataRayon, successType: 3 })
+            dialog.close(true)
+          }
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+        .finally(() => (loading = false))
   }
 
   function cancel() {

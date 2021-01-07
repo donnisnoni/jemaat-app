@@ -1,7 +1,7 @@
 <script>
   import * as fetchService from '/@store/fetch.service.js'
   import Button from '/@components/Button.svelte'
-  // import { link } from 'svelte-spa-router'
+  import { push } from 'svelte-spa-router'
   import moment from 'moment'
 
   // import { Datatable, rows } from 'svelte-simple-datatables'
@@ -29,7 +29,7 @@
     </div>
     <div class="mt-2 ml-auto md:mt-0">
       <Button icon="refresh" on:click={refetchData} title="Muat ulang Data" />
-      <Button icon="plus" primary title="Tambah Kepala Keluarga" />
+      <Button icon="plus" on:click={() => push('/admin/kk/create')} primary title="Tambah Kepala Keluarga" />
     </div>
   </div>
   <div class="flex px-3 py-1 border-b border-gray-200">
