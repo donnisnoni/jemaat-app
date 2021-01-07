@@ -25,7 +25,7 @@ const attributes = {
     allowNull: false,
   },
   status_nikah: {
-    type: DataTypes.ENUM(['Belum Menikah', 'Nikah Gereja', 'Belum Nikah Gereja', 'Duda Janda']),
+    type: DataTypes.ENUM(['Belum Menikah/Bujang', 'Nikah Gereja', 'Belum Nikah Gereja', 'Duda Janda']),
     allowNull: false,
   },
   no_hp: {
