@@ -1,5 +1,5 @@
 'use strict'
-const { DATE } = require('sequelize')
+// const { DATE } = require('sequelize')
 const { Model, Sequelize, DataTypes } = require('sequelize')
 const sequelize = require('./sequelize')
 const enums = require('./enums')
@@ -13,45 +13,59 @@ const attributes = {
     primaryKey: true,
     autoIncrement: true,
   },
+
   id_kk: {
     type: DataTypes.INTEGER.UNSIGNED,
     key: true,
     allowNull: false,
   },
+
   nama: {
     type: DataTypes.STRING,
     allowNull: false,
   },
+
   jk: {
     type: DataTypes.ENUM('L', 'P'),
     allowNull: false,
   },
+
   tempat_lahir: {
     type: DataTypes.STRING,
     allowNull: false,
   },
+
   tanggal_lahir: {
     type: DataTypes.DATE,
     allowNull: false,
   },
+
   status: {
     type: DataTypes.ENUM(enums.status_dalam_keluarga),
     allowNull: false,
   },
+
   golongan_darah: {
     type: DataTypes.ENUM(['A', 'B', 'AB', 'O']),
     allowNull: false,
   },
+
+  sudah_baptis: {
+    type: DataTypes.TINYINT,
+    allowNull: false,
+  },
   tanggal_baptis: {
     type: DataTypes.DATE,
-    allowNull: false,
   },
   tempat_baptis: {
     type: DataTypes.STRING,
-    allowNull: false,
   },
   nama_pelayan_baptis: {
     type: DataTypes.STRING,
+  },
+
+  sudah_sidi: {
+    type: DataTypes.TINYINT,
     allowNull: false,
   },
   tanggal_sidi: {
@@ -63,6 +77,11 @@ const attributes = {
   nama_pelayan_sidi: {
     type: DataTypes.STRING,
   },
+
+  sudah_sidi: {
+    type: DataTypes.TINYINT,
+    allowNull: false,
+  },
   tanggal_nikah: {
     type: DataTypes.DATE,
   },
@@ -72,10 +91,12 @@ const attributes = {
   nama_pelayan_nikah: {
     type: DataTypes.STRING,
   },
+
   pendidikan: {
     type: DataTypes.ENUM(enums.pendidikan),
     allowNull: false,
   },
+
   kedudukan_di_jemaat: {
     type: DataTypes.ENUM(enums.kedudukan_di_jemaat),
     allowNull: false,
