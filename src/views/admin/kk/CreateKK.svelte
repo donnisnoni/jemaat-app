@@ -3,7 +3,7 @@
   import * as fetchService from '/@store/fetch.service.js'
   import { autoCapitalizeWords } from '/@actions/inputDirectives.js'
   import selectValues from '/@shared/selectValues.js'
-  import { Datatable, rows } from 'svelte-simple-datatables'
+  import { Datatable } from 'svelte-simple-datatables'
   import Button from '/@components/Button.svelte'
   import DialogCreateAnggotaKK from './DialogCreateAnggotaKK.svelte'
   import http from '/@shared/http'
@@ -59,12 +59,9 @@
   }
 
   function doCreate() {
-    // alert('Berhasil menambahkan KK!')
-    console.log(dataKK)
     http
       .post('/api/data/kk', dataKK)
       .then(({ status }) => {
-        // console.log(resp)
         if (status === 200) {
           resetForm()
           router.pop('/admin/kk')
@@ -73,12 +70,10 @@
       .catch((err) => {
         console.error(err)
       })
-    // resetForm()
-    // document.getElementById('nama-kk').focus()
   }
 
   function onCreateAnggotaKKSuccess({ detail }) {
-    dataKK.anggota_kk.push({ detail })
+    dataKK.anggota_kk = [...dataKK.anggota_kk, detail]
   }
 </script>
 
@@ -226,13 +221,15 @@
         <th data-key="golongan_darah">Golongan Darah</th>
       </thead>
       <tbody>
-        {#each $rows as row}
+        {#each dataKK.anggota_kk as anggota_kk}
           <tr>
-            <td>{row.id}</td>
-            <td>{row.first_name}</td>
-            <td>{row.last_name}</td>
-            <td>{row.email}</td>
-            <td>{row.ip_address}</td>
+            <!-- <td>{anggota_kk.id}</td> -->
+            <td>{anggota_kk.nama}</td>
+            <td>{anggota_kk.jk}</td>
+            <td>{anggota_kk.tempat_lahir}</td>
+            <td>{anggota_kk.tanggal_lahir}</td>
+            <td>{anggota_kk.status}</td>
+            <td>{anggota_kk.golongan_darah}</td>
           </tr>
         {/each}
       </tbody>

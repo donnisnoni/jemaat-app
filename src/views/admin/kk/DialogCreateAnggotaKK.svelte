@@ -14,12 +14,12 @@
   const emit = createEventDispatcher()
 
   const dataPrototype = {
-    nama: '',
-    tempat_lahir: '',
-    tanggal_lahir: '',
+    nama: 'Don Alfons Nisnoni',
+    tempat_lahir: 'Kupang',
+    tanggal_lahir: '1995-09-18',
     jk: 'L',
     status: selectValues.statusAnggotaKK[0],
-    golongan_darah: 'O',
+    golongan_darah: selectValues.golonganDarah[0],
     pendidikan: selectValues.pendidikan[0],
     kedudukan_di_jemaat: selectValues.kedudukanDiJemaat[0],
     jaminan_kesehatan: selectValues.jaminanKesehatan[0],
