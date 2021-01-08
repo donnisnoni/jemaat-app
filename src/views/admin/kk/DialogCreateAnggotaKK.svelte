@@ -323,7 +323,7 @@
   </form>
 
   <div class="flex p-2 border-t">
-    <Button icon="close" on:click={() => dialog.close(true)}>{isDirty ? 'Batal' : 'Tutup'}</Button>
+    <Button icon="close" on:click={cancel}>{isDirty ? 'Batal' : 'Tutup'}</Button>
     <div class="ml-auto">
       <Button icon="plus" primary>Tambah</Button>
     </div>
