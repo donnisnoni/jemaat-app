@@ -3,9 +3,7 @@
   import selectValues from '/@shared/selectValues.js'
   import Dialog from '/@components/Dialog.svelte'
   import Button from '/@components/Button.svelte'
-  import deepEqual from 'deep-equal'
-
-  window.deepEqual = deepEqual
+  // import deepEqual from 'deep-equal'
 
   /** @type {Dialog} */
   let dialog
@@ -47,19 +45,16 @@
     dialog.close(true)
   }
 
-  let isDirty = false
+  // let isDirty = false
 
-  function checkIsFormDirty() {
-    isDirty = deepEqual(data, dataPrototype)
-  }
+  // function checkIsFormDirty() {
+  //   isDirty = deepEqual(data, dataPrototype)
+  // }
 </script>
 
-<Dialog bind:this={dialog} full visible persistent={isDirty}>
+<Dialog bind:this={dialog} full visible>
   <h3 class="p-2 py-2 text-lg border-b">Tambah Anggota Kepala Keluarga</h3>
-  <form
-    class="relative flex flex-col flex-1 max-h-full px-2 overflow-y-auto sm:px-4 md:px-6"
-    id="create-anggota-kk"
-    on:input={checkIsFormDirty}>
+  <form class="relative flex flex-col flex-1 max-h-full px-2 overflow-y-auto sm:px-4 md:px-6" id="create-anggota-kk">
     <!-- NAMA -->
     <section class="flex flex-col my-2 max-w-600">
       <label for="nama-anggota-kk">Nama Lengkap</label>
@@ -323,7 +318,7 @@
   </form>
 
   <div class="flex p-2 border-t">
-    <Button icon="close" on:click={cancel}>{isDirty ? 'Batal' : 'Tutup'}</Button>
+    <Button icon="close" on:click={cancel}>Tutup</Button>
     <div class="ml-auto">
       <Button icon="plus" primary>Tambah</Button>
     </div>
