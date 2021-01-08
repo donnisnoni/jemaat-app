@@ -76,6 +76,10 @@
     // resetForm()
     // document.getElementById('nama-kk').focus()
   }
+
+  function onCreateAnggotaKKSuccess({ detail }) {
+    dataKK.anggota_kk.push({ detail })
+  }
 </script>
 
 <div class="flex flex-col flex-1 overflow-hidden bg-white card">
@@ -209,7 +213,7 @@
     </div>
   </form>
 
-  <DialogCreateAnggotaKK bind:this={dialogCreateAnggotaKk} />
+  <DialogCreateAnggotaKK bind:this={dialogCreateAnggotaKk} on:success={onCreateAnggotaKKSuccess} />
 
   <div class="flex flex-col flex-1">
     <Datatable {settings} data={dataKK.anggota_kk}>

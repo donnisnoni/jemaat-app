@@ -3,12 +3,15 @@
   import selectValues from '/@shared/selectValues.js'
   import Dialog from '/@components/Dialog.svelte'
   import Button from '/@components/Button.svelte'
+  import { createEventDispatcher } from 'svelte'
   // import deepEqual from 'deep-equal'
 
   /** @type {Dialog} */
   let dialog
   /** @type {HTMLFormElement} */
   let form
+
+  const emit = createEventDispatcher()
 
   const dataPrototype = {
     nama: '',
@@ -56,6 +59,12 @@
     data = { ...dataPrototype }
   }
 
+  function doCreate() {
+    emit('success', data)
+    resetForm()
+    dialog.close(true)
+  }
+
   // let isDirty = false
 
   // function checkIsFormDirty() {
@@ -68,7 +77,8 @@
   <form
     bind:this={form}
     class="relative flex flex-col flex-1 max-h-full px-2 overflow-y-auto sm:px-4 md:px-6"
-    id="create-anggota-kk">
+    id="create-anggota-kk"
+    on:submit|preventDefault={doCreate}>
     <!-- NAMA -->
     <section class="flex flex-col my-2 max-w-600">
       <label for="nama-anggota-kk">Nama Lengkap</label>
@@ -334,7 +344,7 @@
   <div class="flex p-2 border-t">
     <Button icon="close" on:click={cancel}>Tutup</Button>
     <div class="ml-auto">
-      <Button icon="plus" primary>Tambah</Button>
+      <Button form="create-anggota-kk" icon="plus" primary type="submit">Tambah</Button>
     </div>
   </div>
 </Dialog>
