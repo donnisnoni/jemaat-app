@@ -42,7 +42,7 @@
   }
 
   /** @type {typeof DataKKPrototype} */
-  let dataKK = Object.create(DataKKPrototype)
+  let dataKK = { ...DataKKPrototype }
 
   let rayonsResponse = fetchService.fetch('/api/data/rayon').then((data) => {
     dataKK.id_rayon = data[0]['id_rayon']
