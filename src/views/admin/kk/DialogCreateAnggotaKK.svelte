@@ -42,7 +42,7 @@
   }
 
   export function cancel() {
-    dialog.close(true)
+    confirm('Anda yakin ingin menutup formulir ini? Data yang terisi akan hilang!') && dialog.close(true)
   }
 
   // let isDirty = false
