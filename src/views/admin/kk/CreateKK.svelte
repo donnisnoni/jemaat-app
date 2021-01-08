@@ -162,12 +162,6 @@
             spellcheck="false"
             required
             id="alamat-kk" />
-          <!-- <textarea
-        class="w-full p-1 border border-gray-200 rounded-sm bg-gray-50"
-        spellcheck="false"
-        required
-        style="max-height:60px;min-height:60px"
-        id="alamat-kk" /> -->
         </section>
         <!-- STATUS RUMAH -->
         <section class="flex flex-col">
