@@ -39,8 +39,8 @@ const status_dalam_keluarga = [
   'Lainnya',
 ]
 
-const keterangan = ['Janda', 'Duda', 'Yatim', 'Piatu', 'Penyandang Cacat']
-const jaminan_kesehatan = ['BPJS/ASKES', 'Asuransi Lain']
+const keterangan = ['Tidak Ada', 'Janda', 'Duda', 'Yatim', 'Piatu', 'Penyandang Cacat']
+const jaminan_kesehatan = ['Tidak Ada', 'BPJS/ASKES', 'Asuransi Lain']
 const penghasilan = [
   'Tidak Ada',
   'sd. Rp. 750.000',

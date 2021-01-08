@@ -38,7 +38,7 @@ export default {
     'Rp. 2.500.000 - Rp. 5.000.000',
     '> Rp. 5.000.000',
   ],
-  keterangan: ['Janda', 'Duda', 'Yatim', 'Piatu', 'Penyandang Cacat'],
+  keterangan: ['Tidak Ada', 'Janda', 'Duda', 'Yatim', 'Piatu', 'Penyandang Cacat'],
   golonganDarah: ['A', 'B', 'AB', 'O'],
-  jaminanKesehatan: ['BPJS/ASKES', 'Asuransi Lain'],
+  jaminanKesehatan: ['Tidak Ada', 'BPJS/ASKES', 'Asuransi Lain'],
 }
