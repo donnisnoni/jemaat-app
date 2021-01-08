@@ -5,6 +5,8 @@
   import Button from '/@components/Button.svelte'
   import deepEqual from 'deep-equal'
 
+  window.deepEqual = deepEqual
+
   /** @type {Dialog} */
   let dialog
 
@@ -48,14 +50,16 @@
   let isDirty = false
 
   function checkIsFormDirty() {
-    isDirty = !deepEqual(dataPrototype, data)
+    isDirty = deepEqual(data, dataPrototype)
   }
 </script>
 
-<Dialog bind:this={dialog} on:input={checkIsFormDirty} full visible persistent={isDirty}>
+<Dialog bind:this={dialog} full visible persistent={isDirty}>
   <h3 class="p-2 py-2 text-lg border-b">Tambah Anggota Kepala Keluarga</h3>
-  <!-- on:input={checkIsFormDirty} -->
-  <form class="relative flex flex-col flex-1 max-h-full px-2 overflow-y-auto sm:px-4 md:px-6" id="create-anggota-kk">
+  <form
+    class="relative flex flex-col flex-1 max-h-full px-2 overflow-y-auto sm:px-4 md:px-6"
+    id="create-anggota-kk"
+    on:input={checkIsFormDirty}>
     <!-- NAMA -->
     <section class="flex flex-col my-2 max-w-600">
       <label for="nama-anggota-kk">Nama Lengkap</label>
