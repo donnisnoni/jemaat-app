@@ -53,7 +53,7 @@
   .table-wrapper table th {
     @apply sticky;
     @apply top-0;
-    @apply left-0;
+    /* @apply left-0; */
     @apply p-1;
     @apply m-0;
     @apply border;
