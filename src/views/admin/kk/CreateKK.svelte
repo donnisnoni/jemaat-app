@@ -14,6 +14,7 @@
   let dialogCreateAnggotaKk
   /** @type {HTMLFormElement} */
   let form
+  /** @type {Datatable} */
   let datatable
 
   const DataKKPrototype = {
