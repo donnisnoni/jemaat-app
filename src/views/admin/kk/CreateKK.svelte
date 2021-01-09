@@ -17,7 +17,7 @@
   /** @type {Datatable} */
   let datatable
 
-  const DataKKPrototype = {
+  const KKPrototype = {
     nama: '',
     alamat: '',
     no_hp: '',
@@ -28,11 +28,11 @@
     anggota_kk: [],
   }
 
-  /** @type {typeof DataKKPrototype} */
-  let dataKK = { ...DataKKPrototype }
+  /** @type {typeof KKPrototype} */
+  let KK = { ...KKPrototype }
 
   let rayonsResponse = fetchService.fetch('/api/data/rayon').then((data) => {
-    dataKK.id_rayon = data[0]['id_rayon']
+    KK.id_rayon = data[0]['id_rayon']
     return data
   })
 
@@ -42,12 +42,12 @@
 
   function resetForm() {
     form.reset()
-    dataKK = { ...DataKKPrototype }
+    KK = { ...KKPrototype }
   }
 
   function doCreate() {
     http
-      .post('/api/data/kk', dataKK)
+      .post('/api/data/kk', KK)
       .then(({ status }) => {
         if (status === 200) {
           resetForm()
@@ -60,7 +60,7 @@
   }
 
   function onCreateAnggotaKKSuccess({ detail }) {
-    dataKK.anggota_kk = [...dataKK.anggota_kk, detail]
+    KK.anggota_kk = [...KK.anggota_kk, detail]
     datatable.updateTableRows()
   }
 </script>
@@ -95,7 +95,7 @@
       <section class="flex flex-col">
         <label for="rayon-kk">Rayon</label>
         <select
-          bind:value={dataKK.id_rayon}
+          bind:value={KK.id_rayon}
           class="p-1 border border-gray-200 rounded-sm bg-gray-50"
           id="rayon-kk"
           required>
@@ -117,7 +117,7 @@
           <input
             autocomplete="off"
             autofocus
-            bind:value={dataKK.nama}
+            bind:value={KK.nama}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
             id="nama-kk"
             required
@@ -128,7 +128,7 @@
         <section class="flex flex-col">
           <label for="status-nikah-kk">Status Nikah</label>
           <select
-            bind:value={dataKK.status_nikah}
+            bind:value={KK.status_nikah}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
             id="status-nikah-kk"
             required>
@@ -144,7 +144,7 @@
         <section class="flex flex-col flex-1 my-2 mr-2" style="max-width: 300px">
           <label for="alamat-kk">Alamat</label>
           <input
-            bind:value={dataKK.alamat}
+            bind:value={KK.alamat}
             class="w-full p-1 border border-gray-200 rounded-sm bg-gray-50"
             spellcheck="false"
             required
@@ -154,7 +154,7 @@
         <section class="flex flex-col">
           <label for="status-rumah-kk">Status Rumah</label>
           <select
-            bind:value={dataKK.status_rumah}
+            bind:value={KK.status_rumah}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
             id="status-rumah-kk"
             required>
@@ -169,7 +169,7 @@
         <section class="flex flex-col flex-1 my-2 mr-2" style="max-width: 300px">
           <label for="no-hp-kk">No HP</label>
           <input
-            bind:value={dataKK.no_hp}
+            bind:value={KK.no_hp}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
             id="no-hp-kk"
             spellcheck="false"
@@ -180,7 +180,7 @@
         <section class="flex flex-col mr-2">
           <label for="kategori-rumah-kk">Kategori Rumah</label>
           <select
-            bind:value={dataKK.kategori_rumah}
+            bind:value={KK.kategori_rumah}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
             id="kategori-rumah-kk"
             required>
@@ -198,8 +198,8 @@
 
   <DialogCreateAnggotaKK bind:this={dialogCreateAnggotaKk} on:success={onCreateAnggotaKKSuccess} />
 
-  <Datatable bind:this={datatable} hidden={!dataKK.anggota_kk.length}>
-    <thead class:hidden={!dataKK.anggota_kk.length}>
+  <Datatable bind:this={datatable} hidden={!KK.anggota_kk.length}>
+    <thead class:hidden={!KK.anggota_kk.length}>
       <tr style="border-bottom: 1px solid #c0c3ca">
         <th>No</th>
         <th>Nama</th>
@@ -219,7 +219,7 @@
       </tr>
     </thead>
     <tbody>
-      {#each dataKK.anggota_kk as anggota_kk, index}
+      {#each KK.anggota_kk as anggota_kk, index}
         <tr>
           <td class="p-1 text-center">{index + 1}</td>
           <td class="p-1 text-center">{anggota_kk.nama}</td>
@@ -243,7 +243,7 @@
     </tbody>
   </Datatable>
 
-  {#if !dataKK.anggota_kk.length}
+  {#if !KK.anggota_kk.length}
     <div class="flex items-center justify-center flex-1 text-base text-gray-700">Belum ada anggota keluarga 😟</div>
   {/if}
 </div>
