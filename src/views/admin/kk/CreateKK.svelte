@@ -203,9 +203,19 @@
       <tr style="border-bottom: 1px solid #c0c3ca">
         <th>No</th>
         <th>Nama</th>
-        <th>Gol Darah</th>
         <th>L/P</th>
+        <th>Status dalam Keluarga</th>
         <th>TTL</th>
+        <th>Gol Darah</th>
+        <th>Status dalam Jemaat</th>
+        <th>Status Baptis</th>
+        <th>Status Sidi</th>
+        <th>Status Nikah</th>
+        <th>Pendidikan</th>
+        <th>Pekerjaan</th>
+        <th>Penghasilan</th>
+        <th>Jaminan Kesehatan</th>
+        <th>Keterangan</th>
       </tr>
     </thead>
     <tbody>
@@ -213,11 +223,21 @@
         <tr>
           <td class="p-1 text-center">{index + 1}</td>
           <td class="p-1 text-center">{anggota_kk.nama}</td>
-          <td class="p-1 text-center">{anggota_kk.golongan_darah}</td>
           <td class="p-1 text-center">{anggota_kk.jk}</td>
+          <td class="p-1 text-center">{anggota_kk.status}</td>
           <td class="p-1 text-center">
             {anggota_kk.tempat_lahir + ', ' + moment(anggota_kk.tanggal_lahir).format('D MMMM YYYY')}
           </td>
+          <td class="p-1 text-center">{anggota_kk.golongan_darah}</td>
+          <td class="p-1 text-center">{anggota_kk.kedudukan_di_jemaat}</td>
+          <td class="p-1 text-center">{anggota_kk.sudah_baptis ? 'Sudah' : 'Belum'}</td>
+          <td class="p-1 text-center">{anggota_kk.sudah_sidi ? 'Sudah' : 'Belum'}</td>
+          <td class="p-1 text-center">{anggota_kk.sudah_nikah ? 'Sudah' : 'Belum'}</td>
+          <td class="p-1 text-center">{anggota_kk.pendidikan}</td>
+          <td class="p-1 text-center">{anggota_kk.pekerjaan}</td>
+          <td class="p-1 text-center">{anggota_kk.penghasilan}</td>
+          <td class="p-1 text-center">{anggota_kk.jaminan_kesehatan}</td>
+          <td class="p-1 text-center">{anggota_kk.keterangan}</td>
         </tr>
       {/each}
     </tbody>
