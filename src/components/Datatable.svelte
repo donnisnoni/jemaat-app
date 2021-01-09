@@ -1,8 +1,12 @@
 <script>
-  import { tick } from 'svelte'
+  import { tick, onMount } from 'svelte'
 
   // export let columns = []
   // export let data = []
+
+  export let hidden = false
+
+  onMount(updateTableRows)
 
   /**  @type {HTMLTableElement} */
   let table
@@ -27,8 +31,6 @@
       headCell.style.width = longestLength + 2 + 'ch'
     })
   }
-
-  updateTableRows()
 </script>
 
 <style global>
@@ -71,7 +73,7 @@
   }
 </style>
 
-<div class="table-wrapper">
+<div class="table-wrapper" class:hidden>
   <table bind:this={table}>
     <slot />
   </table>
