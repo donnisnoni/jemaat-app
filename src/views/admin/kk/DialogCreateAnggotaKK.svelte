@@ -72,7 +72,7 @@
   // }
 </script>
 
-<Dialog bind:this={dialog} full visible>
+<Dialog bind:this={dialog} full>
   <h3 class="p-2 py-2 text-lg border-b">Tambah Anggota Kepala Keluarga</h3>
   <form
     bind:this={form}
@@ -148,8 +148,8 @@
 
     <!-- GOLONGAN DARAH -->
     <section class="flex flex-col my-2 max-w-600">
-      <label for="status-anggota-kk">Golongan Darah</label>
-      <select class="p-1 border border-gray-200 rounded-sm bg-gray-50" id="status-anggota-kk" required>
+      <label for="golongan-darah-anggota-kk">Golongan Darah</label>
+      <select class="p-1 border border-gray-200 rounded-sm bg-gray-50" id="golongan-darah-anggota-kk" required>
         {#each selectValues.golonganDarah as golonganDarah}
           <option value={golonganDarah}>{golonganDarah}</option>
         {/each}
@@ -158,11 +158,11 @@
 
     <!-- KEDUDUKAN DI JEMAAT -->
     <section class="flex flex-col my-2 max-w-600">
-      <label for="status-anggota-kk">Status dalam Jemaat</label>
+      <label for="kedudukan-di-jemaat-anggota-kk">Status dalam Jemaat</label>
       <select
         bind:value={data.golongan_darah}
         class="p-1 border border-gray-200 rounded-sm bg-gray-50"
-        id="status-anggota-kk"
+        id="kedudukan-di-jemaat-anggota-kk"
         required>
         {#each selectValues.kedudukanDiJemaat as kedudukanDiJemaat}
           <option value={kedudukanDiJemaat}>{kedudukanDiJemaat}</option>
@@ -251,11 +251,11 @@
     {/if}
 
     <section class="flex items-center my-2 max-w-600">
-      <label for="is-sidi-anggota-kk">Sudah Nikah</label>
+      <label for="is-nikah-anggota-kk">Sudah Nikah</label>
       <input
         class="ml-2"
         style="width:15px;height:15px"
-        id="is-sidi-anggota-kk"
+        id="is-nikah-anggota-kk"
         bind:checked={data.sudah_nikah}
         type="checkbox" />
     </section>
@@ -281,10 +281,10 @@
         </section>
         <!-- PELAYAN NIKAH -->
         <section class="flex flex-col my-2 max-w-600">
-          <label for="pelayan-sidi-anggota-kk">Nama Pelayan Nikah</label>
+          <label for="pelayan-nikah-anggota-kk">Nama Pelayan Nikah</label>
           <input
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
-            id="pelayan-sidi-anggota-kk"
+            id="pelayan-nikah-anggota-kk"
             required={data.sudah_nikah} />
         </section>
       </section>
@@ -302,8 +302,8 @@
 
     <!-- PEKERJAAN -->
     <section class="flex flex-col my-2 max-w-600">
-      <label for="status-anggota-kk">Pekerjaan</label>
-      <select class="p-1 border border-gray-200 rounded-sm bg-gray-50" id="status-anggota-kk" required>
+      <label for="pekerjaan-anggota-kk">Pekerjaan</label>
+      <select class="p-1 border border-gray-200 rounded-sm bg-gray-50" id="pekerjaan-anggota-kk" required>
         {#each selectValues.pekerjaan as pekerjaan}
           <option value={pekerjaan}>{pekerjaan}</option>
         {/each}
@@ -312,8 +312,8 @@
 
     <!-- PENGHASILAN -->
     <section class="flex flex-col my-2 max-w-600">
-      <label for="jaminan-kesehatan-anggota-kk">Penghasilan</label>
-      <select class="p-1 border border-gray-200 rounded-sm bg-gray-50" id="jaminan-kesehatan-anggota-kk" required>
+      <label for="penghasilan-anggota-kk">Penghasilan</label>
+      <select class="p-1 border border-gray-200 rounded-sm bg-gray-50" id="penghasilan-anggota-kk" required>
         {#each selectValues.penghasilan as penghasilan}
           <option value={penghasilan}>{penghasilan}</option>
         {/each}
@@ -332,8 +332,8 @@
 
     <!-- KETERANGAN -->
     <section class="flex flex-col my-2 max-w-600">
-      <label for="status-anggota-kk">Keterangan</label>
-      <select class="p-1 border border-gray-200 rounded-sm bg-gray-50" id="status-anggota-kk" required>
+      <label for="keterangan-anggota-kk">Keterangan</label>
+      <select class="p-1 border border-gray-200 rounded-sm bg-gray-50" id="keterangan-anggota-kk" required>
         {#each selectValues.keterangan as keterangan}
           <option value={keterangan}>{keterangan}</option>
         {/each}
