@@ -78,7 +78,7 @@ const attributes = {
     type: DataTypes.STRING,
   },
 
-  sudah_sidi: {
+  sudah_nikah: {
     type: DataTypes.TINYINT,
     allowNull: false,
   },
