@@ -198,9 +198,9 @@
 
   <DialogCreateAnggotaKK bind:this={dialogCreateAnggotaKk} on:success={onCreateAnggotaKKSuccess} />
 
-  <Datatable bind:this={datatable}>
+  <Datatable bind:this={datatable} hidden={!dataKK.anggota_kk.length}>
     <thead class:hidden={!dataKK.anggota_kk.length}>
-      <tr>
+      <tr style="border-bottom: 1px solid #c0c3ca">
         <th>No</th>
         <th>Nama</th>
         <th>Gol Darah</th>
@@ -222,4 +222,8 @@
       {/each}
     </tbody>
   </Datatable>
+
+  {#if !dataKK.anggota_kk.length}
+    <div class="flex items-center justify-center flex-1 text-base text-gray-700">Belum ada anggota keluarga 😟</div>
+  {/if}
 </div>
