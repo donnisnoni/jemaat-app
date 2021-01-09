@@ -37,6 +37,7 @@
     tanggal_nikah: '',
     tempat_nikah: '',
     nama_pelayan_nikah: '',
+    keterangan: selectValues.keterangan[0],
   }
 
   /** @type {typeof dataPrototype} */
@@ -149,7 +150,11 @@
     <!-- GOLONGAN DARAH -->
     <section class="flex flex-col my-2 max-w-600">
       <label for="golongan-darah-anggota-kk">Golongan Darah</label>
-      <select class="p-1 border border-gray-200 rounded-sm bg-gray-50" id="golongan-darah-anggota-kk" required>
+      <select
+        bind:value={data.golongan_darah}
+        class="p-1 border border-gray-200 rounded-sm bg-gray-50"
+        id="golongan-darah-anggota-kk"
+        required>
         {#each selectValues.golonganDarah as golonganDarah}
           <option value={golonganDarah}>{golonganDarah}</option>
         {/each}
@@ -160,7 +165,7 @@
     <section class="flex flex-col my-2 max-w-600">
       <label for="kedudukan-di-jemaat-anggota-kk">Status dalam Jemaat</label>
       <select
-        bind:value={data.golongan_darah}
+        bind:value={data.kedudukan_di_jemaat}
         class="p-1 border border-gray-200 rounded-sm bg-gray-50"
         id="kedudukan-di-jemaat-anggota-kk"
         required>
@@ -173,10 +178,10 @@
     <section class="flex items-center my-2 max-w-600">
       <label for="is-baptis-anggota-kk">Sudah Baptis</label>
       <input
+        bind:checked={data.sudah_baptis}
         class="ml-2"
         style="width:15px;height:15px"
         id="is-baptis-anggota-kk"
-        bind:checked={data.sudah_baptis}
         type="checkbox" />
     </section>
 
@@ -186,6 +191,7 @@
         <section class="flex flex-col my-2 mr-2 max-w-600">
           <label for="tanggal-baptis-anggota-kk">Tanggal Baptis</label>
           <input
+            bind:value={data.tanggal_baptis}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
             id="tanggal-baptis-anggota-kk"
             type="date"
@@ -195,6 +201,7 @@
         <section class="flex flex-col my-2 mr-2 max-w-600">
           <label for="tempat-baptis-anggota-kk">Tempat Baptis</label>
           <input
+            bind:value={data.tempat_baptis}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
             id="tempat-baptis-anggota-kk"
             required={data.sudah_baptis} />
@@ -203,6 +210,7 @@
         <section class="flex flex-col my-2 max-w-600">
           <label for="pelayan-baptis-anggota-kk">Nama Pelayan Baptis</label>
           <input
+            bind:value={data.nama_pelayan_baptis}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
             id="pelayan-baptis-anggota-kk"
             required={data.sudah_baptis} />
@@ -226,6 +234,7 @@
         <section class="flex flex-col my-2 mr-2 max-w-600">
           <label for="tanggal-sidi-anggota-kk">Tanggal Sidi</label>
           <input
+            bind:value={data.tanggal_sidi}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
             id="tanggal-sidi-anggota-kk"
             type="date"
@@ -235,6 +244,7 @@
         <section class="flex flex-col my-2 mr-2 max-w-600">
           <label for="tempat-sidi-anggota-kk">Tempat Sidi</label>
           <input
+            bind:value={data.tempat_sidi}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
             id="tempat-sidi-anggota-kk"
             required={data.sudah_sidi} />
@@ -243,6 +253,7 @@
         <section class="flex flex-col my-2 max-w-600">
           <label for="pelayan-sidi-anggota-kk">Nama Pelayan Sidi</label>
           <input
+            bind:value={data.nama_pelayan_sidi}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
             id="pelayan-sidi-anggota-kk"
             required={data.sudah_sidi} />
@@ -253,10 +264,10 @@
     <section class="flex items-center my-2 max-w-600">
       <label for="is-nikah-anggota-kk">Sudah Nikah</label>
       <input
+        bind:checked={data.sudah_nikah}
         class="ml-2"
         style="width:15px;height:15px"
         id="is-nikah-anggota-kk"
-        bind:checked={data.sudah_nikah}
         type="checkbox" />
     </section>
 
@@ -266,6 +277,7 @@
         <section class="flex flex-col my-2 mr-2 max-w-600">
           <label for="tanggal-nikah-anggota-kk">Tanggal Nikah</label>
           <input
+            bind:value={data.tanggal_nikah}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
             id="tanggal-nikah-anggota-kk"
             type="date"
@@ -275,6 +287,7 @@
         <section class="flex flex-col my-2 mr-2 max-w-600">
           <label for="tempat-nikah-anggota-kk">Tempat Nikah</label>
           <input
+            bind:value={data.tempat_nikah}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
             id="tempat-nikah-anggota-kk"
             required={data.sudah_nikah} />
@@ -283,6 +296,7 @@
         <section class="flex flex-col my-2 max-w-600">
           <label for="pelayan-nikah-anggota-kk">Nama Pelayan Nikah</label>
           <input
+            bind:value={data.nama_pelayan_nikah}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
             id="pelayan-nikah-anggota-kk"
             required={data.sudah_nikah} />
@@ -293,7 +307,11 @@
     <!-- PENDIDIKAN TERAKHIR -->
     <section class="flex flex-col my-2 max-w-600">
       <label for="pendidikan-anggota-kk">Pendidikan</label>
-      <select class="p-1 border border-gray-200 rounded-sm bg-gray-50" id="pendidikan-anggota-kk" required>
+      <select
+        bind:value={data.pendidikan}
+        class="p-1 border border-gray-200 rounded-sm bg-gray-50"
+        id="pendidikan-anggota-kk"
+        required>
         {#each selectValues.pendidikan as pendidikan}
           <option value={pendidikan}>{pendidikan}</option>
         {/each}
@@ -303,7 +321,11 @@
     <!-- PEKERJAAN -->
     <section class="flex flex-col my-2 max-w-600">
       <label for="pekerjaan-anggota-kk">Pekerjaan</label>
-      <select class="p-1 border border-gray-200 rounded-sm bg-gray-50" id="pekerjaan-anggota-kk" required>
+      <select
+        bind:value={data.pekerjaan}
+        class="p-1 border border-gray-200 rounded-sm bg-gray-50"
+        id="pekerjaan-anggota-kk"
+        required>
         {#each selectValues.pekerjaan as pekerjaan}
           <option value={pekerjaan}>{pekerjaan}</option>
         {/each}
@@ -313,7 +335,11 @@
     <!-- PENGHASILAN -->
     <section class="flex flex-col my-2 max-w-600">
       <label for="penghasilan-anggota-kk">Penghasilan</label>
-      <select class="p-1 border border-gray-200 rounded-sm bg-gray-50" id="penghasilan-anggota-kk" required>
+      <select
+        bind:value={data.penghasilan}
+        class="p-1 border border-gray-200 rounded-sm bg-gray-50"
+        id="penghasilan-anggota-kk"
+        required>
         {#each selectValues.penghasilan as penghasilan}
           <option value={penghasilan}>{penghasilan}</option>
         {/each}
@@ -323,7 +349,11 @@
     <!-- JAMINAN KESEHATAN -->
     <section class="flex flex-col my-2 max-w-600">
       <label for="jaminan-kesehatan-anggota-kk">Jaminan Kesehatan</label>
-      <select class="p-1 border border-gray-200 rounded-sm bg-gray-50" id="jaminan-kesehatan-anggota-kk" required>
+      <select
+        bind:value={data.jaminan_kesehatan}
+        class="p-1 border border-gray-200 rounded-sm bg-gray-50"
+        id="jaminan-kesehatan-anggota-kk"
+        required>
         {#each selectValues.jaminanKesehatan as jaminanKesehatan}
           <option value={jaminanKesehatan}>{jaminanKesehatan}</option>
         {/each}
@@ -333,7 +363,11 @@
     <!-- KETERANGAN -->
     <section class="flex flex-col my-2 max-w-600">
       <label for="keterangan-anggota-kk">Keterangan</label>
-      <select class="p-1 border border-gray-200 rounded-sm bg-gray-50" id="keterangan-anggota-kk" required>
+      <select
+        bind:value={data.keterangan}
+        class="p-1 border border-gray-200 rounded-sm bg-gray-50"
+        id="keterangan-anggota-kk"
+        required>
         {#each selectValues.keterangan as keterangan}
           <option value={keterangan}>{keterangan}</option>
         {/each}
