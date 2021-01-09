@@ -35,6 +35,8 @@ export function autoCapitalizeWords(node) {
     if (!value.length) return
     const words = value.split(/\s/)
     const newValueArray = []
+    const selectionStart = event.target.selectionStart
+    const selectionEnd = event.target.selectionEnd
 
     words.forEach((word) => {
       let letters = word.split('')
@@ -43,6 +45,7 @@ export function autoCapitalizeWords(node) {
       newValueArray.push(newWord)
     })
     event.target.value = newValueArray.join(' ')
+    event.target.setSelectionRange(selectionStart, selectionEnd)
   }
 
   node.addEventListener('input', handleInput)
