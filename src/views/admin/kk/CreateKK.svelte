@@ -1,34 +1,20 @@
 <script>
-  // import { current_component } from 'svelte/internal'
   import * as fetchService from '/@store/fetch.service.js'
   import { autoCapitalizeWords } from '/@actions/inputDirectives.js'
   import selectValues from '/@shared/selectValues.js'
-  import { Datatable } from 'svelte-simple-datatables'
+  import moment from 'moment'
+  import Datatable from '/@components/Datatable.svelte'
   import Button from '/@components/Button.svelte'
   import DialogCreateAnggotaKK from './DialogCreateAnggotaKK.svelte'
   import http from '/@shared/http'
   import * as router from 'svelte-spa-router'
-  // import { createEventDispatcher } from 'svelte'
-
-  // const emit = createEventDispatcher()
 
   /* --------------------------- COMPONENT'S INSTANCE -------------------------- */
   /** @type {DialogCreateAnggotaKK} */
   let dialogCreateAnggotaKk
   /** @type {HTMLFormElement} */
   let form
-
-  const settings = {
-    sortable: true,
-    pagination: true,
-    scrollY: true,
-    scrollX: true,
-    rowPerPage: 10,
-    columnFilter: false,
-    blocks: {
-      searchInput: false,
-    },
-  }
+  let datatable
 
   const DataKKPrototype = {
     nama: '',
@@ -74,6 +60,7 @@
 
   function onCreateAnggotaKKSuccess({ detail }) {
     dataKK.anggota_kk = [...dataKK.anggota_kk, detail]
+    datatable.updateTableRows()
   }
 </script>
 
@@ -210,29 +197,28 @@
 
   <DialogCreateAnggotaKK bind:this={dialogCreateAnggotaKk} on:success={onCreateAnggotaKKSuccess} />
 
-  <div class="flex flex-col flex-1">
-    <Datatable {settings} data={dataKK.anggota_kk}>
-      <thead>
-        <th data-key="nama">Nama</th>
-        <th data-key="jk">JK</th>
-        <th data-key="tempat_lahir">Tempat Lahir</th>
-        <th data-key="tanggal_lahir">Tanggal Lahir</th>
-        <th data-key="status">Status</th>
-        <th data-key="golongan_darah">Golongan Darah</th>
-      </thead>
-      <tbody>
-        {#each dataKK.anggota_kk as anggota_kk}
-          <tr>
-            <!-- <td>{anggota_kk.id}</td> -->
-            <td>{anggota_kk.nama}</td>
-            <td>{anggota_kk.jk}</td>
-            <td>{anggota_kk.tempat_lahir}</td>
-            <td>{anggota_kk.tanggal_lahir}</td>
-            <td>{anggota_kk.status}</td>
-            <td>{anggota_kk.golongan_darah}</td>
-          </tr>
-        {/each}
-      </tbody>
-    </Datatable>
-  </div>
+  <Datatable bind:this={datatable}>
+    <thead class:hidden={!dataKK.anggota_kk.length}>
+      <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>Gol Darah</th>
+        <th>L/P</th>
+        <th>TTL</th>
+      </tr>
+    </thead>
+    <tbody>
+      {#each dataKK.anggota_kk as anggota_kk, index}
+        <tr>
+          <td class="p-1 text-center">{index + 1}</td>
+          <td class="p-1 text-center">{anggota_kk.nama}</td>
+          <td class="p-1 text-center">{anggota_kk.golongan_darah}</td>
+          <td class="p-1 text-center">{anggota_kk.jk}</td>
+          <td class="p-1 text-center">
+            {anggota_kk.tempat_lahir + ', ' + moment(anggota_kk.tanggal_lahir).format('D MMMM YYYY')}
+          </td>
+        </tr>
+      {/each}
+    </tbody>
+  </Datatable>
 </div>
