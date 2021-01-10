@@ -62,6 +62,9 @@
     KK.anggota_kk = [...KK.anggota_kk, detail]
     datatable.updateTableRows()
   }
+
+  // UTILITIES
+  const sudahBelum = (value) => (!!value ? 'Sudah' : 'Belum')
 </script>
 
 <div class="flex flex-col flex-1 overflow-hidden bg-white card">
@@ -229,9 +232,9 @@
           </td>
           <td class="p-1 text-center">{anggota_kk.golongan_darah}</td>
           <td class="p-1 text-center">{anggota_kk.kedudukan_di_jemaat}</td>
-          <td class="p-1 text-center">{anggota_kk.sudah_baptis ? 'Sudah' : 'Belum'}</td>
-          <td class="p-1 text-center">{anggota_kk.sudah_sidi ? 'Sudah' : 'Belum'}</td>
-          <td class="p-1 text-center">{anggota_kk.sudah_nikah ? 'Sudah' : 'Belum'}</td>
+          <td class="p-1 text-center">{sudahBelum(anggota_kk.sudah_baptis)}</td>
+          <td class="p-1 text-center">{sudahBelum(anggota_kk.sudah_sidi)}</td>
+          <td class="p-1 text-center">{sudahBelum(anggota_kk.sudah_nikah)}</td>
           <td class="p-1 text-center">{anggota_kk.pendidikan}</td>
           <td class="p-1 text-center">{anggota_kk.pekerjaan}</td>
           <td class="p-1 text-center">{anggota_kk.penghasilan}</td>
