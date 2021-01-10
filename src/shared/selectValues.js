@@ -4,7 +4,7 @@ export default {
   kedudukanDiJemaat: ['Jemaat', 'Jemaat Tamu', 'Diaken', 'Penatua', 'Pendeta'],
   kategoriRumah: ['Semi Permanen', 'Permanen', 'Darurat', 'Lainnya'],
   statusRumah: ['Milik Sendiri', 'Kontrak', 'Menumpang', 'Lainnya'],
-  statusNikah: ['Belum Menikah', 'Nikah Gereja', 'Belum Nikah Gereja', 'Duda Janda'],
+  statusNikah: ['Belum Menikah/Bujang', 'Nikah Gereja', 'Belum Nikah Gereja', 'Duda Janda'],
   pekerjaan: [
     'Tidak Ada',
     'Pendeta',
