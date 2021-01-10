@@ -13,9 +13,9 @@
   const emit = createEventDispatcher()
 
   const AnggotaKKPrototype = {
-    nama: 'Don Alfons Nisnoni',
-    tempat_lahir: 'Kupang',
-    tanggal_lahir: '1995-09-18',
+    nama: '',
+    tempat_lahir: '',
+    tanggal_lahir: '',
     jk: 'L',
     status: selectValues.statusAnggotaKK[0],
     golongan_darah: selectValues.golonganDarah[0],
