@@ -1,6 +1,7 @@
 <script>
   import * as fetchService from '/@store/fetch.service.js'
   import Button from '/@components/Button.svelte'
+  import EmptyDataPlaceholder from '/@components/EmptyDataPlaceholder.svelte'
   import { push } from 'svelte-spa-router'
   import moment from 'moment'
 
@@ -63,9 +64,7 @@
           </div>
         </div>
       {:else}
-        <div class="flex flex-col items-center justify-center flex-1 text-gray-600 hidden-100">
-          <div class="text-base">Belum ada data kepala keluarga</div>
-        </div>
+        <EmptyDataPlaceholder>Belum ada kepala keluarga</EmptyDataPlaceholder>
       {/each}
     {/await}
   </div>

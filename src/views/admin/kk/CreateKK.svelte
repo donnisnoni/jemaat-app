@@ -5,6 +5,7 @@
   import moment from 'moment'
   import Datatable from '/@components/Datatable.svelte'
   import Button from '/@components/Button.svelte'
+  import EmptyDataPlaceholder from '/@components/EmptyDataPlaceholder.svelte'
   import DialogCreateAnggotaKK from './DialogCreateAnggotaKK.svelte'
   import http from '/@shared/http'
   import * as router from 'svelte-spa-router'
@@ -242,8 +243,6 @@
   </Datatable>
 
   {#if !KK.anggota_kk.length}
-    <div class="flex flex-col items-center justify-center flex-1 text-gray-600 hidden-100">
-      <div class="text-base">Belum ada data kepala keluarga</div>
-    </div>
+    <EmptyDataPlaceholder>Belum ada anggota keluarga</EmptyDataPlaceholder>
   {/if}
 </div>
