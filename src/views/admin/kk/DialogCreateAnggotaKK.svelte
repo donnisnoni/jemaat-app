@@ -25,17 +25,17 @@
     pekerjaan: selectValues.pekerjaan[0],
     penghasilan: selectValues.penghasilan[0],
     sudah_baptis: false,
-    tanggal_baptis: '0000-00-00',
-    tempat_baptis: '',
-    nama_pelayan_baptis: '',
+    tanggal_baptis: null,
+    tempat_baptis: null,
+    nama_pelayan_baptis: null,
     sudah_sidi: false,
-    tanggal_sidi: '0000-00-00',
-    tempat_sidi: '',
-    nama_pelayan_sidi: '',
+    tanggal_sidi: null,
+    tempat_sidi: null,
+    nama_pelayan_sidi: null,
     sudah_nikah: false,
-    tanggal_nikah: '0000-00-00',
-    tempat_nikah: '',
-    nama_pelayan_nikah: '',
+    tanggal_nikah: null,
+    tempat_nikah: null,
+    nama_pelayan_nikah: null,
     keterangan: selectValues.keterangan[0],
   }
 
@@ -60,21 +60,21 @@
 
   function getFormatedData() {
     const anggotaKKCopy = { ...anggotaKK }
-    // If falsy, set all date to empty date `0000-00-00`, so MySQL happy
+    // If falsy, set all data to null
     if (!anggotaKKCopy.sudah_baptis) {
-      anggotaKKCopy.tanggal_baptis = AnggotaKKPrototype.tanggal_baptis
-      anggotaKKCopy.tempat_baptis = ''
-      anggotaKKCopy.nama_pelayan_baptis = ''
+      anggotaKKCopy.tanggal_baptis = null
+      anggotaKKCopy.tempat_baptis = null
+      anggotaKKCopy.nama_pelayan_baptis = null
     }
     if (!anggotaKKCopy.sudah_sidi) {
-      anggotaKKCopy.tanggal_sidi = AnggotaKKPrototype.tanggal_sidi
-      anggotaKKCopy.tempat_sidi = ''
-      anggotaKKCopy.nama_pelayan_sidi = ''
+      anggotaKKCopy.tanggal_sidi = null
+      anggotaKKCopy.tempat_sidi = null
+      anggotaKKCopy.nama_pelayan_sidi = null
     }
     if (!anggotaKKCopy.sudah_nikah) {
-      anggotaKKCopy.tanggal_nikah = AnggotaKKPrototype.tanggal_nikah
-      anggotaKKCopy.tempat_nikah = ''
-      anggotaKKCopy.nama_pelayan_nikah = ''
+      anggotaKKCopy.tanggal_nikah = null
+      anggotaKKCopy.tempat_nikah = null
+      anggotaKKCopy.nama_pelayan_nikah = null
     }
     // Convert boolean to integer
     anggotaKKCopy.sudah_baptis = +anggotaKKCopy.sudah_baptis
