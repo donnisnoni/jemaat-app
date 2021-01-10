@@ -12,7 +12,7 @@
 
   const emit = createEventDispatcher()
 
-  const AnggotaKKDataPrototype = {
+  const AnggotaKKPrototype = {
     nama: 'Don Alfons Nisnoni',
     tempat_lahir: 'Kupang',
     tanggal_lahir: '1995-09-18',
@@ -25,22 +25,22 @@
     pekerjaan: selectValues.pekerjaan[0],
     penghasilan: selectValues.penghasilan[0],
     sudah_baptis: false,
-    tanggal_baptis: '',
+    tanggal_baptis: '0000-00-00',
     tempat_baptis: '',
     nama_pelayan_baptis: '',
     sudah_sidi: false,
-    tanggal_sidi: '',
+    tanggal_sidi: '0000-00-00',
     tempat_sidi: '',
     nama_pelayan_sidi: '',
     sudah_nikah: false,
-    tanggal_nikah: '',
+    tanggal_nikah: '0000-00-00',
     tempat_nikah: '',
     nama_pelayan_nikah: '',
     keterangan: selectValues.keterangan[0],
   }
 
-  /** @type {typeof AnggotaKKDataPrototype} */
-  let anggotaKK = { ...AnggotaKKDataPrototype }
+  /** @type {typeof AnggotaKKPrototype} */
+  let anggotaKK = { ...AnggotaKKPrototype }
 
   export function open() {
     dialog.open()
@@ -55,11 +55,37 @@
 
   function resetForm() {
     form.reset()
-    anggotaKK = { ...AnggotaKKDataPrototype }
+    anggotaKK = { ...AnggotaKKPrototype }
+  }
+
+  function getFormatedData() {
+    const anggotaKKCopy = { ...anggotaKK }
+    // If falsy, set all date to empty date `0000-00-00`, so MySQL happy
+    if (!anggotaKKCopy.sudah_baptis) {
+      anggotaKKCopy.tanggal_baptis = AnggotaKKPrototype.tanggal_baptis
+      anggotaKKCopy.tempat_baptis = ''
+      anggotaKKCopy.nama_pelayan_baptis = ''
+    }
+    if (!anggotaKKCopy.sudah_sidi) {
+      anggotaKKCopy.tanggal_sidi = AnggotaKKPrototype.tanggal_sidi
+      anggotaKKCopy.tempat_sidi = ''
+      anggotaKKCopy.nama_pelayan_sidi = ''
+    }
+    if (!anggotaKKCopy.sudah_nikah) {
+      anggotaKKCopy.tanggal_nikah = AnggotaKKPrototype.tanggal_nikah
+      anggotaKKCopy.tempat_nikah = ''
+      anggotaKKCopy.nama_pelayan_nikah = ''
+    }
+    // Convert boolean to integer
+    anggotaKKCopy.sudah_baptis = +anggotaKKCopy.sudah_baptis
+    anggotaKKCopy.sudah_sidi = +anggotaKKCopy.sudah_sidi
+    anggotaKKCopy.sudah_nikah = +anggotaKKCopy.sudah_nikah
+    return anggotaKKCopy
   }
 
   function post() {
-    emit('success', anggotaKK)
+    const formattedAnggotaKK = getFormatedData()
+    emit('success', formattedAnggotaKK)
     resetForm()
     dialog.close(true)
   }
