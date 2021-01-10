@@ -242,6 +242,8 @@
   </Datatable>
 
   {#if !KK.anggota_kk.length}
-    <div class="flex items-center justify-center flex-1 text-base text-gray-700">Belum ada anggota keluarga 😟</div>
+    <div class="flex flex-col items-center justify-center flex-1 text-gray-600 hidden-100">
+      <div class="text-base">Belum ada data kepala keluarga</div>
+    </div>
   {/if}
 </div>
