@@ -1,3 +1,21 @@
+/** @param {HTMLElement} node */
+export function numberPhone(node) {
+  const handler = (event) => {
+    const selectionStart = event.target.selectionStart
+    const selectionEnd = event.target.selectionEnd
+    const newValue = event.target.value.replace(/\D/, '')
+    const isValid = event.target.value == newValue
+    event.target.value = newValue
+    event.target.setSelectionRange(selectionStart, isValid ? selectionEnd : selectionEnd - 1)
+  }
+  node.addEventListener('input', handler)
+  return {
+    onDestroy() {
+      node.removeEventListener('input', handler)
+    },
+  }
+}
+
 /** @param {HTMLInputElement} node */
 export function autoSelectOnFocus(node) {
   const handleFocus = (event) => {
