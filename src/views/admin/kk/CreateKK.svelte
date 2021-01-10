@@ -1,6 +1,6 @@
 <script>
   import * as fetchService from '/@store/fetch.service.js'
-  import { autoCapitalizeWords } from '/@actions/inputDirectives.js'
+  import { autoCapitalizeWords, numberPhone } from '/@actions/inputDirectives.js'
   import selectValues from '/@shared/selectValues.js'
   import moment from 'moment'
   import Datatable from '/@components/Datatable.svelte'
@@ -46,6 +46,7 @@
   }
 
   function doCreate() {
+    // KK.no_hp = '' + KK.no_hp
     http
       .post('/api/data/kk', KK)
       .then(({ status }) => {
@@ -173,8 +174,8 @@
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
             id="no-hp-kk"
             spellcheck="false"
-            type="number"
-            use:autoCapitalizeWords />
+            type="tel"
+            use:numberPhone />
         </section>
         <!-- KATEGORI RUMAH -->
         <section class="flex flex-col mr-2">
