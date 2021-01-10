@@ -77,7 +77,7 @@
       scrollingParrentElement = el
       lastScrollingParrentElementAxis.x = scrollingParrentElement.scrollLeft
       lastScrollingParrentElementAxis.y = scrollingParrentElement.scrollTop
-      el.addEventListener('scroll', handleScrollingParentElement)
+      el.addEventListener('scroll', handleScrollingParentElement, { passive: true })
       return
     }
     searchScrollableElement(el.parentElement)
