@@ -145,7 +145,7 @@
     <!-- TEMPAT TANGGAL LAHIR -->
     <section class="flex flex-wrap w-full max-w-600">
       <!-- TEMPAT LAHIR -->
-      <section class="flex flex-col my-2 mr-2">
+      <section class="flex flex-col flex-1 my-2 mr-2">
         <label for="tempat-lahir-anggota-kk">Tempat Lahir</label>
         <input
           bind:value={anggotaKK.tempat_lahir}
