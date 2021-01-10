@@ -48,10 +48,10 @@
   color: rgba(0, 0, 0, 0.26) !important;
 }
 
-.btn:not(:disabled):active {
-  transform: scale(1.05);
-  box-sizing: border-box;
-}
+// .btn:not(:disabled):active {
+//   transform: scale(1.05);
+//   box-sizing: border-box;
+// }
 
 .btn-error:hover {
   @apply bg-red-700;
