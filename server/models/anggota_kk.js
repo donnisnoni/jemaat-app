@@ -54,7 +54,7 @@ const attributes = {
     allowNull: false,
   },
   tanggal_baptis: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
   },
   tempat_baptis: {
     type: DataTypes.STRING,
@@ -68,7 +68,7 @@ const attributes = {
     allowNull: false,
   },
   tanggal_sidi: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
   },
   tempat_sidi: {
     type: DataTypes.STRING,
@@ -82,7 +82,7 @@ const attributes = {
     allowNull: false,
   },
   tanggal_nikah: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
   },
   tempat_nikah: {
     type: DataTypes.STRING,
