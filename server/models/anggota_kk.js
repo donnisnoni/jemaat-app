@@ -1,5 +1,4 @@
 'use strict'
-// const { DATE } = require('sequelize')
 const { Model, Sequelize, DataTypes } = require('sequelize')
 const sequelize = require('./sequelize')
 const enums = require('./enums')
@@ -36,7 +35,7 @@ const attributes = {
   },
 
   tanggal_lahir: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
     allowNull: false,
   },
 
