@@ -170,10 +170,10 @@
         <section class="flex flex-col flex-1 my-2 mr-2" style="max-width: 300px">
           <label for="no-hp-kk">No HP</label>
           <input
+            autocomplete="off"
             bind:value={KK.no_hp}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
             id="no-hp-kk"
-            spellcheck="false"
             type="tel"
             use:numberPhone />
         </section>
