@@ -40,24 +40,21 @@
     dialogCreateAnggotaKk.open()
   }
 
-  function resetForm() {
+  function resetDataAndForm() {
     form.reset()
     KK = { ...KKPrototype }
   }
 
-  function doCreate() {
-    // KK.no_hp = '' + KK.no_hp
+  function post() {
     http
       .post('/api/data/kk', KK)
       .then(({ status }) => {
         if (status === 200) {
-          resetForm()
+          resetDataAndForm()
           router.pop('/admin/kk')
         }
       })
-      .catch((err) => {
-        console.error(err)
-      })
+      .catch((err) => console.error(err))
   }
 
   function onCreateAnggotaKKSuccess({ detail }) {
@@ -73,7 +70,7 @@
     </div>
     <div class="w-full border border-t md:hidden" />
     <div class="mt-2 ml-auto md:mt-0">
-      <Button icon="notification-clear-all" on:click={resetForm} title="Reset" />
+      <Button icon="notification-clear-all" on:click={resetDataAndForm} title="Reset" />
       <Button
         icon="account-multiple-plus-outline"
         on:click={openCreateAnggotaKKDialog}
@@ -87,7 +84,7 @@
     bind:this={form}
     id="form-kepala-keluarga"
     class="relative flex flex-col p-2 overflow-y-auto border-b border-gray-200 md:flex-row"
-    on:submit|preventDefault={doCreate}
+    on:submit|preventDefault={post}
     style="max-height:40%">
     <!--  -->
     <!--  -->

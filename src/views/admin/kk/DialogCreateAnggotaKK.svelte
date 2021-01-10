@@ -49,11 +49,11 @@
   export function cancel() {
     if (confirm('Anda yakin ingin menutup formulir ini? Data yang terisi akan hilang!')) {
       dialog.close(true)
-      resetForm()
+      resetFormAndData()
     }
   }
 
-  function resetForm() {
+  function resetFormAndData() {
     form.reset()
     anggotaKK = { ...AnggotaKKPrototype }
   }
@@ -86,7 +86,7 @@
   function post() {
     const formattedAnggotaKK = getFormatedData()
     emit('success', formattedAnggotaKK)
-    resetForm()
+    resetFormAndData()
     dialog.close(true)
   }
 </script>
