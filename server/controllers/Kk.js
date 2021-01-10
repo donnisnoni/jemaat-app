@@ -1,5 +1,6 @@
 const db = require('../models')
 const { fn, col } = require('sequelize')
+// const { hasDuplicates } = require('../utils')
 
 /**
  * KK get controller
@@ -34,17 +35,24 @@ const get = (req, reply) => {
  * @type {import("fastify").RouteHandler}
  */
 const create = (req, reply) => {
-  console.log(req.body)
+  if (!req.body) {
+    return reply.code(400).send()
+  }
+
+  const KK = req.body
+
   db.kk
-    .create(req.body)
-    .then((kk) => {
-      kk.save()
-      reply.send(kk)
+    .create(KK)
+    .then(async (buildedKK) => {
+      const createdKK = await buildedKK.save()
+      KK.anggota_kk.forEach(async (anggota_kk) => {
+        anggota_kk['id_kk'] = createdKK.id_kk
+        const buildedAnggotaKK = await db.anggota_kk.create(anggota_kk)
+        await buildedAnggotaKK.save()
+      })
+      reply.send(createdKK)
     })
-    .catch((err) => {
-      console.log(err)
-    })
-  // reply.send('ok')
+    .catch((err) => console.log(err))
 }
 
 module.exports = {
