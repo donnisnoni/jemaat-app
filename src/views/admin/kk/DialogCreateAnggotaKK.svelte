@@ -9,6 +9,7 @@
   let dialog
   /** @type {HTMLFormElement} */
   let form
+  let isUpdate = false
 
   const emit = createEventDispatcher()
 
@@ -42,7 +43,12 @@
   /** @type {typeof AnggotaKKPrototype} */
   let anggotaKK = { ...AnggotaKKPrototype }
 
-  export function open() {
+  /** @param {typeof AnggotaKKPrototype} anggotaKKToUpdate  */
+  export function open(anggotaKKToUpdate) {
+    if (!!anggotaKKToUpdate) {
+      anggotaKK = { ...anggotaKKToUpdate }
+      isUpdate = true
+    }
     dialog.open()
   }
 
@@ -91,7 +97,7 @@
   }
 </script>
 
-<Dialog bind:this={dialog} full>
+<Dialog bind:this={dialog} full persistent>
   <h3 class="p-2 py-2 text-lg border-b">Tambah Anggota Kepala Keluarga</h3>
   <form
     bind:this={form}
