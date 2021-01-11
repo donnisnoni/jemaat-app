@@ -1,7 +1,7 @@
 'use strict'
 const { Model, Sequelize, DataTypes } = require('sequelize')
 const sequelize = require('./sequelize')
-const enums = require('./enums')
+const enums = require('./enums.json')
 
 class AnggotaKepalaKeluarga extends Model {}
 
@@ -45,7 +45,7 @@ const attributes = {
   },
 
   golongan_darah: {
-    type: DataTypes.ENUM(['A', 'B', 'AB', 'O']),
+    type: DataTypes.ENUM(enums.golongan_darah),
     allowNull: false,
   },
 

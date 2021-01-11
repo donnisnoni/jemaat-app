@@ -1,0 +1,100 @@
+{
+  "golongan_darah": [
+    "A",
+    "B",
+    "AB",
+    "O"
+  ],
+  "jaminan_kesehatan": [
+    "Tidak Ada",
+    "BPJS/ASKES",
+    "Asuransi Lain"
+  ],
+  "kategori_rumah": [
+    "Semi Permanen",
+    "Permanen",
+    "Darurat",
+    "Lainnya"
+  ],
+  "kedudukan_di_jemaat": [
+    "Jemaat",
+    "Jemaat Tamu",
+    "Diaken",
+    "Penatua",
+    "Pendeta"
+  ],
+  "keterangan": [
+    "Tidak Ada",
+    "Janda",
+    "Duda",
+    "Yatim/Piatu",
+    "Penyandang Cacat"
+  ],
+  "pekerjaan": [
+    "Tidak/Belum Ada",
+    "Pendeta",
+    "PNS",
+    "Pegawai Swasta",
+    "Wirawasta",
+    "TNI/Polri",
+    "Dokter",
+    "Bidan",
+    "Perawat",
+    "Apoteker",
+    "Pensiunan",
+    "Petani",
+    "Pembantu Rumah Tangga",
+    "Sopir",
+    "Tukang",
+    "Buruh",
+    "Pegawai Gereja",
+    "Pelajar",
+    "Mahasiswa",
+    "Pedagang",
+    "Ibu Rumah Tangga",
+    "Pegawai Kontrak/Honor",
+    "Lainnya"
+  ],
+  "pendidikan": [
+    "Tidak/Belum Sekolah",
+    "PAUD/TK",
+    "SD",
+    "SMP",
+    "SMA",
+    "D2",
+    "D3",
+    "S1/D4",
+    "S2",
+    "S3"
+  ],
+  "penghasilan": [
+    "Tidak Ada",
+    "sd. Rp. 750.000",
+    "Rp. 750.000 - Rp. 1.500.000",
+    "Rp. 1.500.000 - Rp. 2.500.000",
+    "Rp. 2.500.000 - Rp. 5.000.000",
+    "> Rp. 5.000.000"
+  ],
+  "status_dalam_keluarga": [
+    "Suami",
+    "Istri",
+    "Anak",
+    "Saudara Kandung",
+    "Saudara Ipar",
+    "Orang Tua",
+    "Mertua",
+    "Lainnya"
+  ],
+  "status_nikah": [
+    "Belum Menikah/Bujang",
+    "Nikah Gereja",
+    "Belum Nikah Gereja",
+    "Duda Janda"
+  ],
+  "status_rumah": [
+    "Milik Sendiri",
+    "Kontrak",
+    "Menumpang",
+    "Lainnya"
+  ]
+}
