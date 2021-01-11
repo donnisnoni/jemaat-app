@@ -1,1 +1,2 @@
-GET http://localhost:3000/api/data/kk/13  HTTP/1.1
+# GET http://localhost:3000/api/data/kk/15  HTTP/1.1
+GET http://localhost:3000/api/data/kk/15?no_timestamps=true  HTTP/1.1
