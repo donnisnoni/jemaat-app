@@ -45,13 +45,16 @@ const routes = [
   {
     method: 'GET',
     url: '/api/data/kk',
-    // schema: schemas.rayon.getRayonSchema,
     handler: controllers.KK.get,
+  },
+  {
+    method: 'GET',
+    url: '/api/data/kk/:id',
+    handler: controllers.KK.getByID,
   },
   {
     method: 'POST',
     url: '/api/data/kk',
-    // schema: schemas.rayon.getRayonSchema,
     handler: controllers.KK.create,
   },
 ]

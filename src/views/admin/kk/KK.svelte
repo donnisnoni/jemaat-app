@@ -9,6 +9,9 @@
   import DialogAnggotaKK from './DialogAnggotaKK.svelte'
   import http from '/@shared/http'
   import * as router from 'svelte-spa-router'
+  import { onMount } from 'svelte'
+
+  export let params = {}
 
   /* --------------------------- COMPONENT'S INSTANCE -------------------------- */
   /** @type {DialogAnggotaKK} */
@@ -35,6 +38,15 @@
   let rayonsResponse = fetchService.fetch('/api/data/rayon').then((data) => {
     KK.id_rayon = data[0]['id_rayon']
     return data
+  })
+
+  onMount(() => {
+    if (params.id) {
+      fetchService.fetch(`/api/data/kk/${params.id}?no_timestamps=true`).then((data) => {
+        KK = { ...data }
+        datatable.updateTableRows()
+      })
+    }
   })
 
   function resetDataAndForm() {

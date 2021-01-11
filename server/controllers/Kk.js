@@ -31,6 +31,37 @@ const get = (req, reply) => {
 }
 
 /**
+ * KK get by id controller
+ * @type {import("fastify").RouteHandler}
+ */
+const getByID = (req, reply) => {
+  const id = +req.params.id
+  if (isNaN(id) || id < 1) {
+    return reply.code(400).send({ message: 'id harus berupa angka' })
+  }
+  const isExclude = !!req.query.no_timestamps || false
+  const excludeCols = isExclude ? ['tgl_buat', 'tgl_terakhir_update'] : []
+  db.kk
+    .findByPk(id, {
+      attributes: {
+        exclude: excludeCols,
+      },
+      include: {
+        model: db.anggota_kk,
+        as: 'anggota_kk',
+        attributes: {
+          exclude: excludeCols,
+        },
+      },
+      group: 'kepala_keluarga.id_kk',
+    })
+    .then((foundedKK) => {
+      reply.send(foundedKK)
+    })
+    .catch((err) => console.error(err))
+}
+
+/**
  * KK create controller
  * @type {import("fastify").RouteHandler}
  */
@@ -56,6 +87,7 @@ const create = (req, reply) => {
 }
 
 module.exports = {
-  get,
   create,
+  get,
+  getByID,
 }
