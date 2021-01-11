@@ -37,7 +37,8 @@
 
   export function close(force = false) {
     if (!force && persistent) {
-      dialogEl.animate([{ transform: 'scale(1.05)' }], { duration: 150, easing: 'ease-out' })
+      dialogEl.classList.add('shake')
+      setTimeout(() => dialogEl.classList.remove('shake'), 820)
       return
     }
     const animation = dialogEl.animate(ANIMATIONS.FADE_IN.KEYFRAMES, {
