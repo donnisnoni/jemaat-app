@@ -10,6 +10,7 @@
   /** @type {HTMLFormElement} */
   let form
   let isUpdate = false
+  let indexToUpdate = 0
 
   const emit = createEventDispatcher()
 
@@ -43,17 +44,22 @@
   /** @type {typeof AnggotaKKPrototype} */
   let anggotaKK = { ...AnggotaKKPrototype }
 
-  /** @param {typeof AnggotaKKPrototype} anggotaKKToUpdate  */
-  export function open(anggotaKKToUpdate) {
-    if (!!anggotaKKToUpdate) {
+  /** @param {typeof AnggotaKKPrototype} anggotaKKToUpdate
+   * @param {number} index
+   */
+  export function open(anggotaKKToUpdate, index) {
+    // debugger
+    const isEvent = anggotaKKToUpdate instanceof Event
+    if (!isEvent && !!anggotaKKToUpdate) {
       anggotaKK = { ...anggotaKKToUpdate }
       isUpdate = true
+      indexToUpdate = index
     }
     dialog.open()
   }
 
   export function cancel() {
-    if (confirm('Anda yakin ingin menutup formulir ini? Data yang terisi akan hilang!')) {
+    if (isUpdate || confirm('Anda yakin ingin menutup formulir ini? Data yang terisi akan hilang!')) {
       dialog.close(true)
       resetFormAndData()
     }
@@ -62,6 +68,7 @@
   function resetFormAndData() {
     form.reset()
     anggotaKK = { ...AnggotaKKPrototype }
+    isUpdate = false
   }
 
   function getFormatedData() {
@@ -90,15 +97,27 @@
   }
 
   function post() {
+    if (
+      isUpdate &&
+      !confirm(
+        'Apakah kamu yakin ingin mengubah data anggota keluarga ini? Data yang sudah diubah tidak bisa dikembalikan'
+      )
+    ) {
+      return
+    }
     const formattedAnggotaKK = getFormatedData()
-    emit('success', formattedAnggotaKK)
+    emit('success', {
+      anggotaKK: formattedAnggotaKK,
+      isUpdate,
+      indexToUpdate,
+    })
     resetFormAndData()
     dialog.close(true)
   }
 </script>
 
 <Dialog bind:this={dialog} full persistent>
-  <h3 class="p-2 py-2 text-lg border-b">Tambah Anggota Kepala Keluarga</h3>
+  <h3 class="p-2 py-2 text-lg border-b">{isUpdate ? 'Ubah' : 'Tambah'} Anggota Keluarga</h3>
   <form
     bind:this={form}
     class="relative flex flex-col flex-1 max-h-full px-2 overflow-y-auto sm:px-4 md:px-6"
@@ -402,7 +421,9 @@
   <div class="flex p-2 border-t">
     <Button icon="close" on:click={cancel}>Tutup</Button>
     <div class="ml-auto">
-      <Button form="create-anggota-kk" icon="plus" primary type="submit">Tambah</Button>
+      <Button form="create-anggota-kk" icon={isUpdate ? 'content-save-outline' : 'plus'} primary type="submit">
+        {isUpdate ? 'Ubah' : 'Tambah'}
+      </Button>
     </div>
   </div>
 </Dialog>

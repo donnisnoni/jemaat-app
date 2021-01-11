@@ -6,13 +6,13 @@
   import Datatable from '/@components/Datatable.svelte'
   import Button from '/@components/Button.svelte'
   import EmptyDataPlaceholder from '/@components/EmptyDataPlaceholder.svelte'
-  import DialogCreateAnggotaKK from './DialogCreateAnggotaKK.svelte'
+  import DialogAnggotaKK from './DialogAnggotaKK.svelte'
   import http from '/@shared/http'
   import * as router from 'svelte-spa-router'
 
   /* --------------------------- COMPONENT'S INSTANCE -------------------------- */
-  /** @type {DialogCreateAnggotaKK} */
-  let dialogCreateAnggotaKk
+  /** @type {DialogAnggotaKK} */
+  let dialogAnggotaKk
   /** @type {HTMLFormElement} */
   let form
   /** @type {Datatable} */
@@ -37,10 +37,6 @@
     return data
   })
 
-  function openCreateAnggotaKKDialog() {
-    dialogCreateAnggotaKk.open()
-  }
-
   function resetDataAndForm() {
     form.reset()
     KK = { ...KKPrototype }
@@ -58,8 +54,12 @@
       .catch((err) => console.error(err))
   }
 
-  function onCreateAnggotaKKSuccess({ detail }) {
-    KK.anggota_kk = [...KK.anggota_kk, detail]
+  function onAnggotaKKPost({ detail }) {
+    if (detail.isUpdate) {
+      KK.anggota_kk[detail.indexToUpdate] = detail.anggotaKK
+    } else {
+      KK.anggota_kk = [...KK.anggota_kk, detail.anggotaKK]
+    }
     datatable.updateTableRows()
   }
 
@@ -75,10 +75,7 @@
     <div class="w-full border border-t md:hidden" />
     <div class="mt-2 ml-auto md:mt-0">
       <Button icon="notification-clear-all" on:click={resetDataAndForm} title="Reset" />
-      <Button
-        icon="account-multiple-plus-outline"
-        on:click={openCreateAnggotaKKDialog}
-        title="Tambah Anggota Keluarga" />
+      <Button icon="account-multiple-plus-outline" on:click={dialogAnggotaKk.open} title="Tambah Anggota Keluarga" />
       <Button form="form-kepala-keluarga" icon="content-save-outline" primary title="Simpan" />
     </div>
   </div>
@@ -198,7 +195,7 @@
     </div>
   </form>
 
-  <DialogCreateAnggotaKK bind:this={dialogCreateAnggotaKk} on:success={onCreateAnggotaKKSuccess} />
+  <DialogAnggotaKK bind:this={dialogAnggotaKk} on:success={onAnggotaKKPost} />
 
   <Datatable bind:this={datatable} hidden={!KK.anggota_kk.length}>
     <thead class:hidden={!KK.anggota_kk.length}>
@@ -222,7 +219,7 @@
     </thead>
     <tbody>
       {#each KK.anggota_kk as anggota_kk, index}
-        <tr>
+        <tr on:dblclick={() => dialogAnggotaKk.open(KK.anggota_kk[index], index)}>
           <td class="p-1 text-center">{index + 1}</td>
           <td class="p-1 text-center">{anggota_kk.nama}</td>
           <td class="p-1 text-center">{anggota_kk.jk}</td>
