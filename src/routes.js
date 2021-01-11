@@ -17,7 +17,7 @@ const routes = {
     asyncComponent: () => import('./views/admin/kk/Index.svelte'),
   }),
   '/admin/kk/create': wrap({
-    asyncComponent: () => import('./views/admin/kk/CreateKK.svelte'),
+    asyncComponent: () => import('./views/admin/kk/KK.svelte'),
   }),
 }
 
