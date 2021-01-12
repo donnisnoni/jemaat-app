@@ -107,7 +107,9 @@
     </div>
     <div class="w-full border border-t md:hidden" />
     <div class="mt-2 ml-auto md:mt-0">
-      <Button icon="notification-clear-all" on:click={resetDataAndForm} title="Reset" />
+      {#if !isUpdate}
+        <Button icon="notification-clear-all" on:click={resetDataAndForm} title="Reset" />
+      {/if}
       <Button icon="account-multiple-plus-outline" on:click={dialogAnggotaKk.open} title="Tambah Anggota Keluarga" />
       <Button form="form-kepala-keluarga" icon="content-save-outline" primary title="Simpan" />
     </div>
