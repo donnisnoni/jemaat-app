@@ -57,6 +57,11 @@ const routes = [
     url: '/api/data/kk',
     handler: controllers.KK.create,
   },
+  {
+    method: 'PUT',
+    url: '/api/data/kk/:id',
+    handler: controllers.KK.update,
+  },
 ]
 
 module.exports = routes

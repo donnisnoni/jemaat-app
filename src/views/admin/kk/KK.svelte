@@ -20,6 +20,12 @@
   let form
   /** @type {Datatable} */
   let datatable
+  let isUpdate = false
+  let loading = {
+    load: false,
+    update: false,
+    create: false,
+  }
 
   const KKPrototype = {
     nama: '',
@@ -42,10 +48,15 @@
 
   onMount(() => {
     if (params.id) {
-      fetchService.fetch(`/api/data/kk/${params.id}?no_timestamps=true`).then((data) => {
-        KK = { ...data }
-        datatable.updateTableRows()
-      })
+      loading.load = true
+      http
+        .get(`/api/data/kk/${params.id}?no_timestamps=true`)
+        .then(({ data }) => {
+          KK = { ...data }
+          datatable.updateTableRows()
+        })
+        .finally(() => (loading.load = false))
+      isUpdate = true
     }
   })
 
@@ -55,15 +66,25 @@
   }
 
   function post() {
-    http
-      .post('/api/data/kk', KK)
-      .then(({ status }) => {
-        if (status === 200) {
-          resetDataAndForm()
-          router.pop('/admin/kk')
-        }
-      })
-      .catch((err) => console.error(err))
+    const OK = ({ status }) => {
+      if (status === 200) {
+        resetDataAndForm()
+        router.pop('/admin/kk')
+      }
+    }
+    if (!isUpdate) {
+      loading.create = true
+      http
+        .post('/api/data/kk', KK)
+        .then(OK)
+        .finally(() => (loading.create = false))
+    } else {
+      loading.update = true
+      http
+        .put(`/api/data/kk/${KK.id_kk}`, KK)
+        .then(OK)
+        .finally(() => (loading.update = false))
+    }
   }
 
   function onAnggotaKKPost({ detail }) {
@@ -82,7 +103,7 @@
 <div class="flex flex-col flex-1 overflow-hidden bg-white card">
   <div class="flex flex-col flex-wrap p-3 bg-white border-b border-gray-200 md:flex-row ">
     <div class="mb-2 md:place-self-center md:mb-0">
-      <h3 class="text-lg">Keluarga</h3>
+      <h3 class="text-lg">{isUpdate ? 'Ubah' : ''} Keluarga</h3>
     </div>
     <div class="w-full border border-t md:hidden" />
     <div class="mt-2 ml-auto md:mt-0">
@@ -96,6 +117,7 @@
   <form
     bind:this={form}
     id="form-kepala-keluarga"
+    class:hidden={isUpdate && loading.load}
     class="relative flex flex-col p-2 overflow-y-auto border-b border-gray-200 md:flex-row"
     on:submit|preventDefault={post}
     style="max-height:40%">

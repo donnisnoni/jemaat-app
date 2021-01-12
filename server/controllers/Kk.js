@@ -2,6 +2,8 @@ const db = require('../models')
 const { fn, col } = require('sequelize')
 // const { hasDuplicates } = require('../utils')
 
+const logError = (err) => console.log(err)
+
 /**
  * KK get controller
  * @type {import("fastify").RouteHandler}
@@ -24,10 +26,7 @@ const get = (req, reply) => {
       reply.send(foundedKKs)
       // }, 5000);
     })
-    .catch((err) => {
-      console.error(err)
-      reply.send(err)
-    })
+    .catch(logError)
 }
 
 /**
@@ -53,12 +52,11 @@ const getByID = (req, reply) => {
           exclude: excludeCols,
         },
       },
-      group: 'kepala_keluarga.id_kk',
     })
     .then((foundedKK) => {
       reply.send(foundedKK)
     })
-    .catch((err) => console.error(err))
+    .catch(logError)
 }
 
 /**
@@ -83,11 +81,58 @@ const create = (req, reply) => {
       })
       reply.send(createdKK)
     })
-    .catch((err) => console.log(err))
+    .catch(logError)
+}
+
+/**
+ * KK update controller
+ * @type {import("fastify").RouteHandler}
+ */
+const update = (req, reply) => {
+  const id = +req.params.id
+  if (isNaN(id) || id < 1) {
+    return reply.code(400).send({ message: 'id harus berupa angka' })
+  }
+  if (!req.body) {
+    return reply.code(400).send({ message: 'Data kepala keluarga diperlukan' })
+  }
+  const KK = req.body
+
+  db.kk
+    .findByPk(id)
+    .then(async (foundedKK) => {
+      await foundedKK.update(KK)
+
+      if (KK.hasOwnProperty('anggota_kk') && KK.anggota_kk instanceof Array) {
+        // Update/Create each anggota KK
+        KK.anggota_kk.forEach(async (anggota_kk) => {
+          if (anggota_kk.hasOwnProperty('id_anggota_kk')) {
+            await db.anggota_kk
+              .findByPk(anggota_kk.id_anggota_kk)
+              .then((foundedAnggotaKK) => foundedAnggotaKK.update(anggota_kk))
+          } else {
+            await db.anggota_kk.create(anggota_kk)
+          }
+        })
+        // Delete each anggota KK that not in the list
+        const anggotaKKsFromDB = (await db.anggota_kk.findAll({ where: { id_kk: id } })) || []
+        const anggotaKKIdsFromDB = anggotaKKsFromDB.map((anggotaKK) => anggotaKK.id_anggota_kk)
+        const anggotaKKIdsFromRequest = KK.anggota_kk.map((anggotaKK) => anggotaKK.id_anggota_kk)
+        anggotaKKIdsFromDB.forEach((anggotaKKIdFromDB, idx) => {
+          if (!anggotaKKIdsFromRequest.includes(anggotaKKIdFromDB)) {
+            anggotaKKsFromDB[idx].destroy({ force: true })
+          }
+        })
+      }
+
+      reply.send({ message: `Sukses mengupdate kepala keluarga` })
+    })
+    .catch(logError)
 }
 
 module.exports = {
   create,
   get,
   getByID,
+  update,
 }

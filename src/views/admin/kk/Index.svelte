@@ -3,6 +3,7 @@
   import Button from '/@components/Button.svelte'
   import EmptyDataPlaceholder from '/@components/EmptyDataPlaceholder.svelte'
   import { push } from 'svelte-spa-router'
+  import { link } from 'svelte-spa-router'
   import moment from 'moment'
 
   // import { Datatable, rows } from 'svelte-simple-datatables'
@@ -50,8 +51,8 @@
       <!--  -->
     {:then dataKK}
       {#each dataKK as KK, key}
-        <div class="list--item" data-key={key} role="listitem">
-          <!--  -->
+        <!-- svelte-ignore a11y-missing-attribute -->
+        <a class="list--item" data-key={key} href={`/admin/kk/${KK.id_kk}`} role="listitem" use:link>
           <div class="flex flex-col">
             <div class="font-bold">{KK.nama}</div>
             <!-- svelte-ignore missing-declaration -->
@@ -62,7 +63,7 @@
             title="Jumlah anggota kepala keluarga">
             {KK.jumlah_anggota_kk}
           </div>
-        </div>
+        </a>
       {:else}
         <EmptyDataPlaceholder>Belum ada kepala keluarga</EmptyDataPlaceholder>
       {/each}
