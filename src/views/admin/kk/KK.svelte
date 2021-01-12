@@ -120,7 +120,7 @@
     bind:this={form}
     id="form-kepala-keluarga"
     class:hidden={isUpdate && loading.load}
-    class="relative flex flex-col p-2 overflow-y-auto border-b border-gray-200 md:flex-row"
+    class="relative flex flex-col p-2 overflow-y-auto md:flex-row"
     on:submit|preventDefault={post}
     style="max-height:40%">
     <!--  -->
