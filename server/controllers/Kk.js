@@ -111,6 +111,7 @@ const update = (req, reply) => {
               .findByPk(anggota_kk.id_anggota_kk)
               .then((foundedAnggotaKK) => foundedAnggotaKK.update(anggota_kk))
           } else {
+            anggota_kk.id_kk = KK.id_kk
             await db.anggota_kk.create(anggota_kk)
           }
         })
