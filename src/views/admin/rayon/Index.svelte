@@ -5,7 +5,7 @@
   import UpdateRayonDialog from './UpdateRayonDialog.svelte'
   import DeleteRayonDialog from './DeleteRayonDialog.svelte'
   import Button from '/@components/Button.svelte'
-  import Menu from '/@components/Menu.svelte'
+  import MenuEditDelete from '/@components/MenuEditDelete.svelte'
   import { link } from 'svelte-spa-router'
   import moment from 'moment'
 
@@ -20,8 +20,8 @@
 
   let currentSelectedKey = 0
   let lastRayonActionSuccess
-  /** @type {Menu} */
-  let menu
+  /** @type {MenuEditDelete} */
+  let menuEditDelete
   /**  Type of succes event.
    *
    * `1` for Create data succes;
@@ -70,7 +70,7 @@
   }
 
   function openContextMenu(event) {
-    menu.open(event)
+    menuEditDelete.open(event)
     currentSelectedKey = +event.target.dataset.key
   }
 
@@ -106,22 +106,10 @@
     </div>
   </div>
 
-  <Menu bind:this={menu}>
-    <ul class="p-1">
-      <!-- svelte-ignore a11y-missing-attribute -->
-      <li>
-        <a class="inline-flex p-2 cursor-pointer" on:click={openUpdateRayonDialog}>
-          <i class="ml-auto mdi mdi-pencil" />Ubah
-        </a>
-      </li>
-      <!-- svelte-ignore a11y-missing-attribute -->
-      <li>
-        <a class="inline-flex p-2 cursor-pointer" on:click={openDeleteRayonDialog}>
-          <i class="ml-auto mdi mdi-delete" />Hapus
-        </a>
-      </li>
-    </ul>
-  </Menu>
+  <MenuEditDelete
+    bind:this={menuEditDelete}
+    on:delete-clicked={openDeleteRayonDialog}
+    on:edit-clicked={openUpdateRayonDialog} />
 
   <AddRayonDialog bind:this={addRayonDialog} on:success={onActionSuccess} on:closed={showSuccessAlert} />
   <UpdateRayonDialog bind:this={updateRayonDialog} on:success={onActionSuccess} on:closed={showSuccessAlert} />
