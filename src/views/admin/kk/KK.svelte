@@ -5,6 +5,7 @@
   import moment from 'moment'
   import Datatable from '/@components/Datatable.svelte'
   import Button from '/@components/Button.svelte'
+  import MenuEditDelete from '/@components/MenuEditDelete.svelte'
   import EmptyDataPlaceholder from '/@components/EmptyDataPlaceholder.svelte'
   import DialogAnggotaKK from './DialogAnggotaKK.svelte'
   import http from '/@shared/http'
@@ -20,12 +21,15 @@
   let form
   /** @type {Datatable} */
   let datatable
+  /** @type {MenuEditDelete} */
+  let menuEditDelete
   let isUpdate = false
   let loading = {
     load: false,
     update: false,
     create: false,
   }
+  let lastIndex = 0
 
   const KKPrototype = {
     nama: '',
@@ -94,6 +98,23 @@
       KK.anggota_kk = [...KK.anggota_kk, detail.anggotaKK]
     }
     datatable.updateTableRows()
+  }
+
+  function openContextMenu(event, index) {
+    menuEditDelete.open(event)
+    lastIndex = index
+  }
+
+  function openDialogAnggotaKK(index) {
+    dialogAnggotaKk.open(KK.anggota_kk[index], index)
+  }
+
+  function deleteAnggotaKK() {
+    // if (confirm('Apakah anda yakin ingin menghapus anggota keluarga?')) {
+    const anggotaKKCopy = [...KK.anggota_kk]
+    anggotaKKCopy.splice(lastIndex, 1)
+    KK.anggota_kk = anggotaKKCopy
+    // }
   }
 
   // UTILITIES
@@ -231,8 +252,6 @@
     </div>
   </form>
 
-  <DialogAnggotaKK bind:this={dialogAnggotaKk} on:success={onAnggotaKKPost} />
-
   <Datatable bind:this={datatable} hidden={!KK.anggota_kk.length}>
     <thead class:hidden={!KK.anggota_kk.length}>
       <tr style="border-bottom: 1px solid #c0c3ca">
@@ -255,7 +274,9 @@
     </thead>
     <tbody>
       {#each KK.anggota_kk as anggota_kk, index}
-        <tr on:dblclick={() => dialogAnggotaKk.open(KK.anggota_kk[index], index)}>
+        <tr
+          on:dblclick={() => openDialogAnggotaKK(index)}
+          on:contextmenu|preventDefault={(e) => openContextMenu(e, index)}>
           <td class="p-1 text-center">{index + 1}</td>
           <td class="p-1 text-center">{anggota_kk.nama}</td>
           <td class="p-1 text-center">{anggota_kk.jk}</td>
@@ -281,4 +302,10 @@
   {#if !KK.anggota_kk.length}
     <EmptyDataPlaceholder>Belum ada anggota keluarga</EmptyDataPlaceholder>
   {/if}
+
+  <DialogAnggotaKK bind:this={dialogAnggotaKk} on:success={onAnggotaKKPost} />
+  <MenuEditDelete
+    bind:this={menuEditDelete}
+    on:delete-clicked={deleteAnggotaKK}
+    on:edit-clicked={() => openDialogAnggotaKK(lastIndex)} />
 </div>
