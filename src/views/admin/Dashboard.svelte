@@ -20,24 +20,24 @@
     <div class="flex flex-col flex-shrink gap-2 md:flex-row">
       <!-- TOTAL RAYON -->
       <div class="flex flex-col items-center flex-1 p-3 border rounded-md bg-gray-50">
-        <div class="text-6xl hidden-100">
+        <div class="text-3xl hidden-100">
           {#await totalRayonResponse}0{:then jumlahRayon}{jumlahRayon}{/await}
         </div>
-        <div class="text-lg">Rayon</div>
+        <div class="text-sm">Rayon</div>
       </div>
       <!-- TOTAL KK -->
       <div class="flex flex-col items-center flex-1 p-3 border rounded-md bg-gray-50">
-        <div class="text-6xl hidden-100">
+        <div class="text-3xl hidden-100">
           {#await totalKKResponse}0{:then jumlahKK}{jumlahKK}{/await}
         </div>
-        <div class="text-lg">Keluarga</div>
+        <div class="text-sm">Keluarga</div>
       </div>
       <!-- TOTAL JEMAAT -->
       <div class="flex flex-col items-center flex-1 p-3 border rounded-md bg-gray-50">
-        <div class="text-6xl hidden-100">
+        <div class="text-3xl hidden-100">
           {#await totalJemaatResponse}0{:then jumlahJemaat}{jumlahJemaat}{/await}
         </div>
-        <div class="text-lg">Jemaat</div>
+        <div class="text-sm">Jemaat</div>
       </div>
     </div>
   </div>
