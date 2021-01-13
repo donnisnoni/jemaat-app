@@ -23,6 +23,8 @@
   let datatable
   /** @type {MenuEditDelete} */
   let menuEditDelete
+
+  /* --------------------------------- STATE'S -------------------------------- */
   let isUpdate = false
   let loading = {
     load: false,
