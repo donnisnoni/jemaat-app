@@ -54,6 +54,8 @@
       anggotaKK = { ...anggotaKKToUpdate }
       isUpdate = true
       indexToUpdate = index
+    } else {
+      isUpdate = false
     }
     dialog.open()
   }
@@ -68,7 +70,6 @@
   function resetFormAndData() {
     form.reset()
     anggotaKK = { ...AnggotaKKPrototype }
-    isUpdate = false
   }
 
   function getFormatedData() {
