@@ -40,9 +40,9 @@
       </a>
     </li>
     <li>
-      <a href="/admin/kk" title="Kepala Keluarga" use:link use:active>
+      <a href="/admin/kk" title="Keluarga" use:link use:active>
         <i class="mdi mdi-account-outline" />
-        <span class="link-label">Kepala Keluarga</span>
+        <span class="link-label">Keluarga</span>
       </a>
     </li>
   </ul>

@@ -30,7 +30,7 @@
         <div class="text-6xl hidden-100">
           {#await totalKKResponse}0{:then jumlahKK}{jumlahKK}{/await}
         </div>
-        <div class="text-lg">Kepala Keluarga</div>
+        <div class="text-lg">Keluarga</div>
       </div>
       <!-- TOTAL JEMAAT -->
       <div class="flex flex-col items-center flex-1 p-3 border rounded-md bg-gray-50">
