@@ -6,7 +6,7 @@ const instance = new Sequelize({
   username: process.env.DB_USER || 'root',
   password: process.env.DB_PASS || '',
   dialect: 'mariadb',
-  logging: true,
+  logging: console.log,
 })
 
 // instance.sync({ alter: true })
