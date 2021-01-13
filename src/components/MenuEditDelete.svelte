@@ -13,10 +13,12 @@
 
   function emitEdit() {
     emit('edit-clicked')
+    menu.close()
   }
 
   function emitDelete() {
     emit('delete-clicked')
+    menu.close()
   }
 </script>
 
