@@ -33,7 +33,7 @@
   }
   let lastIndex = 0
 
-  const KKPrototype = {
+  let KKPrototype = {
     nama: '',
     alamat: '',
     no_hp: '',
@@ -53,16 +53,17 @@
   })
 
   onMount(() => {
-    if (params.id) {
+    isUpdate = !!params.id
+    if (isUpdate) {
       loading.load = true
       http
         .get(`/api/data/kk/${params.id}?no_timestamps=true`)
         .then(({ data }) => {
-          KK = { ...data }
+          KKPrototype = { ...data }
+          KK = { ...KKPrototype }
           datatable.updateTableRows()
         })
         .finally(() => (loading.load = false))
-      isUpdate = true
     }
   })
 
@@ -130,9 +131,7 @@
     </div>
     <div class="w-full border border-t md:hidden" />
     <div class="mt-2 ml-auto md:mt-0">
-      {#if !isUpdate}
-        <Button icon="notification-clear-all" on:click={resetDataAndForm} title="Reset" />
-      {/if}
+      <Button icon="notification-clear-all" on:click={resetDataAndForm} title="Reset" />
       <Button icon="account-multiple-plus-outline" on:click={dialogAnggotaKk.open} title="Tambah Anggota Keluarga" />
       <Button form="form-kepala-keluarga" icon="content-save-outline" primary title="Simpan" />
     </div>
