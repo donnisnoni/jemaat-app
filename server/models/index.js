@@ -9,23 +9,24 @@ const models = {
   anggota_kk: require('./anggota_kk'),
 }
 
-models.kk.rayon = models.kk.belongsTo(models.rayon, {
+models.kk.belongsTo(models.rayon, {
   as: 'rayon',
   foreignKey: 'id_rayon',
 })
-models.rayon.kk = models.rayon.hasMany(models.kk, {
+models.rayon.hasMany(models.kk, {
   as: 'kepala_keluarga',
   foreignKey: 'id_rayon',
 })
 
-models.rayon.kk = models.anggota_kk.belongsTo(models.kk, {
+models.anggota_kk.belongsTo(models.kk, {
   as: 'anggota_kk',
   foreignKey: 'id_kk',
 })
-models.kk.anggota_kk = models.kk.hasMany(models.anggota_kk, {
+models.kk.hasMany(models.anggota_kk, {
   as: 'anggota_kk',
   foreignKey: 'id_kk',
 })
+
 // models.anggota_kk.hasOne(models.jabatan)
 
 module.exports = { sequelize, ...models }
