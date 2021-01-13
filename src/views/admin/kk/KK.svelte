@@ -278,12 +278,10 @@
           on:dblclick={() => openDialogAnggotaKK(index)}
           on:contextmenu|preventDefault={(e) => openContextMenu(e, index)}>
           <td class="p-1 text-center">{index + 1}</td>
-          <td class="p-1 text-center">{anggota_kk.nama}</td>
+          <td class="p-1">{anggota_kk.nama}</td>
           <td class="p-1 text-center">{anggota_kk.jk}</td>
           <td class="p-1 text-center">{anggota_kk.status}</td>
-          <td class="p-1 text-center">
-            {anggota_kk.tempat_lahir + ', ' + moment(anggota_kk.tanggal_lahir).format('D MMMM YYYY')}
-          </td>
+          <td class="p-1">{anggota_kk.tempat_lahir + ', ' + moment(anggota_kk.tanggal_lahir).format('D MMMM YYYY')}</td>
           <td class="p-1 text-center">{anggota_kk.golongan_darah}</td>
           <td class="p-1 text-center">{anggota_kk.kedudukan_di_jemaat}</td>
           <td class="p-1 text-center">{sudahBelum(anggota_kk.sudah_baptis)}</td>
