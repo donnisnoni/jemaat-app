@@ -56,7 +56,7 @@
           <div class="flex flex-col">
             <div class="font-bold">{KK.nama}</div>
             <!-- svelte-ignore missing-declaration -->
-            <div class="text-xs">{moment(KK.tgl_terakhir_update).fromNow()}</div>
+            <div class="time-from-now">{moment(KK.tgl_terakhir_update).fromNow()}</div>
           </div>
           <div
             class="flex items-center justify-center p-1 ml-auto text-white bg-blue-500 rounded-full rayon-info--jumlah-kk"

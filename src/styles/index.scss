@@ -82,5 +82,10 @@ input::-webkit-inner-spin-button {
 // }
 
 .max-w-600 {
-  max-width:600px
+  max-width: 600px;
+}
+
+.time-from-now {
+  @apply text-xs;
+  @apply text-gray-600;
 }
