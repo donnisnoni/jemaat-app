@@ -4,7 +4,7 @@ const sequelize = require('./sequelize')
 const models = {
   rayon: require('./rayon'),
   admin: require('./admin'),
-  jabatan: require('./jabatan'),
+  // jabatan: require('./jabatan'),
   kk: require('./kk'),
   anggota_kk: require('./anggota_kk'),
 }
@@ -26,6 +26,6 @@ models.kk.anggota_kk = models.kk.hasMany(models.anggota_kk, {
   as: 'anggota_kk',
   foreignKey: 'id_kk',
 })
-models.anggota_kk.hasOne(models.jabatan)
+// models.anggota_kk.hasOne(models.jabatan)
 
 module.exports = { sequelize, ...models }
