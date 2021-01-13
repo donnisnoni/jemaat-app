@@ -33,14 +33,26 @@ const get = (req, reply) => {
  * Rayon get by id controller
  * @type {import("fastify").RouteHandler}
  */
-const getByID = (req, reply) => {
+const getByID = async (req, reply) => {
   const id = +req.params.id
   if (isNaN(id) || id < 1) {
     return reply.code(400).send({ error: true, errors: [], message: 'Bad request' })
   }
 
   db.rayon
-    .findByPk(id)
+    .findByPk(id, {
+      attributes: {
+        include: [
+          [fn('COUNT', col('kepala_keluarga.id_kk')), 'jumlah_kk'],
+          // [fn('COUNT', col('anggota_kk.id_anggota_kk')), 'jumlah_jemaat'],
+        ],
+      },
+      include: {
+        model: db.kk,
+        as: 'kepala_keluarga',
+      },
+      group: 'rayon.id_rayon',
+    })
     .then((foundedRayon) => {
       reply.send(foundedRayon)
     })
