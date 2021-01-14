@@ -8,9 +8,11 @@
   import MenuEditDelete from '/@components/MenuEditDelete.svelte'
   import EmptyDataPlaceholder from '/@components/EmptyDataPlaceholder.svelte'
   import DialogAnggotaKK from './DialogAnggotaKK.svelte'
+  import DialogDeleteAnggota from './DialogDeleteAnggota.svelte'
   import http from '/@shared/http'
   import * as router from 'svelte-spa-router'
   import { onMount } from 'svelte'
+  // import deepEqual from 'deep-equal'
 
   export let params = {}
 
@@ -23,6 +25,8 @@
   let datatable
   /** @type {MenuEditDelete} */
   let menuEditDelete
+  /** @type {DialogDeleteAnggota} */
+  let dialogDeleteAnggota
 
   /* --------------------------------- STATE'S -------------------------------- */
   let isUpdate = false
@@ -31,7 +35,7 @@
     update: false,
     create: false,
   }
-  let lastIndex = 0
+  let indexToActionWith = 0
 
   let KKPrototype = {
     nama: '',
@@ -105,7 +109,7 @@
 
   function openContextMenu(event, index) {
     menuEditDelete.open(event)
-    lastIndex = index
+    indexToActionWith = index
   }
 
   function openDialogAnggotaKK(index) {
@@ -113,14 +117,11 @@
   }
 
   function deleteAnggotaKK() {
-    // if (confirm('Apakah anda yakin ingin menghapus anggota keluarga?')) {
     const anggotaKKCopy = [...KK.anggota_kk]
-    anggotaKKCopy.splice(lastIndex, 1)
+    anggotaKKCopy.splice(indexToActionWith, 1)
     KK.anggota_kk = anggotaKKCopy
-    // }
   }
 
-  // UTILITIES
   const sudahBelum = (value) => (!!value ? 'Sudah' : 'Belum')
 </script>
 
@@ -303,8 +304,11 @@
   {/if}
 
   <DialogAnggotaKK bind:this={dialogAnggotaKk} on:success={onAnggotaKKPost} />
+
   <MenuEditDelete
     bind:this={menuEditDelete}
-    on:delete-clicked={deleteAnggotaKK}
-    on:edit-clicked={() => openDialogAnggotaKK(lastIndex)} />
+    on:delete-clicked={() => dialogDeleteAnggota.open(KK.anggota_kk[indexToActionWith].nama)}
+    on:edit-clicked={() => openDialogAnggotaKK(indexToActionWith)} />
+
+  <DialogDeleteAnggota bind:this={dialogDeleteAnggota} on:yes={deleteAnggotaKK} />
 </div>
