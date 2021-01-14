@@ -35,13 +35,13 @@
     </li>
     <li>
       <a href="/admin/rayon" title="Rayon" use:link use:active={/admin\/rayon.*/i}>
-        <i class="mdi mdi-account-group-outline" />
+        <i class="mdi mdi-home-group" />
         <span class="link-label">Rayon</span>
       </a>
     </li>
     <li>
       <a href="/admin/kk" title="Keluarga" use:link use:active={/admin\/kk.*/i}>
-        <i class="mdi mdi-account-outline" />
+        <i class="mdi mdi-account-group-outline" />
         <span class="link-label">Keluarga</span>
       </a>
     </li>
