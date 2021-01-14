@@ -96,7 +96,10 @@ const update = (req, reply) => {
   if (!req.body) {
     return reply.code(400).send({ message: 'Data kepala keluarga diperlukan' })
   }
+
   const KK = req.body
+  KK.tgl_buat = null
+  KK.tgl_terakhir_update = null
 
   db.kk
     .findByPk(id)
@@ -106,6 +109,8 @@ const update = (req, reply) => {
       if (KK.hasOwnProperty('anggota_kk') && KK.anggota_kk instanceof Array) {
         // Update/Create each anggota KK
         KK.anggota_kk.forEach(async (anggota_kk) => {
+          anggota_kk.tgl_buat = null
+          anggota_kk.tgl_terakhir_update = null
           if (anggota_kk.hasOwnProperty('id_anggota_kk')) {
             await db.anggota_kk
               .findByPk(anggota_kk.id_anggota_kk)
