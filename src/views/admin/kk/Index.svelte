@@ -60,12 +60,12 @@
           </div>
           <div
             class="flex items-center justify-center p-1 ml-auto text-white bg-blue-500 rounded-full rayon-info--jumlah-kk"
-            title="Jumlah anggota kepala keluarga">
+            title="Jumlah anggota keluarga">
             {KK.jumlah_anggota_kk}
           </div>
         </a>
       {:else}
-        <EmptyDataPlaceholder>Belum ada kepala keluarga</EmptyDataPlaceholder>
+        <EmptyDataPlaceholder>Belum ada keluarga</EmptyDataPlaceholder>
       {/each}
     {/await}
   </div>
