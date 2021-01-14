@@ -1,5 +1,5 @@
 const db = require('../models')
-const { fn, col } = require('sequelize')
+const { fn, col, where, literal } = require('sequelize')
 
 /**
  * Rayon get controller
@@ -9,7 +9,16 @@ const get = (req, reply) => {
   db.rayon
     .findAll({
       attributes: {
-        include: [[fn('COUNT', col('kepala_keluarga.id_kk')), 'jumlah_kk']],
+        include: [
+          [
+            literal(`(SELECT COUNT(id_kk) FROM kepala_keluarga WHERE kepala_keluarga.id_rayon = rayon.id_rayon)`),
+            'jumlah_kk',
+          ],
+          [
+            literal(`(SELECT COUNT(id_anggota_kk) FROM anggota_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon)`),
+            'jumlah_jemaat',
+          ],
+        ],
       },
       include: {
         model: db.kk,
@@ -43,8 +52,14 @@ const getByID = async (req, reply) => {
     .findByPk(id, {
       attributes: {
         include: [
-          [fn('COUNT', col('kepala_keluarga.id_kk')), 'jumlah_kk'],
-          // [fn('COUNT', col('anggota_kk.id_anggota_kk')), 'jumlah_jemaat'],
+          [
+            literal(`(SELECT COUNT(id_kk) FROM kepala_keluarga WHERE kepala_keluarga.id_rayon = rayon.id_rayon)`),
+            'jumlah_kk',
+          ],
+          [
+            literal(`(SELECT COUNT(id_anggota_kk) FROM anggota_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon)`),
+            'jumlah_jemaat',
+          ],
         ],
       },
       include: {
