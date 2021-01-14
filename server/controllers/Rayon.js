@@ -1,6 +1,26 @@
 const db = require('../models')
 const { fn, col, where, literal } = require('sequelize')
 
+const include = [
+  [literal(`(SELECT COUNT(id_kk) FROM kepala_keluarga WHERE kepala_keluarga.id_rayon = rayon.id_rayon)`), 'jumlah_kk'],
+  [
+    literal(`(SELECT COUNT(id_anggota_kk) FROM anggota_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon)`),
+    'jumlah_jemaat',
+  ],
+  [
+    literal(
+      `(SELECT COUNT(id_anggota_kk) FROM anggota_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.jk = 'L')`
+    ),
+    'jumlah_jemaat_l',
+  ],
+  [
+    literal(
+      `(SELECT COUNT(id_anggota_kk) FROM anggota_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.jk = 'P')`
+    ),
+    'jumlah_jemaat_p',
+  ],
+]
+
 /**
  * Rayon get controller
  * @type {import("fastify").RouteHandler}
@@ -9,16 +29,7 @@ const get = (req, reply) => {
   db.rayon
     .findAll({
       attributes: {
-        include: [
-          [
-            literal(`(SELECT COUNT(id_kk) FROM kepala_keluarga WHERE kepala_keluarga.id_rayon = rayon.id_rayon)`),
-            'jumlah_kk',
-          ],
-          [
-            literal(`(SELECT COUNT(id_anggota_kk) FROM anggota_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon)`),
-            'jumlah_jemaat',
-          ],
-        ],
+        include,
       },
       include: {
         model: db.kk,
@@ -51,16 +62,7 @@ const getByID = async (req, reply) => {
   db.rayon
     .findByPk(id, {
       attributes: {
-        include: [
-          [
-            literal(`(SELECT COUNT(id_kk) FROM kepala_keluarga WHERE kepala_keluarga.id_rayon = rayon.id_rayon)`),
-            'jumlah_kk',
-          ],
-          [
-            literal(`(SELECT COUNT(id_anggota_kk) FROM anggota_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon)`),
-            'jumlah_jemaat',
-          ],
-        ],
+        include,
       },
       include: {
         model: db.kk,
