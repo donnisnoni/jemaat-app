@@ -18,7 +18,7 @@
   /** @type {DeleteRayonDialog} */
   let deleteRayonDialog
 
-  let currentSelectedKey = 0
+  let lastIndexToActionWith = 0
   let lastRayonActionSuccess
   /** @type {MenuEditDelete} */
   let menuEditDelete
@@ -30,8 +30,12 @@
    * @type {1|2|3}
    */
   let successType
+  let rayon
 
-  let response = fetchService.fetch(fetchURL)
+  let response = fetchService.fetch(fetchURL).then((_rayon) => {
+    rayon = _rayon
+    return _rayon
+  })
 
   function openAddDialog() {
     addRayonDialog.open()
@@ -71,22 +75,15 @@
 
   function openContextMenu(event) {
     menuEditDelete.open(event)
-    currentSelectedKey = +event.target.dataset.key
+    lastIndexToActionWith = +event.target.dataset.key
   }
 
-  async function openUpdateRayonDialog() {
-    const currentSelectedRayon = await getCurrenSelectedRayon()
-    updateRayonDialog.open(currentSelectedRayon)
+  function openUpdateRayonDialog() {
+    updateRayonDialog.open(rayon[lastIndexToActionWith])
   }
 
-  async function openDeleteRayonDialog() {
-    const currentSelectedRayon = await getCurrenSelectedRayon()
-    deleteRayonDialog.open(currentSelectedRayon)
-  }
-
-  async function getCurrenSelectedRayon() {
-    const dataRayon = await fetchService.fetch(fetchURL)
-    return dataRayon[currentSelectedKey]
+  function openDeleteRayonDialog() {
+    deleteRayonDialog.open(rayon[lastIndexToActionWith])
   }
 
   onDestroy(fetchService.cancel)
@@ -105,15 +102,6 @@
       <Button on:click={openAddDialog} icon="plus" primary title="Tambah rayon" />
     </div>
   </div>
-
-  <MenuEditDelete
-    bind:this={menuEditDelete}
-    on:delete-clicked={openDeleteRayonDialog}
-    on:edit-clicked={openUpdateRayonDialog} />
-
-  <AddRayonDialog bind:this={addRayonDialog} on:success={onActionSuccess} on:closed={showSuccessAlert} />
-  <UpdateRayonDialog bind:this={updateRayonDialog} on:success={onActionSuccess} on:closed={showSuccessAlert} />
-  <DeleteRayonDialog bind:this={deleteRayonDialog} on:success={onActionSuccess} on:closed={showSuccessAlert} />
 
   <div class="flex flex-col flex-1 overflow-y-auto" role="list">
     {#await response}
@@ -149,4 +137,13 @@
       {/each}
     {/await}
   </div>
+
+  <MenuEditDelete
+    bind:this={menuEditDelete}
+    on:delete-clicked={openDeleteRayonDialog}
+    on:edit-clicked={openUpdateRayonDialog} />
+
+  <AddRayonDialog bind:this={addRayonDialog} on:success={onActionSuccess} on:closed={showSuccessAlert} />
+  <UpdateRayonDialog bind:this={updateRayonDialog} on:success={onActionSuccess} on:closed={showSuccessAlert} />
+  <DeleteRayonDialog bind:this={deleteRayonDialog} on:success={onActionSuccess} on:closed={showSuccessAlert} />
 </div>
