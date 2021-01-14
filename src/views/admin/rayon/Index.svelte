@@ -73,9 +73,9 @@
     lastRayonActionSuccess = null
   }
 
-  function openContextMenu(event) {
+  function openContextMenu(event, index) {
+    lastIndexToActionWith = index
     menuEditDelete.open(event)
-    lastIndexToActionWith = +event.target.dataset.key
   }
 
   function openUpdateRayonDialog() {
@@ -109,12 +109,11 @@
         <div class="self-center text-lg text-gray-600 animate-pulse">Memuat...</div>
       </div>
     {:then dataRayon}
-      {#each dataRayon as rayon, key}
+      {#each dataRayon as rayon, index}
         <a
           class="list--item"
-          data-key={key}
           href={`/admin/rayon/${rayon.id_rayon}`}
-          on:contextmenu|preventDefault={openContextMenu}
+          on:contextmenu|preventDefault={(event) => openContextMenu(event, index)}
           role="listitem"
           use:link>
           <!--  -->
