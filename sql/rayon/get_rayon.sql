@@ -19,6 +19,7 @@ SELECT
       anggota_kk
     WHERE
       kepala_keluarga.id_rayon = rayon.id_rayon
+      AND anggota_kk.id_kk = kepala_keluarga.id_kk
   ) AS jumlah_jemaat,
   -- JUMLAH JEMAAT LAKI-LAKI --
   (
@@ -28,6 +29,7 @@ SELECT
       anggota_kk
     WHERE
       kepala_keluarga.id_rayon = rayon.id_rayon
+      AND anggota_kk.id_kk = kepala_keluarga.id_kk
       AND anggota_kk.jk = 'L'
   ) AS jumlah_jemaat_l,
   -- JUMLAH JEMAAT PEREMPUAN --
@@ -38,6 +40,7 @@ SELECT
       anggota_kk
     WHERE
       kepala_keluarga.id_rayon = rayon.id_rayon
+      AND anggota_kk.id_kk = kepala_keluarga.id_kk
       AND anggota_kk.jk = 'P'
   ) AS jumlah_jemaat_p
 FROM

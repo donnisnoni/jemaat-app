@@ -4,18 +4,20 @@ const { fn, col, where, literal } = require('sequelize')
 const include = [
   [literal(`(SELECT COUNT(id_kk) FROM kepala_keluarga WHERE kepala_keluarga.id_rayon = rayon.id_rayon)`), 'jumlah_kk'],
   [
-    literal(`(SELECT COUNT(id_anggota_kk) FROM anggota_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon)`),
+    literal(
+      `(SELECT COUNT(id_anggota_kk) FROM anggota_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.id_kk = kepala_keluarga.id_kk)`
+    ),
     'jumlah_jemaat',
   ],
   [
     literal(
-      `(SELECT COUNT(id_anggota_kk) FROM anggota_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.jk = 'L')`
+      `(SELECT COUNT(id_anggota_kk) FROM anggota_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.id_kk = kepala_keluarga.id_kk AND anggota_kk.jk = 'L')`
     ),
     'jumlah_jemaat_l',
   ],
   [
     literal(
-      `(SELECT COUNT(id_anggota_kk) FROM anggota_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.jk = 'P')`
+      `(SELECT COUNT(id_anggota_kk) FROM anggota_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.id_kk = kepala_keluarga.id_kk AND anggota_kk.jk = 'P')`
     ),
     'jumlah_jemaat_p',
   ],
