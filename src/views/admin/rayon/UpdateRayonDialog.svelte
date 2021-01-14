@@ -34,7 +34,7 @@
       .then(async (/* resp */) => {
         resetData()
         emit('success', { successType: 3 })
-        dialog.close()
+        dialog.close(true)
       })
       .catch((err) => {
         console.error(err)
