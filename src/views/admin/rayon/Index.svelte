@@ -4,6 +4,7 @@
   import AddRayonDialog from './AddRayonDialog.svelte'
   import UpdateRayonDialog from './UpdateRayonDialog.svelte'
   import EmptyDataPlaceholder from '/@components/EmptyDataPlaceholder.svelte'
+  import LoadingPlaceholder from '/@components/LoadingPlaceholder.svelte'
   import DeleteRayonDialog from './DeleteRayonDialog.svelte'
   import Button from '/@components/Button.svelte'
   import MenuEditDelete from '/@components/MenuEditDelete.svelte'
@@ -107,9 +108,7 @@
 
   <div class="flex flex-col flex-1 overflow-y-auto" role="list">
     {#await rayonResponse}
-      <div class="flex justify-center flex-1 hidden-100">
-        <div class="self-center text-lg text-gray-600 animate-pulse">Memuat...</div>
-      </div>
+      <LoadingPlaceholder />
     {:then dataRayon}
       {#each dataRayon as rayon, index}
         <a
