@@ -147,7 +147,6 @@
     on:submit|preventDefault={post}
     style="max-height:40%">
     <!--  -->
-    <!--  -->
     <div class="flex flex-col flex-1 md:pr-2 md:mr-2 md:border-r md:w-6/12 md:overflow-y-auto">
       <!-- RAYON -->
       <section class="flex flex-col">
