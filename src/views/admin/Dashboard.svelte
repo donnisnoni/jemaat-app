@@ -1,6 +1,7 @@
 <script>
   // @ts-check
   import { fetch } from '/@store/fetch.service'
+  import LoadingPlaceholder from '/@components/LoadingPlaceholder.svelte'
 
   const totalRayonResponse = fetch('/api/data/rayon').then((rayon) => {
     return rayon.length
@@ -9,7 +10,9 @@
     return KK.length
   })
 
-  const totalJemaatResponse = Promise.resolve(90)
+  const totalJemaatResponse = fetch('/api/data/anggota_kk?count=true').then((count) => {
+    return count
+  })
 </script>
 
 <div class="flex flex-col flex-1 overflow-hidden bg-white card">
@@ -20,24 +23,30 @@
     <div class="flex flex-col flex-shrink gap-2 md:flex-row">
       <!-- TOTAL RAYON -->
       <div class="flex flex-col items-center flex-1 p-3 border rounded-md bg-gray-50">
-        <div class="text-3xl hidden-100">
-          {#await totalRayonResponse}0{:then jumlahRayon}{jumlahRayon}{/await}
-        </div>
-        <div class="text-sm">Rayon</div>
+        {#await totalRayonResponse}
+          <LoadingPlaceholder />
+        {:then jumlahRayon}
+          <div class="text-3xl hidden-100">{jumlahRayon}</div>
+          <div class="text-sm">Rayon</div>
+        {/await}
       </div>
       <!-- TOTAL KK -->
       <div class="flex flex-col items-center flex-1 p-3 border rounded-md bg-gray-50">
-        <div class="text-3xl hidden-100">
-          {#await totalKKResponse}0{:then jumlahKK}{jumlahKK}{/await}
-        </div>
-        <div class="text-sm">Keluarga</div>
+        {#await totalKKResponse}
+          <LoadingPlaceholder />
+        {:then jumlahKK}
+          <div class="text-3xl hidden-100">{jumlahKK}</div>
+          <div class="text-sm">Keluarga</div>
+        {/await}
       </div>
       <!-- TOTAL JEMAAT -->
       <div class="flex flex-col items-center flex-1 p-3 border rounded-md bg-gray-50">
-        <div class="text-3xl hidden-100">
-          {#await totalJemaatResponse}0{:then jumlahJemaat}{jumlahJemaat}{/await}
-        </div>
-        <div class="text-sm">Jemaat</div>
+        {#await totalJemaatResponse}
+          <LoadingPlaceholder />
+        {:then jumlahJemaat}
+          <div class="text-3xl hidden-100">{jumlahJemaat}</div>
+          <div class="text-sm">Jemaat</div>
+        {/await}
       </div>
     </div>
   </div>
