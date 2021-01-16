@@ -22,6 +22,9 @@ const routes = {
   '/admin/kk/:id': wrap({
     asyncComponent: () => import('./views/admin/kk/KK.svelte'),
   }),
+  '/admin/jemaat': wrap({
+    asyncComponent: () => import('./views/admin/jemaat/Index.svelte'),
+  }),
 }
 
 export default routes

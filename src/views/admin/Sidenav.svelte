@@ -45,6 +45,12 @@
         <span class="link-label">Keluarga</span>
       </a>
     </li>
+    <li>
+      <a href="/admin/jemaat" title="Jemaat" use:link use:active={/admin\/jemaat.*/i}>
+        <i class="mdi mdi-account-outline" />
+        <span class="link-label">Jemaat</span>
+      </a>
+    </li>
   </ul>
 
   <ul class="mt-auto">

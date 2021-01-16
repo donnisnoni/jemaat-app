@@ -67,6 +67,13 @@ const routes = [
     url: '/api/data/kk/:id',
     handler: controllers.KK.remove,
   },
+
+  /* ---------------------------- ANGGOTA KK ROUTES --------------------------- */
+  {
+    method: 'GET',
+    url: '/api/data/anggota_kk',
+    handler: controllers.AnggotaKK.get,
+  },
 ]
 
 module.exports = routes
