@@ -6,21 +6,25 @@ const fastify = require('fastify')({
   //   customOptions: { jsonPointers: true, allErrors: true },
   //   plugins: [require('ajv-errors')],
   // },
-});
+})
+
+fastify.register(require('fastify-jwt'), {
+  secret: 'everkoroh@jemaat-app@eden',
+})
 
 // Register Routes
-const routes = require('./routes');
+const routes = require('./routes')
 routes.forEach((route, idx) => {
-  fastify.route(route);
-});
+  fastify.route(route)
+})
 
 // Run the server!
 fastify.listen(8080, function (err, address) {
   if (err) {
-    fastify.log.error(err);
-    process.exit(1);
+    fastify.log.error(err)
+    process.exit(1)
   }
-  fastify.log.info(`server listening on ${address}`);
-});
+  fastify.log.info(`server listening on ${address}`)
+})
 
-module.exports = fastify;
+module.exports = fastify
