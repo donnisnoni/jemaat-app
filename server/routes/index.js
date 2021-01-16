@@ -62,6 +62,11 @@ const routes = [
     url: '/api/data/kk/:id',
     handler: controllers.KK.update,
   },
+  {
+    method: 'DELETE',
+    url: '/api/data/kk/:id',
+    handler: controllers.KK.remove,
+  },
 ]
 
 module.exports = routes

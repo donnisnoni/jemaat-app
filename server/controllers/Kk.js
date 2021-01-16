@@ -136,9 +136,23 @@ const update = (req, reply) => {
     .catch(logError)
 }
 
+async function remove(req, reply) {
+  const id = +req.params.id
+  if (isNaN(id) || id < 1) {
+    return reply.code(400).send({ message: 'id harus berupa angka' })
+  }
+  const targetKK = await db.kk.findByPk(id)
+  if (!targetKK) {
+    return reply.send({ message: `Tidak dapat menemukan keluarga dengan id ${id}` })
+  }
+  await targetKK.destroy({ force: true })
+  return reply.send({ message: `Sukses menghapus kelaurga dengan id ${id}` })
+}
+
 module.exports = {
   create,
   get,
   getByID,
+  remove,
   update,
 }
