@@ -6,19 +6,21 @@
   import { link } from 'svelte-spa-router'
   import moment from 'moment'
 
-  // import { Datatable, rows } from 'svelte-simple-datatables'
-
   const fetchURL = '/api/data/kk'
 
-  fetchService.deleteCache(fetchURL)
+  let KK
+  let KKResponse = fetchService.fetch(fetchURL).then((_KK) => {
+    KK = _KK
+    return _KK
+  })
 
   function refetchData() {
-    fetchService.deleteCache(fetchURL)
     fetchService.cancel()
-    response = fetchService.fetch(fetchURL)
+    KKResponse = fetchService.fetch(fetchURL).then((_KK) => {
+      KK = _KK
+      return _KK
+    })
   }
-
-  let response = fetchService.fetch(fetchURL)
 </script>
 
 <div class="flex flex-col flex-1 overflow-hidden bg-white card">
@@ -47,7 +49,7 @@
   </div>
 
   <div class="flex flex-col flex-1 overflow-y-auto" role="list">
-    {#await response}
+    {#await KKResponse}
       <!--  -->
     {:then dataKK}
       {#each dataKK as KK, key}

@@ -32,7 +32,7 @@
   let successType
   let rayon
 
-  let response = fetchService.fetch(fetchURL).then((_rayon) => {
+  let rayonResponse = fetchService.fetch(fetchURL).then((_rayon) => {
     rayon = _rayon
     return _rayon
   })
@@ -42,9 +42,12 @@
   }
 
   function refetchData() {
-    fetchService.deleteCache(fetchURL)
+    // fetchService.deleteCache(fetchURL)
     fetchService.cancel()
-    response = fetchService.fetch(fetchURL)
+    rayonResponse = fetchService.fetch(fetchURL).then((_rayon) => {
+      rayon = _rayon
+      return _rayon
+    })
   }
 
   function onActionSuccess({ detail }) {
@@ -104,7 +107,7 @@
   </div>
 
   <div class="flex flex-col flex-1 overflow-y-auto" role="list">
-    {#await response}
+    {#await rayonResponse}
       <div class="flex justify-center flex-1 hidden-100">
         <div class="self-center text-lg text-gray-600 animate-pulse">Memuat...</div>
       </div>
