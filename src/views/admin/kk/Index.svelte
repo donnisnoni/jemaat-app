@@ -2,6 +2,7 @@
   import * as fetchService from '/@store/fetch.service.js'
   import Button from '/@components/Button.svelte'
   import EmptyDataPlaceholder from '/@components/EmptyDataPlaceholder.svelte'
+  import LoadingPlaceholder from '/@components/LoadingPlaceholder.svelte'
   import MenuEditDelete from '/@components/MenuEditDelete.svelte'
   import DialogDeleteKK from './DialogDeleteKK.svelte'
   import { push, link } from 'svelte-spa-router'
@@ -63,7 +64,7 @@
 
   <div class="flex flex-col flex-1 overflow-y-auto" role="list">
     {#await KKResponse}
-      <!--  -->
+      <LoadingPlaceholder />
     {:then dataKK}
       {#each dataKK as KK, index}
         <a
