@@ -3,6 +3,7 @@
   import { onDestroy } from 'svelte'
   import AddRayonDialog from './AddRayonDialog.svelte'
   import UpdateRayonDialog from './UpdateRayonDialog.svelte'
+  import EmptyDataPlaceholder from '/@components/EmptyDataPlaceholder.svelte'
   import DeleteRayonDialog from './DeleteRayonDialog.svelte'
   import Button from '/@components/Button.svelte'
   import MenuEditDelete from '/@components/MenuEditDelete.svelte'
@@ -97,9 +98,7 @@
     <div class="mb-2 md:place-self-center md:mb-0">
       <h3 class="text-lg">Rayon</h3>
     </div>
-    <div class="w-full border border-t md:hidden">
-      <!--  -->
-    </div>
+    <div class="w-full border border-t md:hidden" />
     <div class="mt-2 ml-auto md:mt-0">
       <Button on:click={refetchData} icon="refresh" title="Muat ulang Data" />
       <Button on:click={openAddDialog} icon="plus" primary title="Tambah rayon" />
@@ -119,10 +118,8 @@
           on:contextmenu|preventDefault={(event) => openContextMenu(event, index)}
           role="listitem"
           use:link>
-          <!--  -->
           <div class="flex flex-col">
             <div class="font-bold">{rayon.nama}</div>
-            <!-- svelte-ignore missing-declaration -->
             <div class="time-from-now">{moment(rayon.tgl_terakhir_update).fromNow()}</div>
           </div>
           <div
@@ -132,10 +129,7 @@
           </div>
         </a>
       {:else}
-        <div class="flex flex-col items-center justify-center flex-1 text-gray-600 hidden-100">
-          <div class=""><i class="mdi mdi-database-outline" style="vertical-align:unset;font-size:100px" /></div>
-          <div class="text-lg">Uh oh... Belum ada data</div>
-        </div>
+        <EmptyDataPlaceholder>Belum ada rayon</EmptyDataPlaceholder>
       {/each}
     {/await}
   </div>
