@@ -2,12 +2,19 @@
   import * as fetchService from '/@store/fetch.service.js'
   import Button from '/@components/Button.svelte'
   import EmptyDataPlaceholder from '/@components/EmptyDataPlaceholder.svelte'
-  import { push } from 'svelte-spa-router'
-  import { link } from 'svelte-spa-router'
+  import MenuEditDelete from '/@components/MenuEditDelete.svelte'
+  import DialogDeleteKK from './DialogDeleteKK.svelte'
+  import { push, link } from 'svelte-spa-router'
   import moment from 'moment'
+
+  /** @type {MenuEditDelete} */
+  let menuEditDelete
+  /** @type {DialogDeleteKK} */
+  let dialogDeleteKk
 
   const fetchURL = '/api/data/kk'
 
+  let lastIndexToActionWith = 0
   let KK
   let KKResponse = fetchService.fetch(fetchURL).then((_KK) => {
     KK = _KK
@@ -21,6 +28,15 @@
       return _KK
     })
   }
+
+  function openContextMenu(event, index) {
+    lastIndexToActionWith = index
+    menuEditDelete.open(event)
+  }
+
+  function opendDialogDeleteKK() {
+    dialogDeleteKk.open(KK[lastIndexToActionWith])
+  }
 </script>
 
 <div class="flex flex-col flex-1 overflow-hidden bg-white card">
@@ -28,9 +44,7 @@
     <div class="mb-2 md:place-self-center md:mb-0">
       <h3 class="text-lg">Keluarga</h3>
     </div>
-    <div class="w-full border border-t md:hidden">
-      <!--  -->
-    </div>
+    <div class="w-full border border-t md:hidden" />
     <div class="mt-2 ml-auto md:mt-0">
       <Button icon="refresh" on:click={refetchData} title="Muat ulang Data" />
       <Button icon="plus" on:click={() => push('/admin/kk/create')} primary title="Tambah Keluarga" />
@@ -51,12 +65,15 @@
     {#await KKResponse}
       <!--  -->
     {:then dataKK}
-      {#each dataKK as KK, key}
-        <!-- svelte-ignore a11y-missing-attribute -->
-        <a class="list--item" data-key={key} href={`/admin/kk/${KK.id_kk}`} role="listitem" use:link>
+      {#each dataKK as KK, index}
+        <a
+          class="list--item"
+          href={`/admin/kk/${KK.id_kk}`}
+          on:contextmenu|preventDefault={(event) => openContextMenu(event, index)}
+          role="listitem"
+          use:link>
           <div class="flex flex-col">
             <div class="font-bold">{KK.nama}</div>
-            <!-- svelte-ignore missing-declaration -->
             <div class="time-from-now">{moment(KK.tgl_terakhir_update).fromNow()}</div>
           </div>
           <div
@@ -70,4 +87,11 @@
       {/each}
     {/await}
   </div>
+
+  <MenuEditDelete
+    bind:this={menuEditDelete}
+    on:edit-clicked={() => push(`/admin/kk/${KK[lastIndexToActionWith].id_kk}`)}
+    on:delete-clicked={opendDialogDeleteKK} />
+
+  <DialogDeleteKK bind:this={dialogDeleteKk} on:success={refetchData} />
 </div>
