@@ -4,7 +4,7 @@
 
   export let params = { id: 0 }
 
-  let rayon = {}
+  let rayon
 
   const rayonResponse = fetch(`/api/data/rayon/${params.id}`).then((_rayon) => {
     rayon = _rayon
@@ -21,9 +21,6 @@
     {#await rayonResponse}
       loading...
     {:then rayon}
-      <!-- <pre>
-        {JSON.stringify(rayon)}
-      </pre> -->
       <div>Jumlah Keluarga: {rayon.jumlah_kk}</div>
       <div>Jumlah Jemaat: {rayon.jumlah_jemaat}</div>
       <div>Jumlah Jemaat Laki-laki: {rayon.jumlah_jemaat_l}</div>
