@@ -46,6 +46,7 @@
     "axios": "^0.21.1",
     "deep-equal": "^2.0.5",
     "fastify": "^3.9.2",
+    "fastify-jwt": "^2.3.0",
     "mariadb": "^2.5.2",
     "sequelize": "^6.3.5"
   }
