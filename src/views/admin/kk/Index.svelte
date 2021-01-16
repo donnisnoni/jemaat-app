@@ -36,7 +36,7 @@
       <Button icon="plus" on:click={() => push('/admin/kk/create')} primary title="Tambah Keluarga" />
     </div>
   </div>
-  <div class="flex px-3 py-1 border-b border-gray-200">
+  <!-- <div class="flex px-3 py-1 border-b border-gray-200">
     <input class="p-1" placeholder="Cari..." spellcheck="false" style="min-height:25px" type="text" />
     <div class="flex ml-2">
       <label class="self-center mr-1" for="sort-select">Urutkan:</label>
@@ -45,8 +45,7 @@
         <option value="Terbaru">Terlama</option>
       </select>
     </div>
-    <!--  -->
-  </div>
+  </div> -->
 
   <div class="flex flex-col flex-1 overflow-y-auto" role="list">
     {#await KKResponse}
