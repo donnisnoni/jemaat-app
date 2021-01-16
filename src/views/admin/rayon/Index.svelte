@@ -17,11 +17,11 @@
   let updateRayonDialog
   /** @type {DeleteRayonDialog} */
   let deleteRayonDialog
+  /** @type {MenuEditDelete} */
+  let menuEditDelete
 
   let lastIndexToActionWith = 0
   let lastRayonActionSuccess
-  /** @type {MenuEditDelete} */
-  let menuEditDelete
   /**  Type of succes event.
    *
    * `1` for Create data succes;
