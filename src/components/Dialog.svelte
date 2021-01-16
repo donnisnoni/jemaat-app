@@ -33,6 +33,12 @@
       document.activeElement && document.activeElement.blur()
       firstFocusableEl && firstFocusableEl.focus()
     }
+    history.pushState(null, null, location.href)
+    window.addEventListener('popstate', handleBackButton)
+  }
+
+  function handleBackButton() {
+    close(true)
   }
 
   export function close(force = false) {
@@ -55,6 +61,7 @@
       }
     }
     emit('closed')
+    window.removeEventListener('popstate', handleBackButton)
     document.removeEventListener('keydown', handleDocumentKeyDown)
     dialogEl.removeEventListener('keydown', handleDialogKeyDown)
   }
