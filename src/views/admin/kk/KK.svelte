@@ -276,7 +276,7 @@
         {/if}
       </tr>
     </thead>
-    <tbody>
+    <tbody class="select-none">
       {#each KK.anggota_kk as anggota_kk, index}
         <tr
           on:dblclick={() => openDialogAnggotaKK(index)}
