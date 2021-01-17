@@ -21,6 +21,42 @@ const include = [
     ),
     'jumlah_jemaat_p',
   ],
+  [
+    literal(
+      `(SELECT COUNT(id_anggota_kk) FROM anggota_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.id_kk = kepala_keluarga.id_kk AND anggota_kk.sudah_sidi = 1)`
+    ),
+    'jumlah_jemaat_sudah_sidi',
+  ],
+  [
+    literal(
+      `(SELECT COUNT(id_anggota_kk) FROM anggota_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.id_kk = kepala_keluarga.id_kk AND anggota_kk.sudah_sidi = 0)`
+    ),
+    'jumlah_jemaat_belum_sidi',
+  ],
+  [
+    literal(
+      `(SELECT COUNT(id_anggota_kk) FROM anggota_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.id_kk = kepala_keluarga.id_kk AND anggota_kk.jk = 'L' AND anggota_kk.sudah_sidi = 1)`
+    ),
+    'jumlah_jemaat_sudah_sidi_l',
+  ],
+  [
+    literal(
+      `(SELECT COUNT(id_anggota_kk) FROM anggota_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.id_kk = kepala_keluarga.id_kk AND anggota_kk.jk = 'P' AND anggota_kk.sudah_sidi = 1)`
+    ),
+    'jumlah_jemaat_sudah_sidi_p',
+  ],
+  [
+    literal(
+      `(SELECT COUNT(id_anggota_kk) FROM anggota_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.id_kk = kepala_keluarga.id_kk AND anggota_kk.jk = 'L' AND anggota_kk.sudah_sidi = 0)`
+    ),
+    'jumlah_jemaat_belum_sidi_l',
+  ],
+  [
+    literal(
+      `(SELECT COUNT(id_anggota_kk) FROM anggota_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.id_kk = kepala_keluarga.id_kk AND anggota_kk.jk = 'P' AND anggota_kk.sudah_sidi = 0)`
+    ),
+    'jumlah_jemaat_belum_sidi_p',
+  ],
 ]
 
 /**
@@ -55,27 +91,23 @@ const get = (req, reply) => {
  * Rayon get by id controller
  * @type {import("fastify").RouteHandler}
  */
-const getByID = async (req, reply) => {
+async function getByID(req, reply) {
   const id = +req.params.id
   if (isNaN(id) || id < 1) {
-    return reply.code(400).send({ error: true, errors: [], message: 'Bad request' })
+    return reply.code(400).send({ message: 'id harus berupa angka' })
   }
 
-  db.rayon
-    .findByPk(id, {
-      attributes: {
-        include,
-      },
-      include: {
-        model: db.kk,
-        as: 'kepala_keluarga',
-      },
-      group: 'rayon.id_rayon',
-    })
-    .then((foundedRayon) => {
-      reply.send(foundedRayon)
-    })
-    .catch((err) => console.error(err) && reply.code(500).send())
+  const foundedRayon = await db.rayon.findByPk(id, {
+    attributes: { include },
+    include: {
+      model: db.kk,
+      as: 'kepala_keluarga',
+    },
+  })
+  if (!foundedRayon) {
+    reply.code(400).send({ message: `Tidak dapat menemukan rayon dengan id ${id}` })
+  }
+  reply.send(foundedRayon)
 }
 
 /**
