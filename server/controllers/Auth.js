@@ -1,3 +1,4 @@
+'use strict'
 const fastify = require('../fastify')
 const db = require('../models')
 const bcrypt = require('bcrypt')
@@ -7,18 +8,20 @@ const bcrypt = require('bcrypt')
  * @type {import("fastify").RouteHandler}
  */
 async function login(req, reply) {
-  if (!req.body || !req.body.username || !req.body.sandi) {
-    reply.code(400).send()
+  if (!req.body || !req.body.username || !req.body.sandi || !req.body.hasOwnProperty('super_admin')) {
+    return reply.code(400).send()
   }
 
-  const { username, sandi } = req.body
-  const foundedAdmin = await db.admin.findOne({ where: { username } })
+  const { username, sandi, super_admin } = req.body
+  const foundedAdmin = await db.admin.findOne({
+    where: { username, super_admin },
+  })
   if (!foundedAdmin) {
-    reply.code(400).send({ message: 'Username atau sandi salah!' })
+    return reply.code(400).send({ message: 'Username atau sandi salah!' })
   }
   const hash = foundedAdmin.sandi
   if (!bcrypt.compareSync(sandi, hash)) {
-    reply.code(400).send({ message: 'Username atau sandi salah!' })
+    return reply.code(400).send({ message: 'Username atau sandi salah!' })
   }
 
   const payload = {
@@ -32,7 +35,7 @@ async function login(req, reply) {
     expiresIn: +process.env.ACCESS_TOKEN_LIFE,
   })
 
-  reply.send({ message: 'Berhasil login!', token })
+  return reply.send({ message: 'Berhasil login!', token })
 }
 
 /**
@@ -40,8 +43,13 @@ async function login(req, reply) {
  * @type {import("fastify").RouteHandler}
  */
 async function signup(req, reply) {
-  if (!req.body || !req.body.nama || !req.body.username || !req.body.sandi) {
-    reply.code(400).send()
+  // Guard, only super admin have access to it
+  if (!req.decodedJWT.super_admin) {
+    return reply.code(404).send()
+  }
+
+  if (!req.body || !req.body.nama || !req.body.username || !req.body.sandi || !req.body.hasOwnProperty('super_admin')) {
+    return reply.code(400).send()
   }
 
   const newAdmin = req.body
@@ -49,7 +57,7 @@ async function signup(req, reply) {
   newAdmin.sandi = bcrypt.hashSync(newAdmin.sandi, salt)
 
   await db.admin.create(newAdmin)
-  reply.send({ message: 'Berhasil menambahkan admin baru!' })
+  return reply.send({ message: 'Berhasil menambahkan admin baru!' })
 }
 
 module.exports = { login, signup }

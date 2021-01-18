@@ -3,5 +3,6 @@ Content-Type: application/json
 
 {
   "username": "donnisnoni",
-  "sandi": "don@r34lm4dr1d"
+  "sandi": "don@r34lm4dr1d",
+  "super_admin": false
 }

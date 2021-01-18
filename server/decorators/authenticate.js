@@ -1,3 +1,4 @@
+'use strict'
 const db = require('../models')
 
 /**
@@ -13,9 +14,9 @@ async function authenticate(request, reply) {
   }
   // console.log(decodedJWT)
   const { username, super_admin } = decodedJWT
-  const where = { username }
-  if (super_admin) where.super_admin = 1
-  const foundedAdmin = await db.admin.findOne({ where })
+  const foundedAdmin = await db.admin.findOne({
+    where: { username, super_admin },
+  })
   if (!foundedAdmin) {
     reply.code(401).send({ message: 'Autentikasi gagal, silahkan login lagi' })
   }
