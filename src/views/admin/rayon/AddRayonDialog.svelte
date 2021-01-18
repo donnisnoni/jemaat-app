@@ -80,7 +80,7 @@
       primary
       title="Tambah Rayon"
       type="submit">
-      {!loading ? 'Tambah' : 'loading...'}
+      {!loading ? 'Tambah' : 'menambahkan...'}
     </Button>
   </div>
 </Dialog>

@@ -89,7 +89,7 @@
       primary
       title="Simpan"
       type="submit">
-      {!loading ? 'Simpan' : 'loading...'}
+      {!loading ? 'Simpan' : 'memperbaharui...'}
     </Button>
   </div>
 </Dialog>
