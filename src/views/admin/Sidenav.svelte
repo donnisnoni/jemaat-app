@@ -10,6 +10,8 @@
     localStorage.setItem('admin-sidenav', expanded)
   }
 
+  const logout = () => localStorage.removeItem('token')
+
   $: expandButtonCaption = expanded ? 'Perkecil' : 'Perbesar'
 </script>
 
@@ -74,7 +76,9 @@
       </a>
     </li>
     <li>
-      <a href="/" title="Logout" use:link><i class="mdi mdi-logout" /> <span class="link-label">Logout</span> </a>
+      <a href="/" title="Logout" on:click={logout} use:link><i class="mdi mdi-logout" />
+        <span class="link-label">Logout</span>
+      </a>
     </li>
   </ul>
 </nav>

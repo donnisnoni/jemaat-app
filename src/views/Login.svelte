@@ -1,17 +1,33 @@
 <script>
-  'use strict'
+  // @ts-check
   import { autoSelectOnFocus, blurOnEsc } from '/@actions/inputDirectives.js'
+  import axios from 'axios'
   import { push } from 'svelte-spa-router'
+
+  if (localStorage['token']) {
+    if (push('/admin')) {
+      //
+    }
+  }
 
   let refs = { fieldSandi: null },
     revealPass = false,
-    username = 'donnisnononi',
-    sandi = 'don@r34lm4dr1d'
+    username = 'donnisnoni',
+    sandi = 'don@r34lm4dr1d',
+    super_admin = false
 
   function login() {
-    push('/admin')
+    axios
+      .post('/api/login', { username, sandi, super_admin })
+      .then(({ data }) => {
+        localStorage['token'] = data.token
+        push('/admin').then(() => alert('Berhasil login! Selamat data'))
+      })
+      .catch((err) => {
+        alert('Login gagal! Username atau sandi salah!')
+        console.error(err)
+      })
   }
-
   function handleInputSandi(event) {
     sandi = event.target.value
   }
@@ -68,6 +84,16 @@
             <i class="mdi {revealPass ? 'mdi-eye-off-outline' : 'mdi-eye-outline'} my-auto mdi-2xl" />
           </div>
         </div>
+      </div>
+
+      <div class="flex items-center my-2">
+        <input
+          bind:checked={super_admin}
+          class="mr-2"
+          style="width:18px;height:18px"
+          id="is-super-admin"
+          type="checkbox" />
+        <label for="is-super-admin">Login sebagai super admin</label>
       </div>
 
       <hr class="my-3" />
