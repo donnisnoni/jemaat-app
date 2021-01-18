@@ -259,7 +259,7 @@
   </form>
 
   <Datatable bind:this={datatable} hidden={!KK.anggota_kk.length}>
-    <thead class:hidden={!KK.anggota_kk.length}>
+    <thead>
       <tr style="border-bottom: 1px solid #c0c3ca">
         <th>No</th>
         <th>Nama</th>
