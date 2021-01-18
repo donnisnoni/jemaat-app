@@ -89,3 +89,7 @@ input::-webkit-inner-spin-button {
   @apply text-xs;
   @apply text-gray-600;
 }
+
+.hidden {
+  display: none !important;
+}
