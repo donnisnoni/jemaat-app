@@ -1,4 +1,9 @@
 {
+  "typeAcquisition": {
+    "exclude": [
+      "dotenv"
+    ]
+  },
   "compilerOptions": {
     "rootDir": "src",
     "paths": {
