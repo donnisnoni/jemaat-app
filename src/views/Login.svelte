@@ -2,13 +2,9 @@
   // @ts-check
   import { autoSelectOnFocus, blurOnEsc } from '/@actions/inputDirectives.js'
   import axios from 'axios'
-  import { push } from 'svelte-spa-router'
+  import { push, replace } from 'svelte-spa-router'
 
-  if (localStorage['token']) {
-    if (push('/admin')) {
-      //
-    }
-  }
+  if (localStorage['token']) replace('/admin')
 
   let refs = { fieldSandi: null },
     revealPass = false,
