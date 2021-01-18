@@ -238,8 +238,8 @@
             bind:value={anggotaKK.tanggal_baptis}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
             id="tanggal-baptis-anggota-kk"
-            type="date"
-            required={anggotaKK.sudah_baptis} />
+            type="date" />
+          <!-- required={anggotaKK.sudah_baptis} -->
         </section>
         <!-- TEMPAT BAPTIS -->
         <section class="flex flex-col my-2 mr-2 max-w-600">
@@ -247,8 +247,8 @@
           <input
             bind:value={anggotaKK.tempat_baptis}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
-            id="tempat-baptis-anggota-kk"
-            required={anggotaKK.sudah_baptis} />
+            id="tempat-baptis-anggota-kk" />
+          <!-- required={anggotaKK.sudah_baptis} -->
         </section>
         <!-- PELAYAN BAPTIS -->
         <section class="flex flex-col my-2 max-w-600">
@@ -256,8 +256,8 @@
           <input
             bind:value={anggotaKK.nama_pelayan_baptis}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
-            id="pelayan-baptis-anggota-kk"
-            required={anggotaKK.sudah_baptis} />
+            id="pelayan-baptis-anggota-kk" />
+          <!-- required={anggotaKK.sudah_baptis} -->
         </section>
       </section>
     {/if}
@@ -281,8 +281,8 @@
             bind:value={anggotaKK.tanggal_sidi}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
             id="tanggal-sidi-anggota-kk"
-            type="date"
-            required={anggotaKK.sudah_sidi} />
+            type="date" />
+          <!-- required={anggotaKK.sudah_sidi} -->
         </section>
         <!-- TEMPAT SIDI -->
         <section class="flex flex-col my-2 mr-2 max-w-600">
@@ -290,8 +290,8 @@
           <input
             bind:value={anggotaKK.tempat_sidi}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
-            id="tempat-sidi-anggota-kk"
-            required={anggotaKK.sudah_sidi} />
+            id="tempat-sidi-anggota-kk" />
+          <!-- required={anggotaKK.sudah_sidi} -->
         </section>
         <!-- PELAYAN SIDI -->
         <section class="flex flex-col my-2 max-w-600">
@@ -299,8 +299,8 @@
           <input
             bind:value={anggotaKK.nama_pelayan_sidi}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
-            id="pelayan-sidi-anggota-kk"
-            required={anggotaKK.sudah_sidi} />
+            id="pelayan-sidi-anggota-kk" />
+          <!-- required={anggotaKK.sudah_sidi} -->
         </section>
       </section>
     {/if}
@@ -324,8 +324,8 @@
             bind:value={anggotaKK.tanggal_nikah}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
             id="tanggal-nikah-anggota-kk"
-            type="date"
-            required={anggotaKK.sudah_nikah} />
+            type="date" />
+          <!-- required={anggotaKK.sudah_nikah} -->
         </section>
         <!-- TEMPAT NIKAH -->
         <section class="flex flex-col my-2 mr-2 max-w-600">
@@ -333,8 +333,8 @@
           <input
             bind:value={anggotaKK.tempat_nikah}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
-            id="tempat-nikah-anggota-kk"
-            required={anggotaKK.sudah_nikah} />
+            id="tempat-nikah-anggota-kk" />
+          <!-- required={anggotaKK.sudah_nikah} -->
         </section>
         <!-- PELAYAN NIKAH -->
         <section class="flex flex-col my-2 max-w-600">
@@ -342,8 +342,8 @@
           <input
             bind:value={anggotaKK.nama_pelayan_nikah}
             class="p-1 border border-gray-200 rounded-sm bg-gray-50"
-            id="pelayan-nikah-anggota-kk"
-            required={anggotaKK.sudah_nikah} />
+            id="pelayan-nikah-anggota-kk" />
+          <!-- required={anggotaKK.sudah_nikah} -->
         </section>
       </section>
     {/if}
