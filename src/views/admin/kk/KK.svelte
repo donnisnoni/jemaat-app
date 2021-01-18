@@ -133,9 +133,13 @@
     </div>
     <div class="w-full border border-t md:hidden" />
     <div class="mt-2 ml-auto md:mt-0">
-      <Button icon="notification-clear-all" on:click={resetDataAndForm} title="Reset" />
-      <Button icon="account-multiple-plus-outline" on:click={dialogAnggotaKk.open} title="Tambah Anggota Keluarga" />
-      <Button form="form-kepala-keluarga" icon="content-save-outline" primary title="Simpan" />
+      <Button icon="notification-clear-all" iconOnly on:click={resetDataAndForm} title="Reset" />
+      <Button
+        icon="account-multiple-plus-outline"
+        iconOnly
+        on:click={dialogAnggotaKk.open}
+        title="Tambah Anggota Keluarga" />
+      <Button form="form-kepala-keluarga" icon="content-save-outline" iconOnly primary title="Simpan" />
     </div>
   </div>
 

@@ -47,8 +47,8 @@
     </div>
     <div class="w-full border border-t md:hidden" />
     <div class="mt-2 ml-auto md:mt-0">
-      <Button icon="refresh" on:click={refetchData} title="Muat ulang Data" />
-      <Button icon="plus" on:click={() => push('/admin/kk/create')} primary title="Tambah Keluarga" />
+      <Button icon="refresh" iconOnly on:click={refetchData} title="Muat ulang Data" />
+      <Button icon="plus" iconOnly on:click={() => push('/admin/kk/create')} primary title="Tambah Keluarga" />
     </div>
   </div>
   <!-- <div class="flex px-3 py-1 border-b border-gray-200">

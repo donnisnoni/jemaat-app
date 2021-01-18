@@ -101,8 +101,8 @@
     </div>
     <div class="w-full border border-t md:hidden" />
     <div class="mt-2 ml-auto md:mt-0">
-      <Button on:click={refetchData} icon="refresh" title="Muat ulang Data" />
-      <Button on:click={openAddDialog} icon="plus" primary title="Tambah rayon" />
+      <Button on:click={refetchData} icon="refresh" iconOnly title="Muat ulang Data" />
+      <Button on:click={openAddDialog} icon="plus" iconOnly primary title="Tambah rayon" />
     </div>
   </div>
 
