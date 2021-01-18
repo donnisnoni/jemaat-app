@@ -64,8 +64,8 @@
     {#if !rayon.jumlah_kk}
       <EmptyDataPlaceholder>Belum ada keluarga</EmptyDataPlaceholder>
     {/if}
-    <Datatable bind:this={datatable}>
-      <thead class:hidden={!rayon.jumlah_kk}>
+    <Datatable bind:this={datatable} hidden={!rayon.jumlah_kk}>
+      <thead>
         <tr style="border-bottom: 1px solid #c0c3ca">
           <th>No</th>
           <th>Nama</th>
