@@ -12,6 +12,7 @@
   import http from '/@shared/http'
   import * as router from 'svelte-spa-router'
   import { onMount } from 'svelte'
+  import LoadingPlaceholder from '/@components/LoadingPlaceholder.svelte'
   // import deepEqual from 'deep-equal'
 
   export let params = {}
@@ -137,6 +138,10 @@
       <Button form="form-kepala-keluarga" icon="content-save-outline" primary title="Simpan" />
     </div>
   </div>
+
+  {#if isUpdate && loading.load}
+    <LoadingPlaceholder />
+  {/if}
 
   <!-- FORM KEPALA KELUARGA -->
   <form
@@ -304,7 +309,7 @@
     </tbody>
   </Datatable>
 
-  {#if !KK.anggota_kk.length}
+  {#if !isUpdate && !KK.anggota_kk.length}
     <EmptyDataPlaceholder>Belum ada anggota keluarga</EmptyDataPlaceholder>
   {/if}
 
