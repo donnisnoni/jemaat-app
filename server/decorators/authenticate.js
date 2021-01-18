@@ -19,6 +19,7 @@ async function authenticate(request, reply) {
   if (!foundedAdmin) {
     reply.code(401).send({ message: 'Autentikasi gagal, silahkan login lagi' })
   }
+  request.decodedJWT = decodedJWT
 }
 
 module.exports = authenticate
