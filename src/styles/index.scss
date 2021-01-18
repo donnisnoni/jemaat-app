@@ -85,6 +85,10 @@ input::-webkit-inner-spin-button {
   max-width: 600px;
 }
 
+.hidden-force {
+  display: none !important;
+}
+
 .time-from-now {
   @apply text-xs;
   @apply text-gray-600;

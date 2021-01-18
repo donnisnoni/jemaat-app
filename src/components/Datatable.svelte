@@ -73,7 +73,7 @@
   }
 </style>
 
-<div class="table-wrapper" class:hidden>
+<div class="table-wrapper" class:hidden-force={hidden}>
   <table bind:this={table}>
     <slot />
   </table>
