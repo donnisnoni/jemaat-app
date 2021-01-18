@@ -1,1 +1,2 @@
 GET http://localhost:3000/api/data/rayon  HTTP/1.1
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRvbm5pc25vbmkiLCJuYW1hIjoiRG9uIEFsZm9ucyBOaXNub25pIiwic3VwZXJfYWRtaW4iOnRydWUsImlhdCI6MTYxMDk0NTY1MSwiZXhwIjoxNjEwOTU2NDUxfQ.9eqgxdQpl6EzFD38jvhUKlTVebMuA3_M88jtvdMB0eM

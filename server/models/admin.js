@@ -16,10 +16,15 @@ const attributes = {
   },
   username: {
     type: DataTypes.STRING,
+    key: true,
     allowNull: false,
   },
   sandi: {
     type: DataTypes.STRING,
+    allowNull: false,
+  },
+  super_admin: {
+    type: DataTypes.TINYINT.UNSIGNED,
     allowNull: false,
   },
 }
