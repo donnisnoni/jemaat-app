@@ -11,8 +11,6 @@
   }
 
   const logout = () => localStorage.removeItem('token')
-
-  $: expandButtonCaption = expanded ? 'Perkecil' : 'Perbesar'
 </script>
 
 <span
@@ -63,9 +61,9 @@
         on:click={toggleExpand}
         role="button"
         tabindex="0"
-        title={expandButtonCaption}>
+        title={expanded ? 'Perkecil' : 'Perbesar'}>
         <i class="mdi mdi-chevron-double-right" class:mdi-rotate-180={expanded} />
-        <span class="link-label">{expandButtonCaption}</span>
+        <span class="link-label">Perkecil</span>
       </a>
     </li>
     <li class="md:hidden">
