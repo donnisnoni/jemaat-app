@@ -1,33 +1,34 @@
-// import store from './store';
-// import { writable } from 'svelte/store';
-// import cache from './cache'
+import { writable } from 'svelte/store'
+import cache from './cache'
 import http from '/@shared/http'
-import axios from 'axios'
+// import axios from 'axios'
 
-let cancelTokenSrc = axios.CancelToken.source()
+// let cancelTokenSrc = axios.CancelToken.source()
 
-/** Trigger fetch data from server */
-export async function fetch(url) {
-  // if (cache.has(url)) {
-  //   return cache.get(url)
-  // } else {
-  cancelTokenSrc = axios.CancelToken.source()
-  return http.get(url, { cancelToken: cancelTokenSrc.token }).then((response) => {
-    // cache.set(url, response.data)
-    return response.data
-  })
-  // }
+export function fetch(url, onSuccess, onDone) {
+  const store = writable(new Promise(() => {}))
+  if (cache.has(url)) {
+    store.set(Promise.resolve(cache.get(url)))
+  }
+
+  const load = async () => {
+    const response = await http.get(url)
+    const data = await response.data
+    cache.set(url, data)
+    store.set(Promise.resolve(data))
+    return Promise.resolve(data)
+  }
+
+  load()
+    .then((data) => typeof onSuccess === 'function' && onSuccess(data))
+    .finally(() => typeof onDone === 'function' && onDone())
+
+  return store
 }
-
-/** Delete the cache */
-export function deleteCache(url) {
-  // cache.delete(url)
-}
-
 /**
  * Cancel the request
  * @param {string} message
  */
-export function cancel(message) {
-  cancelTokenSrc.cancel(message)
-}
+// export function cancel(message) {
+//   cancelTokenSrc.cancel(message)
+// }
