@@ -20,7 +20,7 @@
   <div class="flex flex-col flex-1 p-3 overflow-y-auto">
     <div class="flex flex-col flex-shrink gap-2 md:flex-row">
       <!-- TOTAL RAYON -->
-      <div class="flex flex-col items-center flex-1 p-3 border rounded-md bg-gray-50">
+      <div class="flex flex-col items-center flex-1 p-3 border rounded-md bg-gray-50 min-h-82px">
         {#await totalRayonResponse}
           <LoadingPlaceholder />
         {:then jumlahRayon}
@@ -29,7 +29,7 @@
         {/await}
       </div>
       <!-- TOTAL KK -->
-      <div class="flex flex-col items-center flex-1 p-3 border rounded-md bg-gray-50">
+      <div class="flex flex-col items-center flex-1 p-3 border rounded-md bg-gray-50 min-h-82px">
         {#await totalKKResponse}
           <LoadingPlaceholder />
         {:then jumlahKK}
@@ -38,7 +38,7 @@
         {/await}
       </div>
       <!-- TOTAL JEMAAT -->
-      <div class="flex flex-col items-center flex-1 p-3 border rounded-md bg-gray-50">
+      <div class="flex flex-col items-center flex-1 p-3 border rounded-md bg-gray-50 min-h-82px">
         {#await jemaatMetadataRespone}
           <LoadingPlaceholder />
         {:then jemaatMetadata}

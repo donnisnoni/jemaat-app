@@ -89,6 +89,10 @@ input::-webkit-inner-spin-button {
   display: none !important;
 }
 
+.min-h-82px {
+  min-height: 82px;
+}
+
 .time-from-now {
   @apply text-xs;
   @apply text-gray-600;
