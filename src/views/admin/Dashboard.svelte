@@ -10,9 +10,7 @@
     return KK.length
   })
 
-  const totalJemaatResponse = fetch('/api/data/anggota_kk?count=true').then((count) => {
-    return count
-  })
+  const jemaatMetadataRespone = fetch('/api/data/anggota_kk?metadata=true')
 </script>
 
 <div class="flex flex-col flex-1 overflow-hidden bg-white card">
@@ -41,10 +39,10 @@
       </div>
       <!-- TOTAL JEMAAT -->
       <div class="flex flex-col items-center flex-1 p-3 border rounded-md bg-gray-50">
-        {#await totalJemaatResponse}
+        {#await jemaatMetadataRespone}
           <LoadingPlaceholder />
-        {:then jumlahJemaat}
-          <div class="text-3xl hidden-100">{jumlahJemaat}</div>
+        {:then jemaatMetadata}
+          <div class="text-3xl hidden-100">{jemaatMetadata.jumlah_jemaat}</div>
           <div class="text-sm">Jemaat</div>
         {/await}
       </div>

@@ -6,10 +6,17 @@ const db = require('../models')
  * @type {import("fastify").RouteHandler}
  */
 async function get(req, reply) {
-  if (req.query && req.query.count) {
-    const totalAnggotaKKs = await db.anggota_kk.count()
-    return reply.send(totalAnggotaKKs)
+  const qMetadata = req.query.metadata
+
+  if (!!qMetadata) {
+    const metadata = {
+      jumlah_jemaat: await db.anggota_kk.count(),
+      jumlah_jemaat_l: await db.anggota_kk.count({ where: { jk: 'L' } }),
+      jumlah_jemaat_p: await db.anggota_kk.count({ where: { jk: 'P' } }),
+    }
+    return reply.send(metadata)
   }
+
   const anggotaKKs = await db.anggota_kk.findAll()
   reply.send(anggotaKKs)
 }
