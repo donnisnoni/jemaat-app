@@ -63,28 +63,18 @@ const include = [
  * Rayon get controller
  * @type {import("fastify").RouteHandler}
  */
-const get = (req, reply) => {
-  db.rayon
-    .findAll({
-      attributes: {
-        include,
-      },
-      include: {
-        model: db.kk,
-        as: 'kepala_keluarga',
-      },
-      group: 'rayon.id_rayon',
-      // order: [['tgl_buat', 'DESC']],
-    })
-    .then((dataRayon) => {
-      // setTimeout(() => {
-      reply.send(dataRayon)
-      // }, 5000);
-    })
-    .catch((err) => {
-      console.error(err)
-      reply.send(err)
-    })
+async function get(req, reply) {
+  const qExcludeKK = req.query.exclude_kk
+  const qMetadata = req.query.metadata
+  const rayons = await db.rayon.findAll({
+    attributes: qMetadata ? { include } : null,
+    include: {
+      model: db.kk,
+      as: 'kepala_keluarga',
+      attributes: qExcludeKK ? [] : null,
+    },
+  })
+  reply.send(rayons)
 }
 
 /**
