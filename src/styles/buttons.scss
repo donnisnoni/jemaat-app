@@ -43,6 +43,19 @@
   @apply bg-red-600;
 }
 
+.btn.btn-state-loading {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn .loading-icon {
+  stroke: #7616cf;
+}
+
+.btn-primary .loading-icon {
+  stroke: #fff;
+}
+
 *:disabled {
   cursor: not-allowed;
 }
