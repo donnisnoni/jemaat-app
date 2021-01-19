@@ -52,10 +52,7 @@
   /** @type {typeof KKPrototype} */
   let KK = { ...KKPrototype }
 
-  let rayonsResponse = fetchService.fetch('/api/data/rayon').then((data) => {
-    KK.id_rayon = data[0]['id_rayon']
-    return data
-  })
+  let rayonsResponse = fetchService.fetch('/api/data/rayon', (_rayon) => (KK.id_rayon = _rayon[0]['id_rayon']))
 
   onMount(() => {
     isUpdate = !!params.id
@@ -165,7 +162,7 @@
           class="p-1 border border-gray-200 rounded-sm bg-gray-50"
           id="rayon-kk"
           required>
-          {#await rayonsResponse}
+          {#await $rayonsResponse}
             <option default>Memuat Rayon...</option>
           {:then rayons}
             {#each rayons as rayon}

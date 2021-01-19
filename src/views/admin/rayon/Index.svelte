@@ -1,6 +1,6 @@
 <script>
   import * as fetchService from '/@store/fetch.service.js'
-  import { onDestroy } from 'svelte'
+  // import { onDestroy } from 'svelte'
   import AddRayonDialog from './AddRayonDialog.svelte'
   import UpdateRayonDialog from './UpdateRayonDialog.svelte'
   import EmptyDataPlaceholder from '/@components/EmptyDataPlaceholder.svelte'
@@ -34,22 +34,16 @@
   let successType
   let rayon
 
-  let rayonResponse = fetchService.fetch(fetchURL).then((_rayon) => {
-    rayon = _rayon
-    return _rayon
-  })
+  const fetchData = () => fetchService.fetch(fetchURL, (_rayon) => (rayon = _rayon))
+
+  let rayonResponse = fetchData()
 
   function openAddDialog() {
     addRayonDialog.open()
   }
 
   function refetchData() {
-    // fetchService.deleteCache(fetchURL)
-    fetchService.cancel()
-    rayonResponse = fetchService.fetch(fetchURL).then((_rayon) => {
-      rayon = _rayon
-      return _rayon
-    })
+    rayonResponse = fetchData()
   }
 
   function onActionSuccess({ detail }) {
@@ -91,7 +85,7 @@
     deleteRayonDialog.open(rayon[lastIndexToActionWith])
   }
 
-  onDestroy(fetchService.cancel)
+  // onDestroy(fetchService.cancel)
 </script>
 
 <div class="flex flex-col flex-1 overflow-hidden bg-white card">
@@ -107,7 +101,7 @@
   </div>
 
   <div class="flex flex-col flex-1 overflow-y-auto" role="list">
-    {#await rayonResponse}
+    {#await $rayonResponse}
       <LoadingPlaceholder />
     {:then dataRayon}
       {#each dataRayon as rayon, index}

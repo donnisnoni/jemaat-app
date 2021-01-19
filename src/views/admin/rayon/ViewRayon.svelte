@@ -12,17 +12,14 @@
 
   let rayon = { nama: '' }
 
-  const rayonResponse = fetch(`/api/data/rayon/${params.id}?with_kk=true`).then((_rayon) => {
-    rayon = _rayon
-    return _rayon
-  })
+  const rayonResponse = fetch(`/api/data/rayon/${params.id}?with_kk=true`, (_rayon) => (rayon = _rayon))
 </script>
 
 <div class="flex flex-col flex-1 overflow-hidden bg-white card">
   <div class="p-3 border-b">
     <h3 class="text-lg">Rayon {rayon.nama}</h3>
   </div>
-  {#await rayonResponse}
+  {#await $rayonResponse}
     <LoadingPlaceholder />
   {:then rayon}
     <div class="flex flex-col p-3 overflow-y-auto border-b" style="max-height:400px">

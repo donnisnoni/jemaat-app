@@ -17,17 +17,12 @@
 
   let lastIndexToActionWith = 0
   let anggotaKk
-  let anggotaKKResponse = fetchService.fetch(fetchURL).then((_KK) => {
-    anggotaKk = _KK
-    return _KK
-  })
+  const fetchData = () => fetchService.fetch(fetchURL, (_KK) => (anggotaKk = _KK))
+  let anggotaKKResponse = fetchData()
 
   function refetchData() {
-    fetchService.cancel()
-    anggotaKKResponse = fetchService.fetch(fetchURL).then((_KK) => {
-      anggotaKk = _KK
-      return _KK
-    })
+    // fetchService.cancel()
+    anggotaKKResponse = fetchData()
   }
 
   function openContextMenu(event, index) {
@@ -53,10 +48,10 @@
   </div>
 
   <div class="flex flex-col flex-1 overflow-y-auto" role="list">
-    {#await anggotaKKResponse}
+    {#await $anggotaKKResponse}
       <LoadingPlaceholder />
     {:then dataAnggotaKK}
-      {#each dataAnggotaKK as anggotaKk, index}
+      {#each dataAnggotaKK as anggotaKk}
         <!-- on:contextmenu|preventDefault={(event) => openContextMenu(event, index)} -->
         <a class="list--item" href={`/admin/kk/${anggotaKk.id_kk}`} role="listitem" use:link>
           <div class="flex flex-col">

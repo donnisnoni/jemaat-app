@@ -14,20 +14,15 @@
   let dialogDeleteKk
 
   const fetchURL = '/api/data/kk'
+  const fetchData = () => fetchService.fetch(fetchURL, (_KK) => (KK = _KK))
 
   let lastIndexToActionWith = 0
   let KK
-  let KKResponse = fetchService.fetch(fetchURL).then((_KK) => {
-    KK = _KK
-    return _KK
-  })
+  let KKResponse = fetchData()
 
   function refetchData() {
-    fetchService.cancel()
-    KKResponse = fetchService.fetch(fetchURL).then((_KK) => {
-      KK = _KK
-      return _KK
-    })
+    // fetchService.cancel()
+    KKResponse = fetchData()
   }
 
   function openContextMenu(event, index) {
@@ -63,7 +58,7 @@
   </div> -->
 
   <div class="flex flex-col flex-1 overflow-y-auto" role="list">
-    {#await KKResponse}
+    {#await $KKResponse}
       <LoadingPlaceholder />
     {:then dataKK}
       {#each dataKK as KK, index}

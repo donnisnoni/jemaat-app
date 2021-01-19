@@ -1,10 +1,9 @@
 <script>
-  // @ts-check
   import { fetch } from '/@store/fetch.service'
   import LoadingPlaceholder from '/@components/LoadingPlaceholder.svelte'
 
-  const totalRayonResponse = fetch('/api/data/rayon').then((rayon) => rayon.length)
-  const totalKKResponse = fetch('/api/data/kk').then((KK) => KK.length)
+  const totalRayonResponse = fetch('/api/data/rayon')
+  const totalKKResponse = fetch('/api/data/kk')
 
   const totalJemaatResponse = fetch('/api/data/anggota_kk?metadata=true&fields=jumlah_jemaat')
   const totalJemaatLResponse = fetch('/api/data/anggota_kk?metadata=true&fields=jumlah_jemaat_l')
@@ -19,13 +18,13 @@
     <div class="flex flex-col gap-2 md:flex-row">
       <div class="flex items-center justify-around p-3 border rounded-md bg-gray-50" style="min-width: 200px">
         <img draggable="false" width="82px" src="/img/village.svg" alt="" />
-        {#await totalRayonResponse}
+        {#await $totalRayonResponse}
           <LoadingPlaceholder />
         {:then jumlah_rayon}
-          <div class="mx-auto text-3xl hidden-100">
+          <div class="mx-auto text-3xl">
             <div class="flex flex-col items-center mx-auto">
               <div class="text-sm">Rayon</div>
-              {jumlah_rayon}
+              {jumlah_rayon.length}
             </div>
           </div>
         {/await}
@@ -33,13 +32,13 @@
       <!-- TOTAL KK -->
       <div class="flex items-center justify-around p-3 border rounded-md bg-gray-50" style="min-width: 200px">
         <img draggable="false" width="70px" src="/img/family.svg" alt="" />
-        {#await totalKKResponse}
+        {#await $totalKKResponse}
           <LoadingPlaceholder />
         {:then jumlah_kk}
-          <div class="mx-auto text-3xl hidden-100">
+          <div class="mx-auto text-3xl">
             <div class="flex flex-col items-center mx-auto">
               <div class="text-sm">Keluarga</div>
-              {jumlah_kk}
+              {jumlah_kk.length}
             </div>
           </div>
         {/await}
@@ -47,10 +46,10 @@
       <!-- TOTAL JEMAAT -->
       <div class="flex items-center justify-around p-3 border rounded-md bg-gray-50" style="min-width: 200px">
         <img draggable="false" width="82px" src="/img/peoples.svg" alt="" />
-        {#await totalJemaatResponse}
+        {#await $totalJemaatResponse}
           <LoadingPlaceholder />
         {:then jemaatMetadata}
-          <div class="mx-auto text-3xl hidden-100">
+          <div class="mx-auto text-3xl">
             <div class="flex flex-col items-center mx-auto">
               <div class="text-sm">Jemaat</div>
               {jemaatMetadata.jumlah_jemaat}
@@ -61,10 +60,10 @@
       <!-- TOTAL JEMAAT L -->
       <div class="flex items-center justify-around p-3 border rounded-md bg-gray-50" style="min-width: 200px">
         <img draggable="false" width="70px" src="/img/man.svg" alt="" />
-        {#await totalJemaatLResponse}
+        {#await $totalJemaatLResponse}
           <LoadingPlaceholder />
         {:then jemaatMetadata}
-          <div class="mx-auto text-3xl hidden-100">
+          <div class="mx-auto text-3xl">
             <div class="flex flex-col items-center mx-auto">
               <div class="text-sm">Jemaat Laki-laki</div>
               {jemaatMetadata.jumlah_jemaat_l}
@@ -75,10 +74,10 @@
       <!-- TOTAL JEMAAT P -->
       <div class="flex items-center justify-around p-3 border rounded-md bg-gray-50" style="min-width: 200px">
         <img draggable="false" width="72px" src="/img/woman.svg" alt="" />
-        {#await totalJemaatPResponse}
+        {#await $totalJemaatPResponse}
           <LoadingPlaceholder />
         {:then jemaatMetadata}
-          <div class="mx-auto text-3xl hidden-100">
+          <div class="mx-auto text-3xl">
             <div class="flex flex-col items-center mx-auto">
               <div class="text-sm">Jemaat Perempuan</div>
               {jemaatMetadata.jumlah_jemaat_p}
