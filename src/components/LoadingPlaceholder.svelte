@@ -1,3 +1,26 @@
-<div class="flex justify-center flex-1 hidden-100">
-  <div class="self-center text-lg text-gray-600 animate-pulse">Memuat...</div>
+<script>
+  export let width = 30
+</script>
+
+<div class="flex items-center justify-center flex-1 hidden-100">
+  <!-- <div class="self-center text-lg text-gray-600 animate-pulse">Memuat...</div> -->
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    style="max-width:{width}px;max-height:{width}px"
+    width="100%"
+    viewBox="0 0 100 100"
+    preserveAspectRatio="xMidYMid">
+    <circle cx="50" cy="50" r="40" stroke="#fe718d" stroke-width="5" fill="none" />
+    <path d="M15 50 Q32.5 40 50 50 Q67.5 60 85 50 A35 35 0 0 1 15 50" fill="#46dff0">
+      <animate
+        attributeName="d"
+        repeatCount="indefinite"
+        dur="1s"
+        calcMode="spline"
+        keyTimes="0;0.5;1"
+        values="M15 50 Q32.5 40 50 50 Q67.5 60 85 50 A35 35 0 0 1 15 50;M15 50 Q32.5 60 50 50 Q67.5 40 85 50 A35 35 0 0 1 15 50;M15 50 Q32.5 40 50 50 Q67.5 60 85 50 A35 35 0 0 1 15 50"
+        keySplines="0.5 0 0.5 1;0.5 0 0.5 1" />
+    </path>
+  </svg>
 </div>
