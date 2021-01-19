@@ -89,7 +89,7 @@
 </script>
 
 <div class="flex flex-col flex-1 overflow-hidden bg-white card">
-  <div class="flex flex-col flex-wrap p-3 bg-white border-b border-gray-200 md:flex-row ">
+  <div class="flex flex-col flex-wrap p-3 bg-white border-b border-gray-200 md:flex-row">
     <div class="mb-2 md:place-self-center md:mb-0">
       <h3 class="text-lg">Rayon</h3>
     </div>
@@ -103,8 +103,8 @@
   <div class="flex flex-col flex-1 overflow-y-auto" role="list">
     {#await $rayonResponse}
       <LoadingPlaceholder />
-    {:then dataRayon}
-      {#each dataRayon as rayon, index}
+    {:then rayons}
+      {#each rayons as rayon, index}
         <a
           class="list--item"
           href={`/admin/rayon/${rayon.id_rayon}`}
@@ -115,11 +115,7 @@
             <div class="font-bold">{rayon.nama}</div>
             <div class="time-from-now">{moment(rayon.tgl_terakhir_update).fromNow()}</div>
           </div>
-          <div
-            class="flex items-center justify-center p-1 ml-auto text-white bg-blue-500 rounded-full rayon-info--jumlah-kk"
-            title="Jumlah kepala keluarga">
-            {rayon.jumlah_kk}
-          </div>
+          <div class="rayon-info--jumlah-kk" title="Jumlah kepala keluarga">{rayon.jumlah_kk}</div>
         </a>
       {:else}
         <EmptyDataPlaceholder>Belum ada rayon</EmptyDataPlaceholder>

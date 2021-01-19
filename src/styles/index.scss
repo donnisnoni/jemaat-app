@@ -34,11 +34,19 @@ input::-webkit-inner-spin-button {
 
 /* purgecss start ignore */
 .rayon-info--jumlah-kk {
-  width: 100%;
-  max-width: 25px;
-  max-height: 25px;
-  font-size: 12px;
+  @apply bg-blue-500;
+  @apply flex;
+  @apply items-center;
+  @apply justify-center;
+  @apply ml-auto;
+  @apply p-1;
+  @apply rounded-full;
+  @apply text-white;
   align-self: center;
+  font-size: 12px;
+  max-height: 25px;
+  max-width: 25px;
+  width: 100%;
 }
 /* purgecss end ignore */
 
