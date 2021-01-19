@@ -9,6 +9,7 @@
   @apply shadow-md;
   @apply w-full;
   @apply max-h-screen;
+  @apply overflow-y-auto;
 
   li {
     &:first-child {
