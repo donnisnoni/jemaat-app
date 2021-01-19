@@ -6,6 +6,10 @@
   animation: hide 200ms;
 }
 
+.hidden-500 {
+  animation: hide 500ms;
+}
+
 @keyframes scale-up-ver-center {
   0% {
     transform: scaleY(0.4);
