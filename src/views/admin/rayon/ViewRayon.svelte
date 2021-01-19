@@ -12,7 +12,7 @@
 
   let rayon = { nama: '' }
 
-  const rayonResponse = fetch(`/api/data/rayon/${params.id}?with_kk=true`, (_rayon) => (rayon = _rayon))
+  const rayonResponse = fetch(`rayon/${params.id}?with_kk=true`, (_rayon) => (rayon = _rayon))
 </script>
 
 <div class="flex flex-col flex-1 overflow-hidden bg-white card">

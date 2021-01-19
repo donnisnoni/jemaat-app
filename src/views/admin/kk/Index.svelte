@@ -13,7 +13,7 @@
   /** @type {DialogDeleteKK} */
   let dialogDeleteKk
 
-  const fetchURL = '/api/data/kk'
+  const fetchURL = 'kk'
   const fetchData = () => fetchService.fetch(fetchURL, (_KK) => (KK = _KK))
 
   let lastIndexToActionWith = 0

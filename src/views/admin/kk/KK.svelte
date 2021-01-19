@@ -52,14 +52,14 @@
   /** @type {typeof KKPrototype} */
   let KK = { ...KKPrototype }
 
-  let rayonsResponse = fetchService.fetch('/api/data/rayon', (_rayon) => (KK.id_rayon = _rayon[0]['id_rayon']))
+  let rayonsResponse = fetchService.fetch('rayon', (_rayon) => (KK.id_rayon = _rayon[0]['id_rayon']))
 
   onMount(() => {
     isUpdate = !!params.id
     if (isUpdate) {
       loading.load = true
       http
-        .get(`/api/data/kk/${params.id}`)
+        .get(`kk/${params.id}`)
         .then(({ data }) => {
           KKPrototype = { ...data }
           KK = { ...KKPrototype }
@@ -84,13 +84,13 @@
     if (!isUpdate) {
       loading.create = true
       http
-        .post('/api/data/kk', KK)
+        .post('kk', KK)
         .then(OK)
         .finally(() => (loading.create = false))
     } else {
       loading.update = true
       http
-        .put(`/api/data/kk/${KK.id_kk}`, KK)
+        .put(`kk/${KK.id_kk}`, KK)
         .then(OK)
         .finally(() => (loading.update = false))
     }

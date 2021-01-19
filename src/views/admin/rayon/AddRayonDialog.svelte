@@ -27,7 +27,7 @@
     cancelTokenSrc = axios.CancelToken.source()
     const dataRayon = { nama: namaRayon }
     http
-      .post('/api/data/rayon', dataRayon, { cancelToken: cancelTokenSrc.token })
+      .post('rayon', dataRayon, { cancelToken: cancelTokenSrc.token })
       .then(async (/* resp */) => {
         resetData()
         emit('success', { dataRayon, successType: 1 })

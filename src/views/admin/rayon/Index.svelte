@@ -11,7 +11,7 @@
   import { link } from 'svelte-spa-router'
   import moment from 'moment'
 
-  const fetchURL = '/api/data/rayon?metadata=true&exclude_kk=true'
+  const fetchURL = 'rayon?metadata=true&exclude_kk=true'
 
   /** @type {AddRayonDialog} */
   let addRayonDialog

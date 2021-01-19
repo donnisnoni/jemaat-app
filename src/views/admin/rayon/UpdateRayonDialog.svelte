@@ -30,7 +30,7 @@
     if (!formAddRayon.checkValidity()) return
     cancelTokenSrc = axios.CancelToken.source()
     http
-      .put(`/api/data/rayon/${idRayon}`, { nama: namaRayon }, { cancelToken: cancelTokenSrc.token })
+      .put(`rayon/${idRayon}`, { nama: namaRayon }, { cancelToken: cancelTokenSrc.token })
       .then(async (/* resp */) => {
         resetData()
         emit('success', { successType: 3 })

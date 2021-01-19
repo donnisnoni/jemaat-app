@@ -2,12 +2,12 @@
   import { fetch } from '/@store/fetch.service'
   import LoadingPlaceholder from '/@components/LoadingPlaceholder.svelte'
 
-  const totalRayonResponse = fetch('/api/data/rayon')
-  const totalKKResponse = fetch('/api/data/kk')
+  const totalRayonResponse = fetch('rayon')
+  const totalKKResponse = fetch('kk')
 
-  const totalJemaatResponse = fetch('/api/data/anggota_kk?metadata=true&fields=jumlah_jemaat')
-  const totalJemaatLResponse = fetch('/api/data/anggota_kk?metadata=true&fields=jumlah_jemaat_l')
-  const totalJemaatPResponse = fetch('/api/data/anggota_kk?metadata=true&fields=jumlah_jemaat_p')
+  const totalJemaatResponse = fetch('anggota_kk?metadata=true&fields=jumlah_jemaat')
+  const totalJemaatLResponse = fetch('anggota_kk?metadata=true&fields=jumlah_jemaat_l')
+  const totalJemaatPResponse = fetch('anggota_kk?metadata=true&fields=jumlah_jemaat_p')
 </script>
 
 <div class="flex flex-col flex-1 overflow-hidden bg-white card">

@@ -24,7 +24,7 @@
     loading = true
     cancelTokenSrc = axios.CancelToken.source()
     http
-      .delete(`/api/data/kk/${KK.id_kk}`)
+      .delete(`kk/${KK.id_kk}`)
       .then(({ status }) => {
         if (status == 200) {
           emit('success')

@@ -24,7 +24,7 @@
     cancelTokenSrc = axios.CancelToken.source()
     rayon &&
       http
-        .delete('/api/data/rayon/' + rayon.id_rayon)
+        .delete('rayon/' + rayon.id_rayon)
         .then(({ status }) => {
           if (status == 200) {
             emit('success', { rayon, successType: 3 })

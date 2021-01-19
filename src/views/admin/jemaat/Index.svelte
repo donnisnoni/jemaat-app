@@ -13,7 +13,7 @@
   /** @type {DialogDeleteKK} */
   // let dialogDeleteKk
 
-  const fetchURL = '/api/data/anggota_kk'
+  const fetchURL = 'anggota_kk'
 
   let lastIndexToActionWith = 0
   let anggotaKk
