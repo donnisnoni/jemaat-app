@@ -81,7 +81,7 @@
     const OK = ({ status }) => {
       if (status === 200) {
         resetDataAndForm()
-        router.pop('/admin/kk')
+        router.push('/admin/kk')
       }
     }
     if (!isUpdate) {
