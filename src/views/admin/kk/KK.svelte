@@ -234,7 +234,7 @@
 
   <Datatable bind:this={datatable} hidden={!KK.anggota_kk.length}>
     <thead>
-      <tr style="border-bottom: 1px solid #c0c3ca">
+      <tr class="border-b">
         <th>No</th>
         <th>Nama</th>
         <th>L/P</th>
