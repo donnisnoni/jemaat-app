@@ -15,7 +15,7 @@
     <h3 class="text-lg">Dashboard</h3>
   </div>
   <div class="flex flex-col flex-1 p-3 overflow-y-auto">
-    <div class="flex flex-col gap-2 md:flex-row">
+    <div class="flex flex-col flex-wrap gap-2 md:flex-row">
       <div class="flex items-center justify-around p-3 border rounded-md bg-gray-50" style="min-width: 200px">
         <img draggable="false" width="82px" src="/img/village.svg" alt="" />
         {#await $totalRayonResponse}
