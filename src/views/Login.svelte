@@ -1,5 +1,4 @@
 <script>
-  // @ts-check
   import { autoSelectOnFocus, blurOnEsc } from '/@actions/inputDirectives.js'
   import axios from 'axios'
   import { push, replace } from 'svelte-spa-router'
@@ -46,7 +45,7 @@
           autocomplete="username"
           autofocus
           bind:value={username}
-          class="p-3 border border-gray-200 rounded-md bg-gray-50"
+          class="w-full field"
           id="username"
           minlength="8"
           required
@@ -61,7 +60,7 @@
           <input
             autocomplete="current-password"
             bind:this={refs.fieldSandi}
-            class="w-full p-3 border border-gray-200 rounded-md bg-gray-50"
+            class="w-full field"
             id="sandi"
             minlength="8"
             on:input={handleInputSandi}
@@ -86,7 +85,7 @@
         <input
           bind:checked={super_admin}
           class="mr-2"
-          style="width:18px;height:18px"
+          style="width:15px;height:15px"
           id="is-super-admin"
           type="checkbox" />
         <label for="is-super-admin">Login sebagai super admin</label>

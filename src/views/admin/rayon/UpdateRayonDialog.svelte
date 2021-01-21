@@ -68,7 +68,7 @@
       <input
         autocomplete="off"
         bind:value={namaRayon}
-        class="field"
+        class="w-full field"
         disabled={loading}
         id="nama-rayon"
         minlength={appConfig.validation.namaRayon.minlength}
