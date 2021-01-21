@@ -2,7 +2,7 @@
   export let width = 30
 </script>
 
-<div class="flex items-center justify-center flex-1 hidden-500">
+<div class="flex items-center justify-center flex-1 hidden-100">
   <!-- <div class="self-center text-lg text-gray-600 animate-pulse">Memuat...</div> -->
   <svg
     xmlns="http://www.w3.org/2000/svg"
