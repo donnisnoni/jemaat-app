@@ -228,7 +228,7 @@
       </section>
     </div>
     <div class="justify-center hidden w-max md:flex" style="max-width:500px">
-      <img alt="Gereja" class="rounded-md select-none" draggable="false" src="/img/login-bg.jpg" />
+      <img alt="Gereja" class="w-full rounded-md select-none" draggable="false" src="/img/login-bg.jpg" />
     </div>
   </form>
 
