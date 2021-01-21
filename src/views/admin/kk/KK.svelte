@@ -149,7 +149,7 @@
     bind:this={form}
     id="form-kepala-keluarga"
     class:hidden={isUpdate && loading.load}
-    class="relative flex flex-col p-2 overflow-y-auto md:flex-row"
+    class="relative flex flex-col p-2 overflow-y-auto border-b md:flex-row"
     on:submit|preventDefault={post}
     style="max-height:40%">
     <!--  -->
@@ -157,11 +157,7 @@
       <!-- RAYON -->
       <section class="flex flex-col">
         <label for="rayon-kk">Rayon</label>
-        <select
-          bind:value={KK.id_rayon}
-          class="p-1 border border-gray-200 rounded-sm bg-gray-50"
-          id="rayon-kk"
-          required>
+        <select bind:value={KK.id_rayon} class="field" id="rayon-kk" required>
           {#await $rayonsResponse}
             <option default>Memuat Rayon...</option>
           {:then rayons}
@@ -181,7 +177,7 @@
             autocomplete="off"
             autofocus
             bind:value={KK.nama}
-            class="p-1 border border-gray-200 rounded-sm bg-gray-50"
+            class="field"
             id="nama-kk"
             required
             spellcheck="false"
@@ -190,11 +186,7 @@
         <!-- STATUS NIKAH -->
         <section class="flex flex-col">
           <label for="status-nikah-kk">Status Nikah</label>
-          <select
-            bind:value={KK.status_nikah}
-            class="p-1 border border-gray-200 rounded-sm bg-gray-50"
-            id="status-nikah-kk"
-            required>
+          <select bind:value={KK.status_nikah} class="field" id="status-nikah-kk" required>
             {#each selectValues.statusNikah as status}
               <option value={status}>{status}</option>
             {/each}
@@ -206,21 +198,12 @@
         <!-- ALAMAT -->
         <section class="flex flex-col flex-1 my-2 mr-2" style="max-width: 300px">
           <label for="alamat-kk">Alamat</label>
-          <input
-            bind:value={KK.alamat}
-            class="w-full p-1 border border-gray-200 rounded-sm bg-gray-50"
-            spellcheck="false"
-            required
-            id="alamat-kk" />
+          <input bind:value={KK.alamat} class="field" spellcheck="false" required id="alamat-kk" />
         </section>
         <!-- STATUS RUMAH -->
         <section class="flex flex-col">
           <label for="status-rumah-kk">Status Rumah</label>
-          <select
-            bind:value={KK.status_rumah}
-            class="p-1 border border-gray-200 rounded-sm bg-gray-50"
-            id="status-rumah-kk"
-            required>
+          <select bind:value={KK.status_rumah} class="field" id="status-rumah-kk" required>
             {#each selectValues.statusRumah as status}
               <option value={status}>{status}</option>
             {/each}
@@ -231,22 +214,12 @@
       <section class="flex flex-wrap items-center">
         <section class="flex flex-col flex-1 my-2 mr-2" style="max-width: 300px">
           <label for="no-hp-kk">No HP</label>
-          <input
-            autocomplete="off"
-            bind:value={KK.no_hp}
-            class="p-1 border border-gray-200 rounded-sm bg-gray-50"
-            id="no-hp-kk"
-            type="tel"
-            use:numberPhone />
+          <input autocomplete="off" bind:value={KK.no_hp} class="field" id="no-hp-kk" type="tel" use:numberPhone />
         </section>
         <!-- KATEGORI RUMAH -->
         <section class="flex flex-col mr-2">
           <label for="kategori-rumah-kk">Kategori Rumah</label>
-          <select
-            bind:value={KK.kategori_rumah}
-            class="p-1 border border-gray-200 rounded-sm bg-gray-50"
-            id="kategori-rumah-kk"
-            required>
+          <select bind:value={KK.kategori_rumah} class="field" id="kategori-rumah-kk" required>
             {#each selectValues.kategoriRumah as kategori}
               <option value={kategori}>{kategori}</option>
             {/each}

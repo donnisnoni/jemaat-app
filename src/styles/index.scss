@@ -89,6 +89,14 @@ input::-webkit-inner-spin-button {
 //   background-color: #3e3e4214;
 // }
 
+.field {
+  @apply bg-gray-50;
+  @apply border-gray-200;
+  @apply border;
+  @apply p-1;
+  @apply rounded-sm;
+}
+
 .max-w-600 {
   max-width: 600px;
 }
