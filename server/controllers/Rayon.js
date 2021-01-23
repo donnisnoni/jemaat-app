@@ -60,8 +60,6 @@ const include = [
   ],
 ]
 
-const getRayonCount = async () => await db.rayon.count()
-
 /**
  * Rayon get controller
  * @type {import("fastify").RouteHandler}
@@ -76,8 +74,8 @@ async function get(req, reply) {
   const offset = getOffset(qPage, ipp)
 
   if (qCount) {
-    const rayonCount = await getRayonCount()
-    return reply.send(rayonCount)
+    const rayonCount = await db.rayon.count()
+    return reply.send(rayonCount + 1)
   }
 
   const rayons = await db.rayon.findAll({
@@ -87,7 +85,6 @@ async function get(req, reply) {
       as: 'kepala_keluarga',
       attributes: qExcludeKK ? [] : null,
     },
-    order: [['id_rayon', 'ASC']],
     offset,
     limit: ipp,
     subQuery: false,

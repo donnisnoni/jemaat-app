@@ -12,7 +12,6 @@
   import { link, location, push } from 'svelte-spa-router'
   import moment from 'moment'
 
-  export let params = {}
   const fetchURL = 'rayon?metadata=true&exclude_kk=true'
 
   /** @type {AddRayonDialog} */
@@ -101,7 +100,13 @@
   }
 
   $: totalPageCount = Math.ceil(rayonTotalCount / itemsPerPage)
-  $: (page && refetchData()) || updateRouteQuery()
+  $: {
+    if (totalPageCount > 0 && page > totalPageCount) {
+      page = totalPageCount
+    }
+    refetchData()
+    updateRouteQuery()
+  }
 
   // onDestroy(fetchService.cancel)
 </script>
