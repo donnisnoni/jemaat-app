@@ -114,9 +114,19 @@ input::-webkit-inner-spin-button {
   @apply text-gray-600;
 }
 
-.pagination-active-page {
+.pagination--item {
+  @apply bg-gray-100;
+  @apply border;
+  @apply cursor-pointer;
+  @apply ml-1;
+  @apply px-2;
+  @apply py-1;
+  @apply rounded-sm;
+}
+
+.pagination--page-active {
   @apply bg-blue-600;
+  transition: background-color 0.3s linear;
   border: none;
-  transition: all 0.3s linear;
   @apply text-white;
 }

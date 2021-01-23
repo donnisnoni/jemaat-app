@@ -56,11 +56,14 @@
   stroke: #fff;
 }
 
-*:disabled {
+*:disabled,
+.disabled {
+  pointer-events: visiblePainted;
   cursor: not-allowed;
 }
 
-.btn:disabled {
+.btn:disabled,
+.disabled {
   background-color: rgba(0, 0, 0, 0.12) !important;
   color: rgba(0, 0, 0, 0.26) !important;
 }
