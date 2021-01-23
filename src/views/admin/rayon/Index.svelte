@@ -9,7 +9,8 @@
   import DeleteRayonDialog from './DeleteRayonDialog.svelte'
   import Button from '/@components/Button.svelte'
   import MenuEditDelete from '/@components/MenuEditDelete.svelte'
-  import { link, location, push } from 'svelte-spa-router'
+  import { link, location, push, querystring } from 'svelte-spa-router'
+  import { decode } from 'query-string-lite'
   import moment from 'moment'
 
   const fetchURL = 'rayon?metadata=true&exclude_kk=true'
@@ -22,6 +23,8 @@
   let deleteRayonDialog
   /** @type {MenuEditDelete} */
   let menuEditDelete
+
+  let queries = decode('?' + $querystring)
 
   let lastIndexToActionWith = 0
   let lastRayonActionSuccess
@@ -38,7 +41,7 @@
   // Paginations
   let rayonTotalCount = 0
   let itemsPerPage = 10
-  let page = 1
+  let page = +queries.page || 1
 
   const fetchData = () =>
     fetchService.fetch(`${fetchURL}&page=${page}`, ({ count, rows }) => {
@@ -97,6 +100,8 @@
   $: {
     if (totalPageCount > 0 && page > totalPageCount) {
       page = totalPageCount
+    } else if (page < 1) {
+      page = 1
     }
     refetchData()
     updateRouteQuery()

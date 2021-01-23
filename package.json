@@ -47,6 +47,7 @@
     "fastify": "^3.9.2",
     "fastify-jwt": "^2.3.0",
     "mariadb": "^2.5.2",
+    "query-string-lite": "^0.2.2",
     "sequelize": "^6.3.5"
   }
 }
