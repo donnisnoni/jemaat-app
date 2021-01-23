@@ -78,7 +78,7 @@ async function get(req, reply) {
     return reply.send(rayonCount + 1)
   }
 
-  const rayons = await db.rayon.findAll({
+  const rayons = await db.rayon.findAndCountAll({
     attributes: qMetadata ? { include } : null,
     include: {
       model: db.kk,

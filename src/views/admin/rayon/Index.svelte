@@ -40,10 +40,11 @@
   let itemsPerPage = 10
   let page = 1
 
-  const fetchData = () => fetchService.fetch(`${fetchURL}&page=${page}`, (_rayon) => (rayon = _rayon))
-  const fetchRayonTotalCount = () =>
-    fetchService.fetch('rayon?count=true', (_rayonTotalCount) => (rayonTotalCount = _rayonTotalCount))
-  fetchRayonTotalCount()
+  const fetchData = () =>
+    fetchService.fetch(`${fetchURL}&page=${page}`, ({ count, rows }) => {
+      rayonTotalCount = count
+      rayon = rows
+    })
 
   let rayonResponse = fetchData()
 
@@ -52,7 +53,6 @@
   }
 
   function refetchData() {
-    fetchRayonTotalCount()
     rayonResponse = fetchData()
   }
 
@@ -120,8 +120,8 @@
   <div class="flex flex-col flex-1 overflow-y-auto" role="list">
     {#await $rayonResponse}
       <LoadingPlaceholder />
-    {:then rayons}
-      {#each rayons as rayon, index}
+    {:then { rows }}
+      {#each rows as rayon, index}
         <a
           class="list--item"
           href={`/admin/rayon/${rayon.id_rayon}`}
