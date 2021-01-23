@@ -113,3 +113,10 @@ input::-webkit-inner-spin-button {
   font-size: 10px;
   @apply text-gray-600;
 }
+
+.pagination-active-page {
+  @apply bg-blue-600;
+  border: none;
+  transition: all 0.3s linear;
+  @apply text-white;
+}

@@ -5,12 +5,14 @@
   import UpdateRayonDialog from './UpdateRayonDialog.svelte'
   import EmptyDataPlaceholder from '/@components/EmptyDataPlaceholder.svelte'
   import LoadingPlaceholder from '/@components/LoadingPlaceholder.svelte'
+  import Pagination from '/@components/Pagination.svelte'
   import DeleteRayonDialog from './DeleteRayonDialog.svelte'
   import Button from '/@components/Button.svelte'
   import MenuEditDelete from '/@components/MenuEditDelete.svelte'
-  import { link } from 'svelte-spa-router'
+  import { link, location, push } from 'svelte-spa-router'
   import moment from 'moment'
 
+  export let params = {}
   const fetchURL = 'rayon?metadata=true&exclude_kk=true'
 
   /** @type {AddRayonDialog} */
@@ -34,7 +36,15 @@
   let successType
   let rayon
 
-  const fetchData = () => fetchService.fetch(fetchURL, (_rayon) => (rayon = _rayon))
+  // Paginations
+  let rayonTotalCount = 0
+  let itemsPerPage = 10
+  let page = 1
+
+  const fetchData = () => fetchService.fetch(`${fetchURL}&page=${page}`, (_rayon) => (rayon = _rayon))
+  const fetchRayonTotalCount = () =>
+    fetchService.fetch('rayon?count=true', (_rayonTotalCount) => (rayonTotalCount = _rayonTotalCount))
+  fetchRayonTotalCount()
 
   let rayonResponse = fetchData()
 
@@ -43,6 +53,7 @@
   }
 
   function refetchData() {
+    fetchRayonTotalCount()
     rayonResponse = fetchData()
   }
 
@@ -85,6 +96,13 @@
     deleteRayonDialog.open(rayon[lastIndexToActionWith])
   }
 
+  function updateRouteQuery() {
+    push($location + '?page=' + page)
+  }
+
+  $: totalPageCount = Math.ceil(rayonTotalCount / itemsPerPage)
+  $: (page && refetchData()) || updateRouteQuery()
+
   // onDestroy(fetchService.cancel)
 </script>
 
@@ -121,6 +139,12 @@
         <EmptyDataPlaceholder>Belum ada rayon</EmptyDataPlaceholder>
       {/each}
     {/await}
+  </div>
+
+  <div class="flex justify-center p-1 border-t">
+    <div class="flex ml-auto hidden-100">
+      <Pagination pageCount={totalPageCount} bind:page />
+    </div>
   </div>
 
   <MenuEditDelete

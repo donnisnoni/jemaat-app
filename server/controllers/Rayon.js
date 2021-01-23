@@ -1,5 +1,6 @@
 const db = require('../models')
-const { fn, col, where, literal } = require('sequelize')
+const { literal } = require('sequelize')
+const { getOffset } = require('../utils')
 
 const include = [
   [literal(`(SELECT COUNT(id_kk) FROM kepala_keluarga WHERE kepala_keluarga.id_rayon = rayon.id_rayon)`), 'jumlah_kk'],
@@ -59,6 +60,8 @@ const include = [
   ],
 ]
 
+const getRayonCount = async () => await db.rayon.count()
+
 /**
  * Rayon get controller
  * @type {import("fastify").RouteHandler}
@@ -68,8 +71,12 @@ async function get(req, reply) {
   const qMetadata = req.query.metadata
   const qCount = req.query.count
 
+  const qPage = req.query.page || 1
+  const ipp = req.query.ipp || 10
+  const offset = getOffset(qPage, ipp)
+
   if (qCount) {
-    const rayonCount = await db.rayon.count()
+    const rayonCount = await getRayonCount()
     return reply.send(rayonCount)
   }
 
@@ -80,6 +87,10 @@ async function get(req, reply) {
       as: 'kepala_keluarga',
       attributes: qExcludeKK ? [] : null,
     },
+    order: [['id_rayon', 'ASC']],
+    offset,
+    limit: ipp,
+    subQuery: false,
   })
   reply.send(rayons)
 }

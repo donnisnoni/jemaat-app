@@ -4,6 +4,11 @@ function hasDuplicates(arr) {
   })
 }
 
+function getOffset(page, ipp) {
+  return page * ipp - ipp
+}
+
 module.exports = {
   hasDuplicates,
+  getOffset,
 }
