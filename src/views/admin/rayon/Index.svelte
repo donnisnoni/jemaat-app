@@ -87,17 +87,11 @@
     menuEditDelete.open(event)
   }
 
-  function openUpdateRayonDialog() {
-    updateRayonDialog.open(rayon[lastIndexToActionWith])
-  }
+  const openUpdateRayonDialog = () => updateRayonDialog.open(rayon[lastIndexToActionWith])
 
-  function openDeleteRayonDialog() {
-    deleteRayonDialog.open(rayon[lastIndexToActionWith])
-  }
+  const openDeleteRayonDialog = () => deleteRayonDialog.open(rayon[lastIndexToActionWith])
 
-  function updateRouteQuery() {
-    push($location + '?page=' + page)
-  }
+  const updateRouteQuery = () => push($location + '?page=' + page)
 
   $: totalPageCount = Math.ceil(rayonTotalCount / itemsPerPage)
   $: {
