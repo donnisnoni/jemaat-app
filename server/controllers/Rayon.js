@@ -66,6 +66,13 @@ const include = [
 async function get(req, reply) {
   const qExcludeKK = req.query.exclude_kk
   const qMetadata = req.query.metadata
+  const qCount = req.query.count
+
+  if (qCount) {
+    const rayonCount = await db.rayon.count()
+    return reply.send(rayonCount)
+  }
+
   const rayons = await db.rayon.findAll({
     attributes: qMetadata ? { include } : null,
     include: {

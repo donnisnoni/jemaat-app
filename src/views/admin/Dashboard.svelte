@@ -2,7 +2,7 @@
   import { fetch } from '/@store/fetch.service'
   import LoadingPlaceholder from '/@components/LoadingPlaceholder.svelte'
 
-  const totalRayonResponse = fetch('rayon')
+  const totalRayonResponse = fetch('rayon?count=true')
   const totalKKResponse = fetch('kk')
 
   const totalJemaatResponse = fetch('anggota_kk?metadata=true&fields=jumlah_jemaat')
@@ -20,11 +20,11 @@
         <img draggable="false" width="82px" src="/img/village.svg" alt="" />
         {#await $totalRayonResponse}
           <LoadingPlaceholder />
-        {:then jumlah_rayon}
+        {:then totalJumlahRayon}
           <div class="mx-auto text-3xl">
             <div class="flex flex-col items-center mx-auto">
               <div class="text-sm">Rayon</div>
-              {jumlah_rayon.length}
+              {totalJumlahRayon}
             </div>
           </div>
         {/await}
