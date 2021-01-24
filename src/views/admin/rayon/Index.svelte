@@ -1,6 +1,6 @@
 <script>
   import * as fetchService from '/@store/fetch.service.js'
-  // import { onDestroy } from 'svelte'
+  import { onDestroy } from 'svelte'
   import AddRayonDialog from './AddRayonDialog.svelte'
   import UpdateRayonDialog from './UpdateRayonDialog.svelte'
   import EmptyDataPlaceholder from '/@components/EmptyDataPlaceholder.svelte'
@@ -10,7 +10,7 @@
   import Button from '/@components/Button.svelte'
   import MenuEditDelete from '/@components/MenuEditDelete.svelte'
   import { link, location, push, querystring } from 'svelte-spa-router'
-  import { decode } from 'query-string-lite'
+  import { encode, decode } from 'query-string-lite'
   import moment from 'moment'
 
   const fetchURL = 'rayon?metadata=true&exclude_kk=true'
@@ -94,7 +94,7 @@
 
   const openDeleteRayonDialog = () => deleteRayonDialog.open(rayon[lastIndexToActionWith])
 
-  const updateRouteQuery = () => push($location + '?page=' + page)
+  const updateRouteQueries = () => push($location + encode({ page: [page + ''] }))
 
   $: totalPageCount = Math.ceil(rayonTotalCount / itemsPerPage)
   $: {
@@ -103,11 +103,16 @@
     } else if (page < 1) {
       page = 1
     }
+    updateRouteQueries()
     refetchData()
-    updateRouteQuery()
   }
 
-  // onDestroy(fetchService.cancel)
+  const unsubscribeQuerystring = querystring.subscribe((v) => {
+    const _queries = decode('?' + v)
+    if (_queries.page && +_queries.page != page) page = _queries.page
+  })
+
+  onDestroy(unsubscribeQuerystring)
 </script>
 
 <div class="flex flex-col flex-1 overflow-hidden bg-white card">
