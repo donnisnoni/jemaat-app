@@ -122,6 +122,7 @@ input::-webkit-inner-spin-button {
   @apply px-2;
   @apply py-1;
   @apply rounded-sm;
+  @apply select-none;
 }
 
 .pagination--page-active {
