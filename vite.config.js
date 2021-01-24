@@ -1,13 +1,13 @@
 import { svelte } from 'vite-plugin-svelte'
-import sveltePreprocess from 'svelte-preprocess'
+// import sveltePreprocess from 'svelte-preprocess'
 import { getAliases } from 'vite-aliases'
 
 const aliases = getAliases()
-const preprocess = sveltePreprocess({ postcss: true })
+// const preprocess = sveltePreprocess({ postcss: true })
 
 /** @type {import('vite').UserConfig} */
 export default {
-  plugins: [svelte({ preprocess })],
+  plugins: [svelte(/* { preprocess } */)],
   rollupDedupe: ['svelte'],
   alias: aliases,
   optimizeDeps: {
