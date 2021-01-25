@@ -52,7 +52,7 @@
   /** @type {typeof KKPrototype} */
   let KK = { ...KKPrototype }
 
-  let rayonsResponse = fetchService.fetch('rayon', (_rayon) => (KK.id_rayon = _rayon[0]['id_rayon']))
+  let rayonsResponse = fetchService.fetch('rayon', ({ rows }) => (KK.id_rayon = rows[0]['id_rayon']))
 
   onMount(() => {
     isUpdate = !!params.id
@@ -160,8 +160,8 @@
         <select bind:value={KK.id_rayon} class="field" id="rayon-kk" required>
           {#await $rayonsResponse}
             <option default>Memuat Rayon...</option>
-          {:then rayons}
-            {#each rayons as rayon}
+          {:then { rows }}
+            {#each rows as rayon}
               <option value={rayon.id_rayon}>{rayon.nama}</option>
             {/each}
           {/await}
