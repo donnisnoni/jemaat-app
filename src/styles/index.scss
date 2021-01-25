@@ -115,6 +115,7 @@ input::-webkit-inner-spin-button {
 }
 
 .pagination--item {
+  box-sizing: border-box;
   @apply bg-gray-100;
   @apply border;
   @apply cursor-pointer;
@@ -127,7 +128,7 @@ input::-webkit-inner-spin-button {
 
 .pagination--page-active {
   @apply bg-blue-600;
-  transition: background-color 0.3s linear;
+  // transition: background-color 0.3s ease-in-out;
   border: none;
   @apply text-white;
 }
