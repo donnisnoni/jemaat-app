@@ -44,8 +44,10 @@
 
   const fetchURL = 'rayon?metadata=true&exclude_kk=true'
 
-  const fetchData = (search = false) => {
-    const _fetchURL = search ? `${fetchURL}&page=${page}` : `${fetchURL}&page=${page}&search=${searchKeyword}`
+  const fetchData = () => {
+    const _fetchURL = searchKeyword.length
+      ? `${fetchURL}&page=${page}&search=${searchKeyword}`
+      : `${fetchURL}&page=${page}`
     return fetchService.fetch(_fetchURL, ({ count, rows }) => {
       rayonTotalCount = count
       rayon = rows
@@ -96,7 +98,8 @@
   function search({ keyCode, target }) {
     if (keyCode != 13) return
     searchKeyword = target.value
-    refetchData(searchKeyword.length)
+    updateRouteQueries()
+    refetchData()
   }
 
   const openUpdateRayonDialog = () => updateRayonDialog.open(rayon[lastIndexToActionWith])
@@ -110,19 +113,18 @@
   }
 
   $: totalPageCount = Math.ceil(rayonTotalCount / itemsPerPage)
-  $: {
-    if (totalPageCount > 0 && page > totalPageCount) {
-      page = totalPageCount
-    } else if (page < 1) {
-      page = 1
-    }
-    updateRouteQueries()
-    refetchData()
-  }
 
   const unsubscribeQuerystring = querystring.subscribe((v) => {
     const _queries = decode('?' + v)
-    if (_queries.page && +_queries.page != page) page = _queries.page
+    if (_queries.page && _queries.page[0] && +_queries.page[0] != page) {
+      page = _queries.page
+    }
+    if (_queries.s && _queries.s[0]) {
+      searchKeyword = _queries.s[0]
+    } else {
+      searchKeyword = ''
+    }
+    refetchData()
   })
 
   onDestroy(unsubscribeQuerystring)
@@ -175,7 +177,7 @@
   {#if totalPageCount > 1}
     <div class="flex justify-center p-1 border-t">
       <div class="flex ml-auto hidden-100">
-        <Pagination pageCount={totalPageCount} bind:page />
+        <Pagination pageCount={totalPageCount} on:change={updateRouteQueries} bind:page />
       </div>
     </div>
   {/if}
