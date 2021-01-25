@@ -1,5 +1,5 @@
 const db = require('../models')
-const { literal } = require('sequelize')
+const { literal, Op } = require('sequelize')
 const { getOffset } = require('../utils')
 
 const include = [
@@ -68,18 +68,22 @@ async function get(req, reply) {
   const qExcludeKK = req.query.exclude_kk
   const qMetadata = req.query.metadata
   const qCount = req.query.count
+  const qSearch = req.query.search
 
   const qPage = req.query.page || 1
   const ipp = req.query.ipp || 10
   const offset = getOffset(qPage, ipp)
 
+  const isValidSearch = typeof qSearch == 'string' && qSearch.length
+
   if (qCount) {
     const rayonCount = await db.rayon.count()
-    return reply.send(rayonCount + 1)
+    return reply.send(rayonCount)
   }
 
   const rayons = await db.rayon.findAndCountAll({
     attributes: qMetadata ? { include } : null,
+    where: isValidSearch ? { nama: { [Op.like]: `%${qSearch}%` } } : null,
     include: {
       model: db.kk,
       as: 'kepala_keluarga',

@@ -13,8 +13,6 @@
   import { encode, decode } from 'query-string-lite'
   import moment from 'moment'
 
-  const fetchURL = 'rayon?metadata=true&exclude_kk=true'
-
   /** @type {AddRayonDialog} */
   let addRayonDialog
   /** @type {UpdateRayonDialog} */
@@ -37,17 +35,22 @@
    */
   let successType
   let rayon
+  let searchKeyword = (queries.s && queries.s[0]) || ''
 
   // Paginations
   let rayonTotalCount = 0
   let itemsPerPage = 10
-  let page = +queries.page || 1
+  let page = (queries.page && +queries.page[0]) || 1
 
-  const fetchData = () =>
-    fetchService.fetch(`${fetchURL}&page=${page}`, ({ count, rows }) => {
+  const fetchURL = 'rayon?metadata=true&exclude_kk=true'
+
+  const fetchData = (search = false) => {
+    const _fetchURL = search ? `${fetchURL}&page=${page}` : `${fetchURL}&page=${page}&search=${searchKeyword}`
+    return fetchService.fetch(_fetchURL, ({ count, rows }) => {
       rayonTotalCount = count
       rayon = rows
     })
+  }
 
   let rayonResponse = fetchData()
 
@@ -90,11 +93,21 @@
     menuEditDelete.open(event)
   }
 
+  function search({ keyCode, target }) {
+    if (keyCode != 13) return
+    searchKeyword = target.value
+    refetchData(searchKeyword.length)
+  }
+
   const openUpdateRayonDialog = () => updateRayonDialog.open(rayon[lastIndexToActionWith])
 
   const openDeleteRayonDialog = () => deleteRayonDialog.open(rayon[lastIndexToActionWith])
 
-  const updateRouteQueries = () => push($location + encode({ page: [page + ''] }))
+  const updateRouteQueries = () => {
+    const queriesObject = { page: [page + ''] }
+    if (searchKeyword.length) queriesObject.s = [searchKeyword]
+    push($location + encode(queriesObject))
+  }
 
   $: totalPageCount = Math.ceil(rayonTotalCount / itemsPerPage)
   $: {
@@ -121,11 +134,19 @@
       <h3 class="text-lg">Rayon</h3>
     </div>
     <div class="w-full border border-t md:hidden" />
-    <div class="mt-2 ml-auto md:mt-0">
+    <div class="flex gap-1 mt-2 ml-auto md:mt-0">
+      <!-- svelte-ignore a11y-autofocus -->
+      <input autofocus on:keypress={search} class="field" placeholder="Cari..." value={searchKeyword} />
       <Button on:click={refetchData} icon="refresh" iconOnly title="Muat ulang Data" />
       <Button on:click={openAddDialog} icon="plus" iconOnly primary title="Tambah rayon" />
     </div>
   </div>
+
+  {#if searchKeyword.length}
+    <div class="p-2 border-b">
+      Hasil pencarian dari "{searchKeyword}"
+    </div>
+  {/if}
 
   <div class="flex flex-col flex-1 overflow-y-auto" role="list">
     {#await $rayonResponse}
@@ -145,16 +166,19 @@
           <div class="rayon-info--jumlah-kk" title="Jumlah kepala keluarga">{rayon.jumlah_kk}</div>
         </a>
       {:else}
-        <EmptyDataPlaceholder>Belum ada rayon</EmptyDataPlaceholder>
+        <EmptyDataPlaceholder
+          >{searchKeyword.length ? `Hasil pencarian kosong` : 'Belum ada rayon'}</EmptyDataPlaceholder>
       {/each}
     {/await}
   </div>
 
-  <div class="flex justify-center p-1 border-t">
-    <div class="flex ml-auto hidden-100">
-      <Pagination pageCount={totalPageCount} bind:page />
+  {#if totalPageCount > 1}
+    <div class="flex justify-center p-1 border-t">
+      <div class="flex ml-auto hidden-100">
+        <Pagination pageCount={totalPageCount} bind:page />
+      </div>
     </div>
-  </div>
+  {/if}
 
   <MenuEditDelete
     bind:this={menuEditDelete}
