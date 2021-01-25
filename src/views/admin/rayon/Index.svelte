@@ -168,8 +168,14 @@
           <div class="rayon-info--jumlah-kk" title="Jumlah kepala keluarga">{rayon.jumlah_kk}</div>
         </a>
       {:else}
-        <EmptyDataPlaceholder
-          >{searchKeyword.length ? `Hasil pencarian kosong` : 'Belum ada rayon'}</EmptyDataPlaceholder>
+        <EmptyDataPlaceholder>
+          <!--  -->
+          {searchKeyword.length
+            ? `Hasil pencarian kosong`
+            : page == 1
+            ? 'Belum ada rayon'
+            : `Halaman ${page} kosong, coba ke halaman lain`}
+        </EmptyDataPlaceholder>
       {/each}
     {/await}
   </div>
