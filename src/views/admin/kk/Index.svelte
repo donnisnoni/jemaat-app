@@ -13,8 +13,8 @@
   /** @type {DialogDeleteKK} */
   let dialogDeleteKk
 
-  const fetchURL = 'kk'
-  const fetchData = () => fetchService.fetch(fetchURL, (_KK) => (KK = _KK))
+  // const fetchURL = 'kk'
+  const fetchData = () => fetchService.fetch('kk', (_KK) => (KK = _KK))
 
   let lastIndexToActionWith = 0
   let KK
@@ -30,9 +30,7 @@
     menuEditDelete.open(event)
   }
 
-  function opendDialogDeleteKK() {
-    dialogDeleteKk.open(KK[lastIndexToActionWith])
-  }
+  const opendDialogDeleteKK = () => dialogDeleteKk.open(KK[lastIndexToActionWith])
 </script>
 
 <div class="flex flex-col flex-1 overflow-hidden bg-white card">
