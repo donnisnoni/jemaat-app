@@ -24,6 +24,13 @@
       emit('change')
     }
   }
+
+  $: {
+    if (page > pageCount) {
+      page = pageCount
+      emit('change')
+    }
+  }
 </script>
 
 <div class="pagination--item" class:disabled={page == 1} on:click={decrement}>PREV</div>
