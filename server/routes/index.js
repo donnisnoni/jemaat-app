@@ -1,3 +1,4 @@
+'use strict'
 const controllers = require('../controllers')
 const fastify = require('../fastify')
 const schemas = require('../schemas')

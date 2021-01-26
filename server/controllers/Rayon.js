@@ -1,3 +1,4 @@
+'use strict'
 const db = require('../models')
 const { literal, Op } = require('sequelize')
 const { getOffset } = require('../utils')

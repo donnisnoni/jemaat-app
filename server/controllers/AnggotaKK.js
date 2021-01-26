@@ -1,3 +1,4 @@
+'use strict'
 const db = require('../models')
 // const { fn, col } = require('sequelize')
 

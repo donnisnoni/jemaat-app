@@ -1,3 +1,4 @@
+'use strict'
 /** @type {import('fastify').FastifyInstance} */
 const fastify = require('fastify')({
   logger: true,

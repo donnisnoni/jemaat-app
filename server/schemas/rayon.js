@@ -1,3 +1,4 @@
+'use strict'
 const appConfig = require('../../app.config.json')
 
 /**

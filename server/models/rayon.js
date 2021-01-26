@@ -1,3 +1,4 @@
+'use strict'
 const { Model, Sequelize, DataTypes } = require('sequelize')
 const sequelize = require('./sequelize')
 
