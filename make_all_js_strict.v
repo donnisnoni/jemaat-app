@@ -13,12 +13,12 @@ fn main() {
 		content := os.read_file(js_file) or { panic(err) }
 		lines := content.split('\n')
 		first_line := lines[0]
-		if first_line.contains("'use strict'") || first_line.contains('"use strict"') {
+		if first_line.contains("'use strict'") || first_line.contains('"use strict"') || first_line.contains('#!') {
 			println(' [skip]')
 			continue
 		}
 		mut new_content := "'use strict'\n" + content
-		os.write_file(js_file, new_content)
+		os.write_file(js_file, new_content) or { panic(err) }
 		println(' [changed]')
 		changed_files_count++
 	}
