@@ -1,5 +1,5 @@
 'use strict'
-const appConfig = require('../../app.config.json')
+// const appConfig = require('../../app.config.json')
 
 /**
  * Get rayon schema
@@ -24,7 +24,7 @@ const createRayonSchema = {
     properties: {
       nama: {
         type: 'string',
-        minLength: appConfig.validation.namaRayon.minlength,
+        // minLength: appConfig.validation.namaRayon.minlength,
         errorMessage: {
           type: 'Nama salah',
           min: 'Nama minimal berjumlah  karakter',

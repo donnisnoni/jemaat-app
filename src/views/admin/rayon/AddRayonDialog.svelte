@@ -5,7 +5,6 @@
   import http from '/@shared/http.js'
   import axios from 'axios'
   import { createEventDispatcher, onDestroy } from 'svelte'
-  import * as appConfig from '../../../../app.config.json'
 
   const emit = createEventDispatcher()
 
@@ -64,7 +63,7 @@
         class="w-full field"
         disabled={loading}
         id="nama-rayon"
-        minlength={appConfig.validation.namaRayon.minlength}
+        minlength="3"
         required
         spellcheck="false"
         type="text"
