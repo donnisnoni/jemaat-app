@@ -20,40 +20,38 @@
   text-decoration: none;
   transition: 0.3s linear;
   background-color: #42373711;
-}
 
-.btn.icon-only {
-  min-width: 50px;
-}
+  &.icon-only {
+    min-width: 50px;
+  }
 
-.btn.btn-primary {
-  // @apply bg-gradient-to-r;
-  // @apply from-blue-400;
-  // @apply to-blue-600;
-  @apply text-white;
-  @apply bg-blue-600;
-}
+  &.btn-primary {
+    @apply text-white;
+    @apply bg-blue-600;
+    &:hover {
+      @apply bg-blue-700;
+    }
+    & .loading-icon {
+      stroke: #fff;
+    }
+  }
 
-.btn-primary:hover {
-  @apply bg-blue-700;
-}
+  &.btn-error {
+    @apply text-white;
+    @apply bg-red-600;
+    &:hover {
+      @apply bg-red-700;
+    }
+  }
 
-.btn.btn-error {
-  @apply text-white;
-  @apply bg-red-600;
-}
+  &.btn-state-loading {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
 
-.btn.btn-state-loading {
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-.btn .loading-icon {
-  stroke: #7616cf;
-}
-
-.btn-primary .loading-icon {
-  stroke: #fff;
+  &.loading-icon {
+    stroke: #7616cf;
+  }
 }
 
 *:disabled,
@@ -72,18 +70,3 @@
 //   transform: scale(1.05);
 //   box-sizing: border-box;
 // }
-
-.btn-error:hover {
-  @apply bg-red-700;
-}
-
-.btn__loader {
-  align-items: center;
-  display: flex;
-  height: 100%;
-  justify-content: center;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
-}
