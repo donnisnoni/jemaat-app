@@ -50,7 +50,6 @@
           minlength="8"
           required
           type="text"
-          use:autoSelectOnFocus
           use:blurOnEsc />
       </div>
 
@@ -66,7 +65,6 @@
             on:input={handleInputSandi}
             required
             type={revealPass ? 'text' : 'password'}
-            use:autoSelectOnFocus
             use:blurOnEsc
             value={sandi} />
           <div

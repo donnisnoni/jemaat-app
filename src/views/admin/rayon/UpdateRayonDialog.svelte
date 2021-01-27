@@ -74,8 +74,7 @@
         required
         spellcheck="false"
         type="text"
-        use:autoCapitalizeWords
-        use:autoSelectOnFocus />
+        use:autoCapitalizeWords />
     </form>
   </div>
   <div class="flex px-3 py-2 mt-auto">
