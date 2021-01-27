@@ -115,10 +115,12 @@ input::-webkit-inner-spin-button {
   min-height: 82px;
 }
 
+/* purgecss start ignore */
 .time-from-now {
   font-size: 10px;
   @apply text-gray-600;
 }
+/* purgecss end ignore */
 
 .pagination--item {
   box-sizing: border-box;
