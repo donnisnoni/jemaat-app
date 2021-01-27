@@ -1,3 +1,5 @@
+@import './colors.scss';
+
 /* purgecss start ignore */
 
 .sidenav {
@@ -27,24 +29,20 @@
 
   a {
     @apply block;
+    @apply flex;
     @apply items-center;
     @apply my-1;
     @apply rounded-md;
-    display: flex;
+    transition: background-color 0.1s linear;
 
-    &:hover {
-      @apply bg-gradient-to-l;
-      @apply from-blue-100;
-      @apply to-blue-200;
+    &:not(.active):hover {
+      background-color: $bg-semi-transparent;
     }
 
     &.active {
-      @apply bg-gradient-to-r;
-      @apply from-blue-200;
-      @apply to-blue-300;
-      /*  */
+      @apply bg-blue-500;
+      @apply text-white;
       @apply font-bold;
-      @apply shadow-sm;
     }
 
     .mdi {
