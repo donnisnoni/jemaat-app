@@ -56,13 +56,13 @@
   <!-- <hr /> -->
   <div class="flex flex-col px-3 py-2 overflow-y-auto">
     <form id="form-add-rayon" bind:this={formAddRayon} on:submit|preventDefault={createRayon}>
-      <label class="block" for="nama-rayon">Nama Rayon</label>
+      <label class="block" for="nama-rayon-1">Nama Rayon</label>
       <input
         autocomplete="off"
         bind:value={namaRayon}
         class="w-full field"
         disabled={loading}
-        id="nama-rayon"
+        id="nama-rayon-1"
         minlength="3"
         required
         spellcheck="false"
