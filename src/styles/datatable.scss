@@ -1,3 +1,5 @@
+@import './colors.scss';
+
 /* purgecss start ignore */
 
 .table-wrapper {
@@ -24,11 +26,11 @@
   thead tr,
   tbody tr {
     @apply cursor-pointer;
-    transition: all 0.1s linear;
+    transition: background-color 0.1s linear;
   }
 
   tbody tr:hover {
-    background-color: rgba(184, 184, 184, 0.205);
+    background-color: $bg-semi-transparent;
   }
 }
 

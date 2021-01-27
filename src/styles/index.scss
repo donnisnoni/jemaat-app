@@ -1,6 +1,7 @@
 @import 'tailwindcss/base.css';
 @import 'tailwindcss/components.css';
 @import 'tailwindcss/utilities.css';
+@import './colors.scss';
 
 :root *,
 button:focus {
@@ -82,6 +83,11 @@ input::-webkit-inner-spin-button {
   @apply p-3;
   @apply border-b;
   @apply cursor-pointer;
+  transition: background-color 0.1s linear;
+
+  &:hover {
+    background-color: $bg-semi-transparent;
+  }
 }
 /* purgecss end ignore */
 
