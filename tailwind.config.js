@@ -13,7 +13,7 @@ module.exports = {
   },
   purge: {
     // enable: true,
-    content: ['./src/**/*.svelte', './index.html', './node_modules/svelte-simple-datatables/src/**/*.svelte'],
+    content: ['./src/**/*.svelte', './index.html'],
     css: ['./src/styles/**/*.css'],
     extractors: [{ extractor: PurgeSvelte, extensions: ['svelte'] }],
     // safelist: [/svelte-/],
