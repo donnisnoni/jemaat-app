@@ -33,46 +33,6 @@
   }
 </script>
 
-<style global>
-  .table-wrapper {
-    @apply flex;
-    @apply flex-col;
-    @apply flex-1;
-    @apply overflow-auto;
-  }
-
-  .table-wrapper table {
-    /* @apply p-0; */
-    /* @apply m-0; */
-    /* @apply border; */
-    /* @apply border-collapse; */
-    @apply table-fixed;
-    @apply w-max;
-  }
-
-  .table-wrapper table th {
-    @apply sticky;
-    @apply top-0;
-    /* @apply left-0; */
-    @apply p-1;
-    @apply m-0;
-    @apply border;
-    /* box-sizing: border-box; */
-    border: none;
-    @apply bg-gray-100;
-  }
-
-  .table-wrapper thead tr,
-  .table-wrapper tbody tr {
-    cursor: pointer;
-    transition: all 0.1s linear;
-  }
-
-  .table-wrapper tbody tr:hover {
-    background-color: rgba(184, 184, 184, 0.205);
-  }
-</style>
-
 <div class="table-wrapper" class:hidden-force={hidden}>
   <table bind:this={table}>
     <slot />

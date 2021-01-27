@@ -1,0 +1,35 @@
+/* purgecss start ignore */
+
+.table-wrapper {
+  @apply flex;
+  @apply flex-col;
+  @apply flex-1;
+  @apply overflow-auto;
+
+  table {
+    @apply table-fixed;
+    @apply w-max;
+
+    th {
+      @apply sticky;
+      @apply top-0;
+      @apply p-1;
+      @apply m-0;
+      @apply border;
+      @apply border-none;
+      @apply bg-gray-100;
+    }
+  }
+
+  thead tr,
+  tbody tr {
+    @apply cursor-pointer;
+    transition: all 0.1s linear;
+  }
+
+  tbody tr:hover {
+    background-color: rgba(184, 184, 184, 0.205);
+  }
+}
+
+/* purgecss end ignore */
