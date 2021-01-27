@@ -23,24 +23,14 @@
   let menuEditDelete
 
   let queries = decode('?' + $querystring)
-
-  let lastIndexToActionWith = 0
-  let lastRayonActionSuccess
-  /**  Type of succes event.
-   *
-   * `1` for Create data succes;
-   * `2` for Update data success;
-   * `3` for Delete data success;
-   * @type {1|2|3}
-   */
-  let successType
-  let rayon
   let searchKeyword = (queries.s && queries.s[0]) || ''
-
-  // Paginations
-  let rayonTotalCount = 0
-  let itemsPerPage = 10
   let page = (queries.page && +queries.page[0]) || 1
+
+  let selectedIndex = 0
+  let rayon
+
+  let totalItemCount = 0
+  let itemsPerPage = 10
 
   const fetchURL = 'rayon?metadata=true&exclude_kk=true'
 
@@ -49,49 +39,19 @@
       ? `${fetchURL}&page=${page}&search=${searchKeyword}`
       : `${fetchURL}&page=${page}`
     return fetchService.fetch(_fetchURL, ({ count, rows }) => {
-      rayonTotalCount = count
+      totalItemCount = count
       rayon = rows
     })
   }
 
   let rayonResponse = fetchData()
 
-  function openAddDialog() {
-    addRayonDialog.open()
-  }
-
   function refetchData() {
     rayonResponse = fetchData()
   }
 
-  function onActionSuccess({ detail }) {
-    lastRayonActionSuccess = detail.dataRayon
-    successType = detail.successType
-    refetchData()
-  }
-
-  function showSuccessAlert() {
-    if (!lastRayonActionSuccess) return
-    let message
-    switch (successType) {
-      case 1:
-        message = `Sukses menambahkan ${lastRayonActionSuccess.nama} sebagai rayon baru kita!`
-        break
-      case 2:
-        message = `Sukses memperbaharui data rayon!`
-        break
-      case 3:
-        message = `Sukses menghapus rayon ${lastRayonActionSuccess.nama}!`
-        break
-      default:
-        break
-    }
-    alert(message)
-    lastRayonActionSuccess = null
-  }
-
   function openContextMenu(event, index) {
-    lastIndexToActionWith = index
+    selectedIndex = index
     menuEditDelete.open(event)
   }
 
@@ -102,9 +62,9 @@
     refetchData()
   }
 
-  const openUpdateRayonDialog = () => updateRayonDialog.open(rayon[lastIndexToActionWith])
+  const openUpdateRayonDialog = () => updateRayonDialog.open(rayon[selectedIndex])
 
-  const openDeleteRayonDialog = () => deleteRayonDialog.open(rayon[lastIndexToActionWith])
+  const openDeleteRayonDialog = () => deleteRayonDialog.open(rayon[selectedIndex])
 
   const updateRouteQueries = () => {
     const queriesObject = { page: [page + ''] }
@@ -112,7 +72,7 @@
     push($location + encode(queriesObject))
   }
 
-  $: totalPageCount = Math.ceil(rayonTotalCount / itemsPerPage)
+  $: totalPageCount = Math.ceil(totalItemCount / itemsPerPage)
 
   const unsubscribeQuerystring = querystring.subscribe((v) => {
     const _queries = decode('?' + v)
@@ -140,7 +100,7 @@
       <!-- svelte-ignore a11y-autofocus -->
       <input autofocus on:keypress={search} class="field" placeholder="Cari..." value={searchKeyword} />
       <Button on:click={refetchData} icon="refresh" iconOnly title="Muat ulang Data" />
-      <Button on:click={openAddDialog} icon="plus" iconOnly primary title="Tambah rayon" />
+      <Button on:click={addRayonDialog.open} icon="plus" iconOnly primary title="Tambah rayon" />
     </div>
   </div>
 
@@ -169,7 +129,6 @@
         </a>
       {:else}
         <EmptyDataPlaceholder>
-          <!--  -->
           {searchKeyword.length
             ? `Hasil pencarian kosong`
             : page == 1
@@ -193,7 +152,7 @@
     on:delete-clicked={openDeleteRayonDialog}
     on:edit-clicked={openUpdateRayonDialog} />
 
-  <AddRayonDialog bind:this={addRayonDialog} on:success={onActionSuccess} on:closed={showSuccessAlert} />
-  <UpdateRayonDialog bind:this={updateRayonDialog} on:success={onActionSuccess} on:closed={showSuccessAlert} />
-  <DeleteRayonDialog bind:this={deleteRayonDialog} on:success={onActionSuccess} on:closed={showSuccessAlert} />
+  <AddRayonDialog bind:this={addRayonDialog} on:success={refetchData} />
+  <UpdateRayonDialog bind:this={updateRayonDialog} on:success={refetchData} />
+  <DeleteRayonDialog bind:this={deleteRayonDialog} on:success={refetchData} />
 </div>
