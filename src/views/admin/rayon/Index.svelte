@@ -38,10 +38,16 @@
     const _fetchURL = searchKeyword.length
       ? `${fetchURL}&page=${page}&search=${searchKeyword}`
       : `${fetchURL}&page=${page}`
-    return fetchService.fetch(_fetchURL, ({ count, rows }) => {
-      totalItemCount = count
-      rayon = rows
-    })
+    return fetchService.fetch(
+      _fetchURL,
+      ({ count, rows }) => {
+        totalItemCount = count
+        rayon = rows
+      },
+      null,
+      null,
+      !!searchKeyword.length
+    )
   }
 
   let rayonResponse = fetchData()
