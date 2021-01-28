@@ -6,16 +6,16 @@ const cache = new Map()
 
 // let cancelTokenSrc = axios.CancelToken.source()
 
-export function fetch(url, onSuccess, onDone, onError) {
+export function fetch(url, onSuccess, onDone, onError, disableCache = false) {
   const store = writable(new Promise(() => {}))
-  if (cache.has(url)) {
+  if (!disableCache && cache.has(url)) {
     store.set(Promise.resolve(cache.get(url)))
   }
 
   http
     .get(url)
     .then(({ data }) => {
-      cache.set(url, data)
+      !disableCache && cache.set(url, data)
       store.set(Promise.resolve(data))
       typeof onSuccess == 'function' && onSuccess(data)
     })
