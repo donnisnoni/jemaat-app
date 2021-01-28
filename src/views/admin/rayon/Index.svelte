@@ -56,7 +56,8 @@
   }
 
   function search({ keyCode, target }) {
-    if (keyCode != 13) return
+    if (keyCode != 13 || target.value === searchKeyword) return
+    page = 1
     searchKeyword = target.value
     updateRouteQueries()
     refetchData()
