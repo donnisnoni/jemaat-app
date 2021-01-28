@@ -11,7 +11,18 @@ export default {
   rollupDedupe: ['svelte'],
   alias: aliases,
   optimizeDeps: {
-    exclude: ['ajv-errors', 'bcrypt', 'dotenv', 'fastify-jwt', 'fastify', 'mariadb', 'sequelize'],
+    exclude: [
+      'ajv-errors',
+      'bcrypt',
+      'dotenv',
+      'ejs',
+      'fastify-jwt',
+      'fastify',
+      'mariadb',
+      'pdf-lib',
+      'puppeteer',
+      'sequelize',
+    ],
   },
   proxy: {
     '/api': { target: 'http://localhost:8080', changeOrigin: true },

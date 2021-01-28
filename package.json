@@ -44,9 +44,12 @@
     "bcrypt": "^5.0.0",
     "deep-equal": "^2.0.5",
     "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
     "fastify": "^3.11.0",
     "fastify-jwt": "^2.3.0",
     "mariadb": "^2.5.2",
+    "pdf-lib": "^1.16.0",
+    "puppeteer": "^5.5.0",
     "query-string-lite": "^0.2.2",
     "sequelize": "^6.5.0"
   }

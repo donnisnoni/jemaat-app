@@ -2,6 +2,7 @@
 'use strict'
 
 require('dotenv').config()
+require('moment/locale/id')
 const fastify = require('./fastify')
 
 fastify.register(require('fastify-jwt'), {

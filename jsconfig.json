@@ -2,7 +2,8 @@
   "typeAcquisition": {
     "exclude": [
       "dotenv",
-      "fast-safe-stringify"
+      "fast-safe-stringify",
+      "agent-base"
     ]
   },
   "compilerOptions": {

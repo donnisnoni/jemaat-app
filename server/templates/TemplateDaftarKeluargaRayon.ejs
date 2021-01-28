@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+    <style type="text/css">
+      :root {
+        -webkit-print-color-adjust: exact;
+      }
+
+      body {
+        margin: 20px;
+        padding: 0;
+        min-width: 21cm;
+        max-width: 21cm;
+        min-height: 29.7cm;
+        max-height: 29.7cm;
+      }
+
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      table {
+        border-collapse: collapse;
+        border: none;
+        height: 100%;
+      }
+
+      body,
+      pre.normal {
+        font-family: sans-serif;
+      }
+
+      thead,
+      tbody tr {
+        border-bottom: 1px solid grey;
+      }
+
+      thead {
+        border-top: 1px solid grey;
+      }
+
+      thead td {
+        background-color: lightgray;
+        padding: 10px;
+        font-weight: bold;
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      tbody td {
+        padding: 5px;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      @page {
+        size: A4;
+        marks: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <% if (kks.length) { %>
+    <h2 class="text-center" style="margin-bottom: 25px; text-decoration: underline">
+      Daftar Kepala Keluarga Rayon <%= nama %>
+    </h2>
+    <div style="display: flex; flex-direction: column; margin: 20px 0 20px 0">
+      <div>Tanggal : <%= tanggalCetak %></div>
+      <div>Jumlah Kepala Keluarga : <%= kks.length %> Keluarga</div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <td style="min-width: 15ch; max-width: 15ch">Nama</td>
+          <td style="min-width: 15ch; max-width: 15ch">Alamat</td>
+          <td class="text-center" style="max-width: 8ch">Status Nikah</td>
+          <td class="text-center">No HP</td>
+          <td class="text-center">Kategori Rumah</td>
+          <td class="text-center" style="max-width: 8ch">Status Rumah</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let i=0; i < kks.length; i++) { %> <% var kk=kks[i] %>
+        <tr>
+          <td><%= kk.nama %></td>
+          <td><%= kk.alamat %></td>
+          <td class="text-center"><%= kk.status_nikah %></td>
+          <td><%= kk.no_hp %></td>
+          <td class="text-center"><%= kk.kategori_rumah %></td>
+          <td class="text-center"><%= kk.status_rumah %></td>
+        </tr>
+        <% } %>
+      </tbody>
+      <tfoot>
+        <tr></tr>
+      </tfoot>
+    </table>
+    <% } else { %>
+    <h1 class="text-center">Belum ada keluarga di rayon <%= nama %></h1>
+    <% } %>
+  </body>
+</html>

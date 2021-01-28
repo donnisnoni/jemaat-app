@@ -3,3 +3,5 @@ node_modules
 dist
 *.local
 *-lock*
+__temp__/a.pdf
+__temp__/index.html

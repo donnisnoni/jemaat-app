@@ -57,6 +57,12 @@ const routes = [
     preValidation: [fastify.authenticate],
     handler: controllers.Rayon.remove,
   },
+  {
+    method: 'GET',
+    url: '/api/data/rayon/:id/report',
+    // preValidation: [fastify.authenticate],
+    handler: controllers.Rayon.getReport,
+  },
 
   /* ------------------------- KEPALA KELUARGA ROUTES ------------------------- */
   {

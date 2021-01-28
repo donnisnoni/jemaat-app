@@ -2,6 +2,10 @@
 const db = require('../models')
 const { literal, Op } = require('sequelize')
 const { getOffset } = require('../utils')
+const PDF = require('../utils/pdf')
+const path = require('path')
+const moment = require('moment')
+const CONSTS = require('../shared/consts')
 
 const include = [
   [literal(`(SELECT COUNT(id_kk) FROM kepala_keluarga WHERE kepala_keluarga.id_rayon = rayon.id_rayon)`), 'jumlah_kk'],
@@ -193,10 +197,66 @@ const update = async (req, reply) => {
     .catch((err) => console.error(err) && reply.code(500).send())
 }
 
+/**
+ * Get report rayon controller
+ * @type {import("fastify").RouteHandler}
+ */
+async function getReport(req, reply) {
+  const id = +req.params.id
+  if (isNaN(id) || id < 1) {
+    return reply.code(400).send()
+  }
+
+  const { keyword } = req.query
+  const validKeywords = [
+    'list_kk',
+    'list_kaum_bapak',
+    'list_kaum_ibu',
+    'list_lansia',
+    'list_anak_par',
+    'list_kk_and_anggota',
+  ]
+
+  if (!keyword || !validKeywords.includes(keyword)) {
+    return reply.code(400).send({ message: 'Parameter `keyword` tidak ada atau tidak valid' })
+  }
+
+  const rayon = await db.rayon.findByPk(id)
+  if (!rayon) {
+    reply.code(400).send({ message: `Tidak dapat menemukan rayon dengan id ${id}` })
+  }
+
+  if (keyword === validKeywords[0]) {
+    let kks = await db.kk.findAll({
+      where: { id_rayon: id },
+      raw: true,
+    })
+
+    for (let index = 0; index <= 3; index++) {
+      kks = kks.concat(kks)
+    }
+
+    const date = moment().format(CONSTS.MOMENT_FORMAT)
+
+    const title = `Laporan Daftar Kepala Keluarga Rayon ${rayon.nama} | ${date}`
+    const pdf = await PDF.createPDF({
+      template: path.resolve(__dirname, '..', 'templates/TemplateDaftarKeluargaRayon.ejs'),
+      title,
+      data: { kks, nama: rayon.nama, tanggalCetak: date },
+    })
+
+    reply
+      .type('application/pdf')
+      .headers({ 'Content-Disposition': `filename="${title}.pdf` })
+      .send(pdf)
+  }
+}
+
 module.exports = {
   create,
   get,
   getByID,
-  update,
+  getReport,
   remove,
+  update,
 }

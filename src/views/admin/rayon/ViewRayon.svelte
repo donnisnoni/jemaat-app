@@ -2,13 +2,18 @@
   import { fetch } from '/@store/fetch.service.js'
   import LoadingPlaceholder from '/@components/LoadingPlaceholder.svelte'
   import EmptyDataPlaceholder from '/@components/EmptyDataPlaceholder.svelte'
+  import Button from '/@components/Button.svelte'
+  import Dialog from '/@components/Dialog.svelte'
   import Datatable from '/@components/Datatable.svelte'
   import * as router from 'svelte-spa-router'
+  import { openNewWindow } from '/@shared/utils'
 
   export let params = { id: 0 }
 
   /** @type {Datatable} */
   let datatable
+  /** @type {Dialog} */
+  let dialogPrint
 
   let rayon = { nama: '' }
 
@@ -16,9 +21,16 @@
 </script>
 
 <div class="flex flex-col flex-1 overflow-hidden bg-white card">
-  <div class="p-3 border-b">
-    <h3 class="text-lg">Rayon {rayon.nama}</h3>
+  <div class="flex flex-col flex-wrap p-3 bg-white border-b border-gray-200 md:flex-row">
+    <div class="mb-2 md:place-self-center md:mb-0">
+      <h3 class="text-lg">Rayon {rayon.nama}</h3>
+    </div>
+    <div class="w-full border border-t md:hidden" />
+    <div class="flex gap-1 mt-2 ml-auto md:mt-0">
+      <Button icon="printer" iconOnly on:click={dialogPrint.open} title="Cetak Laporan" />
+    </div>
   </div>
+
   {#await $rayonResponse}
     <LoadingPlaceholder />
   {:then rayon}
@@ -88,4 +100,19 @@
       </tbody>
     </Datatable>
   {/await}
+
+  <Dialog bind:this={dialogPrint} style="max-width: 900px" visible class="simple-dialog">
+    <h3 class="px-3 py-2 text-lg">Cetak Laporan Rayon {rayon.nama}</h3>
+    <hr />
+    <div class="flex flex-wrap gap-1 p-2">
+      <Button on:click={openNewWindow(`/api/data/rayon/${rayon.id_rayon}/report?keyword=list_kk`)}>
+        Data Kepala Keluarga
+      </Button>
+      <Button>Data Jemaat</Button>
+      <Button>Data PAR</Button>
+      <Button>Data Lansia</Button>
+      <Button>Data Kaum Bapak</Button>
+      <Button>Data Kaum Ibu</Button>
+    </div>
+  </Dialog>
 </div>
