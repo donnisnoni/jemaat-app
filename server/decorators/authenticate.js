@@ -10,8 +10,8 @@ async function authenticate(request, reply) {
   try {
     decodedJWT = await request.jwtVerify()
   } catch (err) {
-    console.error(error)
-    return reply.code(500).send()
+    console.error(err)
+    return reply.code(401).send()
   }
   // console.log(decodedJWT)
   const { username, super_admin } = decodedJWT
