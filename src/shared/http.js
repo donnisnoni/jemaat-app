@@ -11,9 +11,19 @@ axiosInstance.interceptors.request.use((req) => {
   return req
 })
 
-axiosInstance.interceptors.response.use((resp) => {
-  resp.status === 401 && replace('/')
-  return resp
-})
+axiosInstance.interceptors.response.use(
+  (resp) => {
+    return resp
+  },
+  (error) => {
+    console.error(error)
+    if (401 === error.response.status) {
+      localStorage['token'] = ''
+      replace('/')
+    } else {
+      return Promise.reject(error)
+    }
+  }
+)
 
 export default axiosInstance
