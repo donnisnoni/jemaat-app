@@ -4,7 +4,7 @@ const fs = require('fs')
 const { Buffer } = require('buffer')
 const { PDFDocument } = require('pdf-lib')
 
-async function createPDF({ template, data, output, title = 'Laporan' }) {
+async function createPDF({ template, data, output, title = 'Laporan', format = 'A4' }) {
   const content = ejs.render(fs.readFileSync(template).toString(), data)
 
   const browser = await puppeteer.launch({
@@ -20,7 +20,7 @@ async function createPDF({ template, data, output, title = 'Laporan' }) {
   const page = await browser.newPage()
   await page.goto('data:text/html,' + content, { waitUntil: 'networkidle0' })
   let pdf = await page.pdf({
-    format: 'A4',
+    format,
     path: output || null,
     margin: {
       top: '20px',
