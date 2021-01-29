@@ -18,10 +18,7 @@
         localStorage['token'] = data.token
         push('/admin').then(() => alert('Berhasil login! Selamat data'))
       })
-      .catch((err) => {
-        alert('Login gagal! Username atau sandi salah!')
-        console.error(err)
-      })
+      .catch(() => alert('Login gagal! Username atau sandi salah!'))
   }
   function handleInputSandi(event) {
     sandi = event.target.value

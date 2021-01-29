@@ -35,9 +35,6 @@
         emit('success', { successType: 3 })
         dialog.close(true)
       })
-      .catch((err) => {
-        console.error(err)
-      })
       .finally(() => {
         loading = false
       })

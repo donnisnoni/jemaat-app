@@ -32,9 +32,6 @@
         emit('success', { dataRayon, successType: 1 })
         dialog.close(true)
       })
-      .catch((err) => {
-        console.error(err)
-      })
       .finally(() => {
         loading = false
       })
