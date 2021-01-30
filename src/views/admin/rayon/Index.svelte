@@ -88,11 +88,7 @@
       if (_queries.page && _queries.page[0] && +_queries.page[0] != page) {
         page = _queries.page
       }
-      if (_queries.s && _queries.s[0]) {
-        searchKeyword = _queries.s[0]
-      } else {
-        searchKeyword = ''
-      }
+      searchKeyword = _queries.s && _queries.s[0] ? _queries.s[0] : ''
       !init && refetchData()
     })
     init = false
