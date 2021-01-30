@@ -1,25 +1,30 @@
 <script>
-  import { autoSelectOnFocus, blurOnEsc } from '/@actions/inputDirectives.js'
+  import { blurOnEsc } from '/@actions/inputDirectives.js'
+  import Button from '/@components/Button.svelte'
   import axios from 'axios'
-  import { push, replace } from 'svelte-spa-router'
+  import { replace } from 'svelte-spa-router'
 
   if (localStorage['token']) replace('/admin')
 
-  let refs = { fieldSandi: null },
+  let fieldSandi,
     revealPass = false,
     username = 'donnisnoni',
     sandi = 'don@r34lm4dr1d',
-    super_admin = false
+    super_admin = false,
+    loading = false
 
   function login() {
+    loading = true
     axios
       .post('/api/login', { username, sandi, super_admin })
       .then(({ data }) => {
         localStorage['token'] = data.token
-        push('/admin').then(() => alert('Berhasil login! Selamat data'))
+        replace('/admin')
       })
-      .catch(() => alert('Login gagal! Username atau sandi salah!'))
+      .catch(() => alert('Login gagal, Username atau sandi salah!'))
+      .finally(() => (loading = false))
   }
+
   function handleInputSandi(event) {
     sandi = event.target.value
   }
@@ -55,7 +60,7 @@
         <div class="relative flex items-center">
           <input
             autocomplete="current-password"
-            bind:this={refs.fieldSandi}
+            bind:this={fieldSandi}
             class="w-full field"
             id="sandi"
             minlength="8"
@@ -69,8 +74,6 @@
             class="absolute top-0 right-0 flex h-full px-2"
             on:click={() => (revealPass = !revealPass)}
             role="button">
-            <!-- on:mousedown={() => (revealPass = true)} -->
-            <!-- on:mouseup={() => (revealPass = false)} -->
             <i class="mdi {revealPass ? 'mdi-eye-off-outline' : 'mdi-eye-outline'} my-auto mdi-2xl" />
           </div>
         </div>
@@ -88,7 +91,9 @@
 
       <hr class="my-3" />
 
-      <div class="flex flex-col"><button aria-label="Login" class="btn btn-primary" type="submit">LOGIN</button></div>
+      <div class="flex flex-col">
+        <Button {loading} primary type="submit">LOGIN</Button>
+      </div>
     </form>
   </div>
 </div>
