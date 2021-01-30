@@ -1,6 +1,6 @@
 <script>
   import * as fetchService from '/@store/fetch.service.js'
-  import { onDestroy } from 'svelte'
+  import { onMount } from 'svelte'
   import AddRayonDialog from './AddRayonDialog.svelte'
   import UpdateRayonDialog from './UpdateRayonDialog.svelte'
   import EmptyDataPlaceholder from '/@components/EmptyDataPlaceholder.svelte'
@@ -81,20 +81,23 @@
 
   $: totalPageCount = Math.ceil(totalItemCount / itemsPerPage)
 
-  const unsubscribeQuerystring = querystring.subscribe((v) => {
-    const _queries = decode('?' + v)
-    if (_queries.page && _queries.page[0] && +_queries.page[0] != page) {
-      page = _queries.page
-    }
-    if (_queries.s && _queries.s[0]) {
-      searchKeyword = _queries.s[0]
-    } else {
-      searchKeyword = ''
-    }
-    refetchData()
+  onMount(() => {
+    let init = 1
+    const unsubscribeQuerystring = querystring.subscribe((v) => {
+      const _queries = decode('?' + v)
+      if (_queries.page && _queries.page[0] && +_queries.page[0] != page) {
+        page = _queries.page
+      }
+      if (_queries.s && _queries.s[0]) {
+        searchKeyword = _queries.s[0]
+      } else {
+        searchKeyword = ''
+      }
+      !init && refetchData()
+    })
+    init = false
+    return unsubscribeQuerystring
   })
-
-  onDestroy(unsubscribeQuerystring)
 </script>
 
 <div class="flex flex-col flex-1 overflow-hidden bg-white card">
