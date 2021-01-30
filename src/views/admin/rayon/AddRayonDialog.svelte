@@ -9,7 +9,7 @@
   const emit = createEventDispatcher()
 
   let dialog,
-    namaRayon = '',
+    nama = '',
     loading = false,
     cancelTokenSrc = axios.CancelToken.source()
 
@@ -24,31 +24,20 @@
     loading = true
     if (!formAddRayon.checkValidity()) return
     cancelTokenSrc = axios.CancelToken.source()
-    const dataRayon = { nama: namaRayon }
     http
-      .post('rayon', dataRayon, { cancelToken: cancelTokenSrc.token })
-      .then(async (/* resp */) => {
-        resetData()
-        emit('success', { dataRayon, successType: 1 })
+      .post('rayon', { nama }, { cancelToken: cancelTokenSrc.token })
+      .then(() => {
+        nama = ''
+        emit('success')
         dialog.close(true)
       })
-      .finally(() => {
-        loading = false
-      })
+      .finally(() => (loading = false))
   }
 
-  function resetData() {
-    namaRayon = ''
-  }
-
-  onDestroy(() => {
-    cancelTokenSrc.cancel('Component is destroyed')
-  })
-
-  $: persistent = namaRayon.length
+  onDestroy(cancelTokenSrc.cancel)
 </script>
 
-<Dialog bind:this={dialog} class="simple-dialog" on:closed {persistent}>
+<Dialog bind:this={dialog} class="simple-dialog" on:closed persistent={nama.length}>
   <h3 class="px-3 py-2 text-lg">Tambah Rayon</h3>
   <!-- <hr /> -->
   <div class="flex flex-col px-3 py-2 overflow-y-auto">
@@ -56,27 +45,26 @@
       <label class="block" for="nama-rayon-1">Nama Rayon</label>
       <input
         autocomplete="off"
-        bind:value={namaRayon}
+        bind:value={nama}
         class="w-full field"
         disabled={loading}
         id="nama-rayon-1"
         minlength="3"
         required
         spellcheck="false"
-        type="text"
         use:autoCapitalizeWords />
     </form>
   </div>
   <div class="flex px-3 py-2 mt-auto">
     <Button
       class="ml-auto btn btn-primary btn-scale"
-      disabled={loading}
       form="form-add-rayon"
-      icon={loading || 'plus'}
+      icon="plus"
+      {loading}
       primary
       title="Tambah Rayon"
       type="submit">
-      {!loading ? 'Tambah' : 'menambahkan...'}
+      Tambah
     </Button>
   </div>
 </Dialog>
