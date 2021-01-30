@@ -32,7 +32,10 @@
       @apply bg-blue-700;
     }
     & .loading-icon {
+      padding: 5px;
       stroke: #fff;
+      width: 100%;
+      height: 100%;
     }
   }
 
