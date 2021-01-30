@@ -44,7 +44,7 @@
   }
 </script>
 
-<Dialog bind:this={dialog} class="simple-dialog" on:closed persistent>
+<Dialog bind:this={dialog} class="simple-dialog" on:closed persistent={loading}>
   <h3 class="px-3 py-2 text-lg">Hapus Rayon</h3>
   <div class="px-3 py-2">Apakah kamu yakin akan menghapus rayon {rayon.nama}?</div>
   {#if rayon.jumlah_kk > 0}

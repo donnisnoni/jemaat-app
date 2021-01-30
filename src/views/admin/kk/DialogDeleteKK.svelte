@@ -44,7 +44,7 @@
   }
 </script>
 
-<Dialog bind:this={dialog} class="simple-dialog" on:closed persistent>
+<Dialog bind:this={dialog} class="simple-dialog" on:closed persistent={loading}>
   <h3 class="px-3 py-2 text-lg">Hapus Keluarga?</h3>
   <div class="px-3 py-2">Apakah kamu yakin akan menghapus keluarga {KK.nama}?</div>
   {#if KK.jumlah_anggota_kk > 0}
