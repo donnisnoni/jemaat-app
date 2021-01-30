@@ -147,7 +147,7 @@ async function remove(req, reply) {
     return reply.send({ message: `Tidak dapat menemukan keluarga dengan id ${id}` })
   }
   await targetKK.destroy({ force: true })
-  return reply.send({ message: `Sukses menghapus kelaurga dengan id ${id}` })
+  return reply.send({ message: `Sukses menghapus keluarga dengan id ${id}` })
 }
 
 module.exports = {
