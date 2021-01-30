@@ -57,7 +57,7 @@
   </div>
   <div class="flex px-3 py-2 mt-auto">
     <Button
-      class="ml-auto btn btn-primary btn-scale"
+      class="ml-auto btn btn-primary "
       form="form-add-rayon"
       icon="plus"
       {loading}

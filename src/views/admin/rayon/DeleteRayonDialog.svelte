@@ -59,7 +59,7 @@
   <div class="flex flex-col px-3 py-2 overflow-y-auto" />
   <div class="flex flex-row-reverse px-3 py-2 mt-auto">
     <Button
-      class="ml-auto text-white btn btn-scale"
+      class="ml-auto text-white btn"
       style="background-color:#ff5959"
       icon="delete"
       {loading}

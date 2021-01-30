@@ -67,8 +67,11 @@
     </form>
   </div>
   <div class="flex px-3 py-2 mt-auto">
+    <Button on:click={cancel} icon="cancel">
+      {loading || nama !== namaBefore ? 'batalkan' : 'tutup'}
+    </Button>
     <Button
-      class="flex-row-reverse ml-auto btn btn-primary btn-scale"
+      class="ml-auto btn btn-primary"
       disabled={nama === namaBefore}
       form="form-update-rayon"
       icon="content-save-outline"
@@ -78,6 +81,5 @@
       type="submit">
       Simpan
     </Button>
-    <Button on:click={cancel} icon="cancel">{loading || nama !== namaBefore ? 'batalkan' : 'tutup'}</Button>
   </div>
 </Dialog>

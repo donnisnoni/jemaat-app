@@ -60,7 +60,7 @@
   <div class="flex px-3 py-2 mt-auto">
     <Button on:click={cancel} icon="cancel">{loading ? 'batalkan' : 'tidak'}</Button>
     <Button
-      class="ml-auto text-white btn btn-scale"
+      class="ml-auto text-white btn"
       style="background-color:#ff5959"
       disabled={loading}
       icon={loading || 'delete'}

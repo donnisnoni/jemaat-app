@@ -26,7 +26,7 @@
   <div class="flex px-3 py-2 mt-auto">
     <Button on:click={() => dialog.close(true)} icon="cancel">Tidak</Button>
     <Button
-      class="ml-auto text-white bg-red-500 btn btn-scale"
+      class="ml-auto text-white bg-red-500 btn"
       style="background-color:#ff5959"
       icon="delete"
       on:click={emitYes}
