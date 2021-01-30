@@ -20,18 +20,18 @@
   }
 </script>
 
-<Dialog bind:this={dialog} class="simple-dialog" on:closed persistent>
+<Dialog bind:this={dialog} class="simple-dialog" on:closed>
   <h3 class="px-3 py-2 text-lg">Hapus anggota keluarga?</h3>
   <div class="px-3 py-2">Apakah kamu yakin akan menghapus {nama} dari anggota keluarga?</div>
-  <div class="flex px-3 py-2 mt-auto">
-    <Button on:click={() => dialog.close(true)} icon="cancel">Tidak</Button>
+  <div class="flex flex-row-reverse px-3 py-2 mt-auto">
     <Button
       class="ml-auto text-white bg-red-500 btn"
       style="background-color:#ff5959"
       icon="delete"
       on:click={emitYes}
-      title="Hapus Anggota">
+      title="Hapus Anggota Keluarga">
       Hapus
     </Button>
+    <Button on:click={() => dialog.close(true)} icon="cancel">Tidak</Button>
   </div>
 </Dialog>
