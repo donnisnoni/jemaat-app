@@ -25,6 +25,10 @@
     min-width: 50px;
   }
 
+  & .loading-icon {
+    stroke: #fff;
+  }
+
   &.btn-primary {
     @apply text-white;
     @apply bg-blue-600;
@@ -33,7 +37,6 @@
     }
     & .loading-icon {
       padding: 5px;
-      stroke: #fff;
       width: 100%;
       max-width: 40px;
       height: 100%;
