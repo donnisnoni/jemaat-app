@@ -57,16 +57,16 @@
     </div>
   {/if}
   <div class="flex flex-col px-3 py-2 overflow-y-auto" />
-  <div class="flex px-3 py-2 mt-auto">
-    <Button on:click={cancel} icon="cancel">{loading ? 'batalkan' : 'tidak'}</Button>
+  <div class="flex flex-row-reverse px-3 py-2 mt-auto">
     <Button
       class="ml-auto text-white btn"
       style="background-color:#ff5959"
-      disabled={loading}
-      icon={loading || 'delete'}
+      icon="delete"
+      {loading}
       on:click={doDelete}
       title="Hapus Keluarga">
-      {!loading ? 'Hapus' : 'menghapus...'}
+      Hapus
     </Button>
+    <Button on:click={cancel} icon="cancel">{loading ? 'batalkan' : 'tidak'}</Button>
   </div>
 </Dialog>
