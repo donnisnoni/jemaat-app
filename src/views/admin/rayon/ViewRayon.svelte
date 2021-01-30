@@ -108,7 +108,8 @@
       <Button on:click={openNewWindow(`/api/data/rayon/${rayon.id_rayon}/report?keyword=list_kk`)}>
         Data Kepala Keluarga
       </Button>
-      <Button>Data Jemaat</Button>
+      <Button on:click={openNewWindow(`/api/data/rayon/${rayon.id_rayon}/report?keyword=list_jemaat`)}
+        >Data Jemaat</Button>
       <Button>Data PAR</Button>
       <Button>Data Lansia</Button>
       <Button>Data Kaum Bapak</Button>
