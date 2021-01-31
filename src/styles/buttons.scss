@@ -9,6 +9,7 @@
   @apply justify-center;
   @apply relative;
   @apply rounded-md;
+  @apply overflow-hidden;
   @apply select-none;
   @apply uppercase;
   @apply whitespace-nowrap;
@@ -27,6 +28,8 @@
 
   & .loading-icon {
     stroke: #fff;
+    padding: 5px;
+    max-width: 40px;
   }
 
   &.btn-primary {
@@ -36,9 +39,7 @@
       @apply bg-blue-700;
     }
     & .loading-icon {
-      padding: 5px;
       width: 100%;
-      max-width: 40px;
       height: 100%;
     }
   }
