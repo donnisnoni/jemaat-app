@@ -106,14 +106,15 @@
     <hr />
     <div class="flex flex-wrap gap-1 p-2">
       <Button on:click={openNewWindow(`/api/data/rayon/${rayon.id_rayon}/report?keyword=list_kk`)}>
-        Data Kepala Keluarga
+        Daftar Kepala Keluarga
       </Button>
-      <Button on:click={openNewWindow(`/api/data/rayon/${rayon.id_rayon}/report?keyword=list_jemaat`)}
-        >Data Jemaat</Button>
-      <Button>Data PAR</Button>
-      <Button>Data Lansia</Button>
-      <Button>Data Kaum Bapak</Button>
-      <Button>Data Kaum Ibu</Button>
+      <Button on:click={openNewWindow(`/api/data/rayon/${rayon.id_rayon}/report?keyword=list_jemaat`)}>
+        Daftar Jemaat
+      </Button>
+      <Button>Daftar Anak PAR</Button>
+      <Button>Daftar Lansia</Button>
+      <Button>Daftar Kaum Bapak</Button>
+      <Button>Daftar Kaum Ibu</Button>
     </div>
   </Dialog>
 </div>
