@@ -101,7 +101,7 @@
     </Datatable>
   {/await}
 
-  <Dialog bind:this={dialogPrint} style="max-width: 900px" visible class="simple-dialog">
+  <Dialog bind:this={dialogPrint} style="max-width: 900px" class="simple-dialog">
     <h3 class="px-3 py-2 text-lg">Cetak Laporan Rayon {rayon.nama}</h3>
     <hr />
     <div class="flex flex-wrap gap-1 p-2">
