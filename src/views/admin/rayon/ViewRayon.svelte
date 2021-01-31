@@ -20,7 +20,7 @@
   const rayonResponse = fetch(`rayon/${params.id}?with_kk=true`, (_rayon) => (rayon = _rayon))
 </script>
 
-<div class="flex flex-col flex-1 overflow-hidden bg-white card">
+<div class="flex flex-col flex-1 bg-white card">
   <div class="flex flex-col flex-wrap p-3 bg-white border-b border-gray-200 md:flex-row">
     <div class="mb-2 md:place-self-center md:mb-0">
       <h3 class="text-lg">Rayon {rayon.nama}</h3>
@@ -34,41 +34,50 @@
   {#await $rayonResponse}
     <LoadingPlaceholder />
   {:then rayon}
-    <div class="flex flex-col p-3 overflow-y-auto border-b" style="max-height:400px">
-      <table class="table-fixed" style="max-width: 300px">
-        <tr>
-          <td class="max-w-max">Jumlah Keluarga</td>
-          <td>:</td>
-          <td>{rayon.jumlah_kk}</td>
-        </tr>
-        <tr>
-          <td class="max-w-max">Jumlah Jemaat</td>
-          <td>:</td>
-          <td>{rayon.jumlah_jemaat} | L: {rayon.jumlah_jemaat_l} | P: {rayon.jumlah_jemaat_p}</td>
-        </tr>
-        <tr>
-          <td class="max-w-max">Jumlah Jemaat yang sudah sidi</td>
-          <td>:</td>
-          <td>
-            {rayon.jumlah_jemaat_sudah_sidi}
-            | L:
-            {rayon.jumlah_jemaat_sudah_sidi_l}
-            | P:
-            {rayon.jumlah_jemaat_sudah_sidi_p}
-          </td>
-        </tr>
-        <tr>
-          <td class="max-w-max">Jumlah Jemaat yang belum sidi</td>
-          <td>:</td>
-          <td>
-            {rayon.jumlah_jemaat_belum_sidi}
-            | L:
-            {rayon.jumlah_jemaat_belum_sidi_l}
-            | P:
-            {rayon.jumlah_jemaat_belum_sidi_p}
-          </td>
-        </tr>
-      </table>
+    <div class="flex flex-col flex-wrap gap-2 p-3 md:flex-row">
+      <!-- TOTAL KK -->
+      <div class="flex items-center justify-around p-3 border rounded-md bg-gray-50" style="min-width: 200px">
+        <img draggable="false" width="70px" src="/img/family.svg" alt="" />
+        <div class="mx-auto text-3xl">
+          <div class="flex flex-col items-center mx-auto">
+            <div class="text-sm">Keluarga</div>
+            {rayon.jumlah_kk}
+          </div>
+        </div>
+      </div>
+      <!-- TOTAL JEMAAT -->
+      <div class="flex items-center justify-around p-3 border rounded-md bg-gray-50" style="min-width: 200px">
+        <img draggable="false" width="82px" src="/img/peoples.svg" alt="" />
+        <div class="mx-auto text-3xl">
+          <div class="flex flex-col items-center mx-auto">
+            <div class="text-sm">Jemaat</div>
+            {rayon.jumlah_jemaat}
+            <div class="text-xs">Sudah Sidi: {rayon.jumlah_jemaat_sudah_sidi}</div>
+          </div>
+        </div>
+      </div>
+      <!-- TOTAL JEMAAT L -->
+      <div class="flex items-center justify-around p-3 border rounded-md bg-gray-50" style="min-width: 200px">
+        <img draggable="false" width="70px" src="/img/man.svg" alt="" />
+        <div class="mx-auto text-3xl">
+          <div class="flex flex-col items-center mx-auto">
+            <div class="text-sm">Jemaat Laki-laki</div>
+            {rayon.jumlah_jemaat_l}
+            <div class="text-xs">Sudah Sidi: {rayon.jumlah_jemaat_sudah_sidi_l}</div>
+          </div>
+        </div>
+      </div>
+      <!-- TOTAL JEMAAT P -->
+      <div class="flex items-center justify-around p-3 border rounded-md bg-gray-50" style="min-width: 200px">
+        <img draggable="false" width="72px" src="/img/woman.svg" alt="" />
+        <div class="mx-auto text-3xl">
+          <div class="flex flex-col items-center mx-auto">
+            <div class="text-sm">Jemaat Perempuan</div>
+            {rayon.jumlah_jemaat_p}
+            <div class="text-xs">Sudah Sidi: {rayon.jumlah_jemaat_sudah_sidi_p}</div>
+          </div>
+        </div>
+      </div>
     </div>
     {#if !rayon.jumlah_kk}
       <EmptyDataPlaceholder>Belum ada keluarga</EmptyDataPlaceholder>
