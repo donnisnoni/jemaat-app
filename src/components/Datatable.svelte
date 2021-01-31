@@ -1,8 +1,6 @@
 <script>
   import { tick, onMount } from 'svelte'
-
-  // export let columns = []
-  // export let data = []
+  import '/@styles/datatable.scss'
 
   export let hidden = false
 

@@ -12,7 +12,6 @@ import './styles/mdi.scss'
 import './styles/sidenav.scss'
 // import './styles/table.scss';
 import './styles/animations.scss'
-import './styles/datatable.scss'
 
 const app = new App({
   target: document.body,
