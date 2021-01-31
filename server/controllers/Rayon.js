@@ -65,6 +65,8 @@ const include = [
   ],
 ]
 
+const respNotFound = (id) => ({ message: `Tidak dapat menemukan rayon dengan id ${id}` })
+
 /**
  * Rayon get controller
  * @type {import("fastify").RouteHandler}
@@ -107,6 +109,7 @@ async function get(req, reply) {
  */
 async function getByID(req, reply) {
   const id = +req.params.id
+
   if (isNaN(id) || id < 1) {
     return reply.code(400).send({ message: 'id harus berupa angka' })
   }
@@ -119,7 +122,7 @@ async function getByID(req, reply) {
     },
   })
   if (!foundedRayon) {
-    reply.code(400).send({ message: `Tidak dapat menemukan rayon dengan id ${id}` })
+    reply.code(400).send(respNotFound(id))
   }
   reply.send(foundedRayon)
 }
@@ -128,67 +131,63 @@ async function getByID(req, reply) {
  * Create rayon controller
  * @type {import("fastify").RouteHandler}
  */
-const create = async (req, reply) => {
-  // TODO: Validation
-  // console.log(req.body);
-  if (req.validationError) {
-    reply.send('ok').status(200)
+async function create(req, reply) {
+  // if (req.validationError) {
+  //   reply.send('ok').status(200)
+  // }
+
+  const createRayon = await db.rayon.create({ nama: req.body.nama })
+  const save = await createRayon.save()
+
+  if (!save) {
+    return reply.code(500).send({ message: `Gagal menambahkan rayon baru` })
   }
-  db.rayon
-    .create({ nama: req.body.nama })
-    .then((rayon) => {
-      rayon.save()
-      reply.send(rayon)
-    })
-    .catch((err) => {
-      console.error(err)
-    })
+
+  reply.send({ message: 'Sukses menambahkan rayon baru' })
 }
 
 /**
  * Delete rayon controller
  * @type {import("fastify").RouteHandler}
  */
-const remove = async (req, reply) => {
+async function remove(req, reply) {
   const id = +req.params.id
 
   if (isNaN(id) || id < 1) {
-    return reply.code(400).send({ error: true, errors: [], message: 'Bad request' })
+    return reply.code(400).send()
   }
-  db.rayon
-    .findByPk(id)
-    .then((foundedRayon) => {
-      if (foundedRayon) {
-        foundedRayon
-          .destroy()
-          .then(() => reply.send({ error: false, message: 'Berhasil menghapus data' }))
-          .catch((err) => console.error(err) && reply.code(500).send())
-      } else {
-        reply.code(500).send()
-      }
-    })
-    .catch((err) => console.error(err) && reply.code(500).send())
+
+  const rayon = await db.rayon.findByPk(id)
+  if (!rayon) {
+    return reply.code(400).send(respNotFound(id))
+  }
+
+  await rayon.destroy()
+  reply.send({ message: `Berhasil menghapus rayon dengan id ${id}` })
 }
 
 /**
  * Update rayon controller
  * @type {import("fastify").RouteHandler}
  */
-const update = async (req, reply) => {
+async function update(req, reply) {
   const id = +req.params.id
 
   if (isNaN(id) || id < 1) {
-    return reply.code(400).send({ error: true, errors: [], message: 'Bad request' })
+    return reply.code(400).send()
   }
 
-  db.rayon
-    .findByPk(id)
-    .then((foundedRayon) => {
-      foundedRayon.update({ nama: req.body.nama }).then((editedRayon) => {
-        reply.send(editedRayon)
-      })
-    })
-    .catch((err) => console.error(err) && reply.code(500).send())
+  const rayon = await db.rayon.findByPk(id)
+  if (!rayon) {
+    return reply.code(400).send(respNotFound(id))
+  }
+
+  const updated = await rayon.update({ nama: req.body.nama })
+  if (!updated) {
+    return reply.code(500).send({ message: `Gagal memperbaharui rayon dengan id ${id}` })
+  }
+
+  reply.send({ message: `Sukses memperbaharui rayon dengan id ${id}` })
 }
 
 /**
@@ -197,6 +196,7 @@ const update = async (req, reply) => {
  */
 async function getReport(req, reply) {
   const id = +req.params.id
+
   if (isNaN(id) || id < 1) {
     return reply.code(400).send()
   }
@@ -210,7 +210,7 @@ async function getReport(req, reply) {
 
   const rayon = await db.rayon.findByPk(id)
   if (!rayon) {
-    reply.code(400).send({ message: `Tidak dapat menemukan rayon dengan id ${id}` })
+    reply.code(400).send(respNotFound(id))
   }
 
   const date = utils.getDate()
