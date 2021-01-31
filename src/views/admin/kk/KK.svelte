@@ -33,8 +33,7 @@
   let isUpdate = false
   let loading = {
     load: false,
-    update: false,
-    create: false,
+    updateOrCreate: false,
   }
   let indexToActionWith = 0
 
@@ -81,18 +80,12 @@
         router.push('/admin/kk')
       }
     }
+    const done = () => (loading.updateOrCreate = false)
+    loading.updateOrCreate = true
     if (!isUpdate) {
-      loading.create = true
-      http
-        .post('kk', KK)
-        .then(OK)
-        .finally(() => (loading.create = false))
+      http.post('kk', KK).then(OK).finally(done)
     } else {
-      loading.update = true
-      http
-        .put(`kk/${KK.id_kk}`, KK)
-        .then(OK)
-        .finally(() => (loading.update = false))
+      http.put(`kk/${KK.id_kk}`, KK).then(OK).finally(done)
     }
   }
 
@@ -136,7 +129,13 @@
         iconOnly
         on:click={dialogAnggotaKk.open}
         title="Tambah Anggota Keluarga" />
-      <Button form="form-kepala-keluarga" icon="content-save-outline" iconOnly primary title="Simpan" />
+      <Button
+        form="form-kepala-keluarga"
+        icon={isUpdate ? 'content-save-outline' : 'plus'}
+        loading={loading.updateOrCreate}
+        iconOnly
+        primary
+        title={isUpdate ? 'Simpan' : 'Tambah Keluarga'} />
     </div>
   </div>
 
