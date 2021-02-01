@@ -120,7 +120,9 @@
       <Button on:click={openNewWindow(`/api/data/rayon/${rayon.id_rayon}/report?keyword=list_jemaat`)}>
         Daftar Jemaat
       </Button>
-      <Button>Daftar Anak PAR</Button>
+      <Button on:click={openNewWindow(`/api/data/rayon/${rayon.id_rayon}/report?keyword=list_anak_par`)}>
+        Daftar Anak PAR
+      </Button>
       <Button>Daftar Lansia</Button>
       <Button>Daftar Kaum Bapak</Button>
       <Button>Daftar Kaum Ibu</Button>

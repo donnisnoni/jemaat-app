@@ -8,60 +8,128 @@ const moment = require('moment')
 const utils = require('../utils')
 
 const include = [
-  [literal(`(SELECT COUNT(id_kk) FROM kepala_keluarga WHERE kepala_keluarga.id_rayon = rayon.id_rayon)`), 'jumlah_kk'],
   [
     literal(
-      `(SELECT COUNT(id_anggota_kk) FROM anggota_kk LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon)`
+      `(SELECT 
+          COUNT(id_kk)
+        FROM
+          kepala_keluarga
+        WHERE kepala_keluarga.id_rayon = rayon.id_rayon)`
+    ),
+    'jumlah_kk',
+  ],
+  [
+    literal(
+      `(SELECT
+          COUNT(id_anggota_kk)
+        FROM
+          anggota_kk
+        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon)`
     ),
     'jumlah_jemaat',
   ],
   [
     literal(
-      `(SELECT COUNT(id_anggota_kk) FROM anggota_kk LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.jk = 'L')`
+      `(SELECT
+          COUNT(id_anggota_kk)
+        FROM
+          anggota_kk
+        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.jk = 'L')`
     ),
     'jumlah_jemaat_l',
   ],
   [
     literal(
-      `(SELECT COUNT(id_anggota_kk) FROM anggota_kk LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.jk = 'P')`
+      `(SELECT
+          COUNT(id_anggota_kk)
+        FROM
+          anggota_kk
+        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.jk = 'P')`
     ),
     'jumlah_jemaat_p',
   ],
   [
     literal(
-      `(SELECT COUNT(id_anggota_kk) FROM anggota_kk LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.sudah_sidi = 1)`
+      `(SELECT
+          COUNT(id_anggota_kk)
+        FROM
+          anggota_kk
+        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.sudah_sidi = 1)`
     ),
     'jumlah_jemaat_sudah_sidi',
   ],
   [
     literal(
-      `(SELECT COUNT(id_anggota_kk) FROM anggota_kk LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.sudah_sidi = 0)`
+      `(SELECT
+          COUNT(id_anggota_kk)
+        FROM
+          anggota_kk
+        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk
+        WHERE
+          kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.sudah_sidi = 0)`
     ),
     'jumlah_jemaat_belum_sidi',
   ],
   [
     literal(
-      `(SELECT COUNT(id_anggota_kk) FROM anggota_kk LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.jk = 'L' AND anggota_kk.sudah_sidi = 1)`
+      `(SELECT
+          COUNT(id_anggota_kk)
+        FROM
+          anggota_kk
+        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk
+        WHERE
+          kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.jk = 'L' AND anggota_kk.sudah_sidi = 1)`
     ),
     'jumlah_jemaat_sudah_sidi_l',
   ],
   [
     literal(
-      `(SELECT COUNT(id_anggota_kk) FROM anggota_kk LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.jk = 'P' AND anggota_kk.sudah_sidi = 1)`
+      `(SELECT
+          COUNT(id_anggota_kk)
+        FROM
+          anggota_kk
+        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk
+        WHERE
+          kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.jk = 'P' AND anggota_kk.sudah_sidi = 1)`
     ),
     'jumlah_jemaat_sudah_sidi_p',
   ],
   [
     literal(
-      `(SELECT COUNT(id_anggota_kk) FROM anggota_kk LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.jk = 'L' AND anggota_kk.sudah_sidi = 0)`
+      `(SELECT
+          COUNT(id_anggota_kk)
+        FROM
+          anggota_kk
+        LEFT JOIN
+          kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk
+        WHERE
+          kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.jk = 'L' AND anggota_kk.sudah_sidi = 0)`
     ),
     'jumlah_jemaat_belum_sidi_l',
   ],
   [
     literal(
-      `(SELECT COUNT(id_anggota_kk) FROM anggota_kk LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.jk = 'P' AND anggota_kk.sudah_sidi = 0)`
+      `(SELECT
+          COUNT(id_anggota_kk)
+        FROM
+          anggota_kk
+        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk
+        WHERE 
+          kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.jk = 'P' AND anggota_kk.sudah_sidi = 0)`
     ),
     'jumlah_jemaat_belum_sidi_p',
+  ],
+  [
+    literal(
+      `(SELECT 
+          COUNT(id_anggota_kk)
+        FROM
+          anggota_kk
+        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk 
+        WHERE
+          kepala_keluarga.id_rayon = rayon.id_rayon AND TIMESTAMPDIFF(YEAR, tanggal_lahir, CURDATE()) <= 15)`
+    ),
+    'jumlah_anak_par',
   ],
 ]
 
@@ -233,6 +301,42 @@ async function getReport(req, reply) {
       template: path.resolve(__dirname, '..', 'templates', 'TemplateDaftarKeluargaRayon.ejs'),
       title,
       data: { kks, nama: rayon.nama, tanggalCetak: date },
+      landscape: true,
+    })
+
+    reply.type(respType).headers(genHeaders(title)).send(pdf)
+  }
+
+  // List Anak PAR
+  else if (keyword == validKeywords[4]) {
+    let rayon = await db.rayon.findByPk(id, {
+      attributes: {
+        include: [include[include.length - 1]],
+      },
+      include: {
+        model: db.kk,
+        as: 'kepala_keluarga',
+        include: {
+          model: db.anggota_kk,
+          attributes: {
+            include: [[literal('TIMESTAMPDIFF(YEAR, tanggal_lahir, CURDATE())'), 'umur']],
+          },
+          as: 'anggota_kk',
+        },
+      },
+      having: {
+        'kepala_keluarga.anggota_kk.umur': { [Op.lte]: 15 },
+      },
+    })
+
+    rayon = JSON.parse(JSON.stringify(rayon))
+
+    const title = `Laporan Daftar Anak PAR Rayon ${rayon.nama} | ${date}`
+    const pdf = await PDF.createPDF({
+      template: path.resolve(__dirname, '..', 'templates', 'TemplateDaftarAnakPAR.ejs'),
+      title,
+      data: { rayon, tanggalCetak: date, moment },
+      format: 'A3',
       landscape: true,
     })
 
