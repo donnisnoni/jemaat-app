@@ -131,6 +131,18 @@ const include = [
     ),
     'jumlah_anak_par',
   ],
+  [
+    literal(
+      `(SELECT 
+          COUNT(id_anggota_kk)
+        FROM
+          anggota_kk
+        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk 
+        WHERE
+          kepala_keluarga.id_rayon = rayon.id_rayon AND TIMESTAMPDIFF(YEAR, tanggal_lahir, CURDATE()) >= 65)`
+    ),
+    'jumlah_jemaat_lansia',
+  ],
 ]
 
 const respNotFound = (id) => ({ message: `Tidak dapat menemukan rayon dengan id ${id}` })
@@ -270,14 +282,21 @@ async function getReport(req, reply) {
   }
 
   const { keyword } = req.query
-  const validKeywords = ['list_kk', 'list_kaum_bapak', 'list_kaum_ibu', 'list_lansia', 'list_anak_par', 'list_jemaat']
+  const validKeywords = [
+    'list_kk',
+    'list_kaum_bapak',
+    'list_kaum_ibu',
+    'list_jemaat_lansia',
+    'list_anak_par',
+    'list_jemaat',
+  ]
 
   if (!keyword || !validKeywords.includes(keyword)) {
     return reply.code(400).send({ message: 'Parameter `keyword` tidak ada atau tidak valid' })
   }
 
-  const rayon = await db.rayon.findByPk(id)
-  if (!rayon) {
+  const foundedRayon = await db.rayon.findByPk(id)
+  if (!foundedRayon) {
     reply.code(400).send(respNotFound(id))
   }
 
@@ -292,23 +311,23 @@ async function getReport(req, reply) {
       raw: true,
     })
 
-    // for (let index = 0; index <= 3; index++) {
-    //   kks = kks.concat(kks)
-    // }
+    if (!kks.length) {
+      return reply.send(`Belum ada keluarga di rayon ${foundedRayon.nama}`)
+    }
 
-    const title = `Laporan Daftar Kepala Keluarga Rayon ${rayon.nama} | ${date}`
+    const title = `Laporan Daftar Kepala Keluarga Rayon ${foundedRayon.nama} | ${date}`
     const pdf = await PDF.createPDF({
       template: path.resolve(__dirname, '..', 'templates', 'TemplateDaftarKeluargaRayon.ejs'),
       title,
-      data: { kks, nama: rayon.nama, tanggalCetak: date },
+      data: { kks, nama: foundedRayon.nama, tanggalCetak: date },
       landscape: true,
     })
 
     reply.type(respType).headers(genHeaders(title)).send(pdf)
   }
 
-  // List Anak PAR
-  else if (keyword == validKeywords[4]) {
+  // List Jemaat Lansia
+  else if (keyword == validKeywords[3]) {
     let rayon = await db.rayon.findByPk(id, {
       attributes: {
         include: [include[include.length - 1]],
@@ -325,9 +344,53 @@ async function getReport(req, reply) {
         },
       },
       having: {
+        'kepala_keluarga.anggota_kk.umur': { [Op.gte]: 65 },
+      },
+    })
+
+    if (!rayon) {
+      return reply.send(`Belum ada jemaat lansia di rayon ${foundedRayon.nama}`)
+    }
+
+    rayon = JSON.parse(JSON.stringify(rayon))
+
+    const title = `Laporan Lansia Rayon ${rayon.nama} | ${date}`
+    const pdf = await PDF.createPDF({
+      template: path.resolve(__dirname, '..', 'templates', 'TemplateDaftarJemaatLansia.ejs'),
+      title,
+      data: { rayon, tanggalCetak: date, moment },
+      format: 'A3',
+      landscape: true,
+    })
+
+    reply.type(respType).headers(genHeaders(title)).send(pdf)
+  }
+
+  // List Anak PAR
+  else if (keyword == validKeywords[4]) {
+    let rayon = await db.rayon.findByPk(id, {
+      attributes: {
+        include: [include[include.length - 2]],
+      },
+      include: {
+        model: db.kk,
+        as: 'kepala_keluarga',
+        include: {
+          model: db.anggota_kk,
+          attributes: {
+            include: [[literal('TIMESTAMPDIFF(YEAR, tanggal_lahir, CURDATE())'), 'umur']],
+          },
+          as: 'anggota_kk',
+        },
+      },
+      having: {
         'kepala_keluarga.anggota_kk.umur': { [Op.lte]: 15 },
       },
     })
+
+    if (!rayon) {
+      return reply.send(`Belum anak PAR di rayon ${foundedRayon.nama}`)
+    }
 
     rayon = JSON.parse(JSON.stringify(rayon))
 
@@ -356,6 +419,10 @@ async function getReport(req, reply) {
         },
       },
     })
+
+    if (!rayon.kepala_keluarga.length) {
+      return reply.send(`Belum anak jemaat di rayon ${foundedRayon.nama}`)
+    }
 
     rayon = JSON.parse(JSON.stringify(rayon))
 
