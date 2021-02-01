@@ -18,6 +18,7 @@
   let rayon = { nama: '' }
 
   const rayonResponse = fetch(`rayon/${params.id}?with_kk=true`, (_rayon) => (rayon = _rayon))
+  const openReport = (keyword) => openNewWindow(`/api/data/rayon/${rayon.id_rayon}/report?keyword=${keyword}`)
 </script>
 
 <div class="flex flex-col flex-1 bg-white card">
@@ -114,18 +115,10 @@
     <h3 class="px-3 py-2 text-lg">Cetak Laporan Rayon {rayon.nama}</h3>
     <hr />
     <div class="flex flex-wrap gap-1 p-2">
-      <Button on:click={openNewWindow(`/api/data/rayon/${rayon.id_rayon}/report?keyword=list_kk`)}>
-        Daftar Kepala Keluarga
-      </Button>
-      <Button on:click={openNewWindow(`/api/data/rayon/${rayon.id_rayon}/report?keyword=list_jemaat`)}>
-        Daftar Jemaat
-      </Button>
-      <Button on:click={openNewWindow(`/api/data/rayon/${rayon.id_rayon}/report?keyword=list_anak_par`)}>
-        Daftar Anak PAR
-      </Button>
-      <Button on:click={openNewWindow(`/api/data/rayon/${rayon.id_rayon}/report?keyword=list_jemaat_lansia`)}>
-        Daftar Jemaat Lansia
-      </Button>
+      <Button on:click={() => openReport('list_kk')}>Daftar Kepala Keluarga</Button>
+      <Button on:click={() => openReport('list_jemaat')}>Daftar Jemaat</Button>
+      <Button on:click={() => openReport('list_anak_par')}>Daftar Anak PAR</Button>
+      <Button on:click={() => openReport('list_jemaat_lansia')}>Daftar Jemaat Lansia</Button>
       <Button>Daftar Kaum Bapak</Button>
       <Button>Daftar Kaum Ibu</Button>
     </div>
