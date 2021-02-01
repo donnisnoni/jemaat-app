@@ -317,7 +317,7 @@ async function getReport(req, reply) {
 
     const title = `Laporan Daftar Kepala Keluarga Rayon ${foundedRayon.nama} | ${date}`
     const pdf = await PDF.createPDF({
-      template: path.resolve(__dirname, '..', 'templates', 'TemplateDaftarKeluargaRayon.ejs'),
+      template: path.resolve(__dirname, '..', 'templates', 'DaftarKeluargaRayon.ejs'),
       title,
       data: { kks, nama: foundedRayon.nama, tanggalCetak: date },
       landscape: true,
@@ -356,7 +356,7 @@ async function getReport(req, reply) {
 
     const title = `Laporan Lansia Rayon ${rayon.nama} | ${date}`
     const pdf = await PDF.createPDF({
-      template: path.resolve(__dirname, '..', 'templates', 'TemplateDaftarJemaatLansia.ejs'),
+      template: path.resolve(__dirname, '..', 'templates', 'DaftarJemaatLansia.ejs'),
       title,
       data: { rayon, tanggalCetak: date, moment },
       format: 'A3',
@@ -396,7 +396,7 @@ async function getReport(req, reply) {
 
     const title = `Laporan Daftar Anak PAR Rayon ${rayon.nama} | ${date}`
     const pdf = await PDF.createPDF({
-      template: path.resolve(__dirname, '..', 'templates', 'TemplateDaftarAnakPAR.ejs'),
+      template: path.resolve(__dirname, '..', 'templates', 'DaftarAnakPAR.ejs'),
       title,
       data: { rayon, tanggalCetak: date, moment },
       format: 'A3',
@@ -428,7 +428,7 @@ async function getReport(req, reply) {
 
     const title = `Laporan Daftar Jemaat Rayon ${rayon.nama} | ${date}`
     const pdf = await PDF.createPDF({
-      template: path.resolve(__dirname, '..', 'templates', 'TemplateDaftarJemaat.ejs'),
+      template: path.resolve(__dirname, '..', 'templates', 'DaftarJemaat.ejs'),
       title,
       data: { rayon, tanggalCetak: date, moment },
       format: 'A3',
