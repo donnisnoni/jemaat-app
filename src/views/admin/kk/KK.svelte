@@ -249,9 +249,6 @@
         <th>Penghasilan</th>
         <th>Jaminan Kesehatan</th>
         <th>Keterangan</th>
-        {#if isUpdate}
-          <th>Terakhir Diubah</th>
-        {/if}
       </tr>
     </thead>
     <tbody class="select-none">
@@ -274,9 +271,6 @@
           <td class="p-1 text-center">{anggota_kk.penghasilan}</td>
           <td class="p-1 text-center">{anggota_kk.jaminan_kesehatan}</td>
           <td class="p-1 text-center">{anggota_kk.keterangan}</td>
-          {#if isUpdate}
-            <td class="p-1 text-center">{moment(anggota_kk.tgl_terakhir_update).fromNow()}</td>
-          {/if}
         </tr>
       {/each}
     </tbody>
