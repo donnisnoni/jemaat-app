@@ -45,7 +45,7 @@
       </div>
       <!-- TOTAL JEMAAT -->
       <div class="flex items-center justify-around p-3 border rounded-md bg-gray-50" style="min-width: 200px">
-        <img draggable="false" width="82px" src="/img/peoples.svg" alt="" />
+        <img draggable="false" width="87px" src="/img/peoples.svg" alt="" />
         {#await $totalJemaatResponse}
           <LoadingPlaceholder />
         {:then jemaatMetadata}
