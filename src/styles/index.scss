@@ -88,6 +88,11 @@ input::-webkit-inner-spin-button {
   &:hover {
     background-color: $bg-semi-transparent;
   }
+
+  & .emoji-gender {
+    margin: auto 10px auto 5px;
+    font-size: 25px;
+  }
 }
 /* purgecss end ignore */
 

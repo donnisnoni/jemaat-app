@@ -54,8 +54,13 @@
       {#each dataAnggotaKK as anggotaKk}
         <!-- on:contextmenu|preventDefault={(event) => openContextMenu(event, index)} -->
         <a class="list--item" href={`/admin/kk/${anggotaKk.id_kk}`} role="listitem" use:link>
+          <div class="emoji-gender">
+            {anggotaKk.jk == 'L' ? '👨' : '👩'}
+          </div>
           <div class="flex flex-col">
-            <div class="font-bold">{anggotaKk.nama}</div>
+            <div class="font-bold">
+              {anggotaKk.nama}
+            </div>
             <div class="time-from-now">{moment(anggotaKk.tgl_terakhir_update).fromNow()}</div>
           </div>
         </a>
