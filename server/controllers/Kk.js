@@ -9,6 +9,13 @@ const respNotFound = (id) => ({ message: `Tidak dapat menemukan keluarga dengan 
  * @type {import("fastify").RouteHandler}
  */
 async function get(req, reply) {
+  const qCount = req.query.count
+
+  if (qCount) {
+    const count = await db.kk.count()
+    return reply.send(count)
+  }
+
   const kks = await db.kk.findAll({
     attributes: {
       include: [[fn('COUNT', col('anggota_kk.id_kk')), 'jumlah_anggota_kk']],

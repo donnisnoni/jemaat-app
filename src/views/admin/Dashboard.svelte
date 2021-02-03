@@ -3,11 +3,11 @@
   import LoadingPlaceholder from '/@components/LoadingPlaceholder.svelte'
 
   const totalRayonResponse = fetch('rayon?count=true')
-  const totalKKResponse = fetch('kk')
-
-  const totalJemaatResponse = fetch('anggota_kk?metadata=true&fields=jumlah_jemaat')
-  const totalJemaatLResponse = fetch('anggota_kk?metadata=true&fields=jumlah_jemaat_l')
-  const totalJemaatPResponse = fetch('anggota_kk?metadata=true&fields=jumlah_jemaat_p')
+  const totalKKResponse = fetch('kk?count=true')
+  const baseURL = 'anggota_kk?metadata=true&fields='
+  const totalJemaatResponse = fetch(`${baseURL}jumlah_jemaat`)
+  const totalJemaatLResponse = fetch(`${baseURL}jumlah_jemaat_l`)
+  const totalJemaatPResponse = fetch(`${baseURL}jumlah_jemaat_p`)
 </script>
 
 <div class="flex flex-col flex-1 overflow-hidden bg-white card">
@@ -38,7 +38,7 @@
           <div class="mx-auto text-3xl">
             <div class="flex flex-col items-center mx-auto">
               <div class="text-sm">Keluarga</div>
-              {jumlah_kk.length}
+              {jumlah_kk}
             </div>
           </div>
         {/await}
