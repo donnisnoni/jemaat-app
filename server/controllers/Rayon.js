@@ -143,6 +143,30 @@ const include = [
     ),
     'jumlah_jemaat_lansia',
   ],
+  [
+    literal(
+      `(SELECT 
+          COUNT(id_anggota_kk)
+        FROM
+          anggota_kk
+        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk 
+        WHERE
+          kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.sudah_nikah = 1 AND anggota_kk.jk = 'L')`
+    ),
+    'jumlah_kaum_bapak',
+  ],
+  [
+    literal(
+      `(SELECT 
+          COUNT(id_anggota_kk)
+        FROM
+          anggota_kk
+        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk 
+        WHERE
+          kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.sudah_nikah = 1 AND anggota_kk.jk = 'P')`
+    ),
+    'jumlah_kaum_ibu',
+  ],
 ]
 
 const respNotFound = (id) => ({ message: `Tidak dapat menemukan rayon dengan id ${id}` })
@@ -291,6 +315,7 @@ async function getReport(req, reply) {
     'list_jemaat',
   ]
 
+  debugger
   if (!keyword || !validKeywords.includes(keyword)) {
     return reply.code(400).send({ message: 'Parameter `keyword` tidak ada atau tidak valid' })
   }
@@ -326,12 +351,81 @@ async function getReport(req, reply) {
     reply.type(respType).headers(genHeaders(title)).send(pdf)
   }
 
+  // List Kaum Bapak
+  else if (keyword === validKeywords[1]) {
+    let rayon = await db.rayon.findByPk(id, {
+      attributes: { include: [include[12]] },
+      include: {
+        model: db.kk,
+        as: 'kepala_keluarga',
+        include: {
+          model: db.anggota_kk,
+          as: 'anggota_kk',
+          where: {
+            [Op.and]: { sudah_nikah: 1, jk: 'L' },
+          },
+        },
+      },
+    })
+
+    if (!rayon) {
+      return reply.send(`Belum ada kaum bapak di rayon ${foundedRayon.nama}`)
+    }
+
+    rayon = JSON.parse(JSON.stringify(rayon))
+
+    const title = `Laporan Daftar Kaum Bapak Rayon ${rayon.nama} | ${date}`
+    const pdf = await PDF.createPDF({
+      template: path.resolve(__dirname, '..', 'templates', 'DaftarKaumBapak.ejs'),
+      title,
+      data: { rayon, tanggalCetak: date, moment },
+      format: 'A3',
+      landscape: true,
+    })
+
+    reply.type(respType).headers(genHeaders(title)).send(pdf)
+  }
+
+  // List Kaum Ibu
+  else if (keyword === validKeywords[2]) {
+    let rayon = await db.rayon.findByPk(id, {
+      attributes: { include: [include[13]] },
+      include: {
+        model: db.kk,
+        as: 'kepala_keluarga',
+        include: {
+          model: db.anggota_kk,
+          as: 'anggota_kk',
+          where: {
+            [Op.and]: { sudah_nikah: 1, jk: 'P' },
+          },
+        },
+      },
+    })
+
+    if (!rayon) {
+      return reply.send(`Belum ada kaum ibu di rayon ${foundedRayon.nama}`)
+    }
+
+    rayon = JSON.parse(JSON.stringify(rayon))
+
+    const title = `Laporan Daftar Kaum Ibu Rayon ${rayon.nama} | ${date}`
+    const pdf = await PDF.createPDF({
+      template: path.resolve(__dirname, '..', 'templates', 'DaftarKaumIbu.ejs'),
+      title,
+      data: { rayon, tanggalCetak: date, moment },
+      format: 'A3',
+      landscape: true,
+    })
+
+    reply.type(respType).headers(genHeaders(title)).send(pdf)
+  }
+
   // List Jemaat Lansia
   else if (keyword == validKeywords[3]) {
+    console.log(include.length)
     let rayon = await db.rayon.findByPk(id, {
-      attributes: {
-        include: [include[include.length - 1]],
-      },
+      attributes: { include: [include[11]] },
       include: {
         model: db.kk,
         as: 'kepala_keluarga',
@@ -370,7 +464,7 @@ async function getReport(req, reply) {
   else if (keyword == validKeywords[4]) {
     let rayon = await db.rayon.findByPk(id, {
       attributes: {
-        include: [include[include.length - 2]],
+        include: [include[10]],
       },
       include: {
         model: db.kk,

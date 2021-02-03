@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <%- include('./head'); %>
+  <body>
+    <% if (rayon.kepala_keluarga.length) { %>
+    <!--  -->
+    <%- include('./header'); %>
+    <!--  -->
+    <h2 class="text-center" style="margin: 25px 0; text-decoration: underline">
+      Daftar Kaum Ibu Rayon <%= rayon.nama %>
+    </h2>
+
+    <div style="display: flex; flex-direction: column; margin: 20px 0; font-weight: bold">
+      <div>Tanggal : <%= tanggalCetak %></div>
+      <div>Jumlah Jemaat : <%= rayon.jumlah_kaum_ibu %> Jemaat</div>
+    </div>
+
+    <table style="table-layout: auto; width: 100%">
+      <thead>
+        <tr>
+          <td style="width: 15ch">Nama</td>
+          <td class="text-center" style="width: 2ch">JK</td>
+          <td style="width: 5ch">Status dlm Keluarga</td>
+          <td style="width: 10ch">TTL</td>
+          <td class="text-center" style="width: 1ch">GD</td>
+          <td class="text-center" style="width: 1ch">SB</td>
+          <td class="text-center" style="width: 1ch">SS</td>
+          <td class="text-center" style="width: 1ch">SN</td>
+          <td style="width: 10ch">Pendidikan</td>
+          <td style="width: 10ch">Pekerjaan</td>
+          <td style="width: 10ch">Penghasilan</td>
+          <td style="width: 10ch">Jaminan Kesehatan</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let i = 0; i < rayon.kepala_keluarga.length; i++) { %> <% const kk = rayon.kepala_keluarga[i] %>
+        <tr style="background-color: rgb(223, 223, 224); font-weight: bold; orphans: 1">
+          <td class="x" colspan="12"><%= kk.nama %></td>
+        </tr>
+        <% for (let j = 0; j < kk.anggota_kk.length; j++) { %> <% const anggota_kk = kk.anggota_kk[j] %>
+        <tr>
+          <td><%= anggota_kk.nama %></td>
+          <td class="text-center"><%= anggota_kk.jk %></td>
+          <td><%= anggota_kk.status %></td>
+          <td><%= anggota_kk.tempat_lahir %>, <%= moment(anggota_kk.tanggal_lahir).format('DD/MM/YYYY') %></td>
+          <td class="text-center"><%= anggota_kk.golongan_darah %></td>
+          <td class="text-center"><%= anggota_kk.sudah_baptis ? '✔': '✘' %></td>
+          <td class="text-center"><%= anggota_kk.sudah_sidi ? '✔': '✘' %></td>
+          <td class="text-center"><%= anggota_kk.sudah_nikah ? '✔': '✘' %></td>
+          <td><%= anggota_kk.pendidikan %></td>
+          <td><%= anggota_kk.pekerjaan %></td>
+          <td><%= anggota_kk.penghasilan.replace(/Rp.\s/g, '') %></td>
+          <td><%= anggota_kk.jaminan_kesehatan %></td>
+          <% } %>
+          <!--  -->
+          <% } %>
+        </tr>
+      </tbody>
+
+      <tfoot>
+        <tr></tr>
+      </tfoot>
+    </table>
+
+    <div style="margin: 20px 0">
+      <b>Keterangan:</b>
+      <i>JK: Jenis Kelamin | GD: Golongan Darah | SB = Status Baptis | SS = Status Sidi | SN = Status Nikah</i>
+    </div>
+
+    <% } else { %>
+    <h1 class="text-center">Belum ada jemaat lansia di rayon <%= rayon.nama %></h1>
+    <% } %>
+  </body>
+</html>
