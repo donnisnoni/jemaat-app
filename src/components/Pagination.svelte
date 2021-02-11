@@ -33,7 +33,7 @@
   }
 </script>
 
-<div class="pagination--item" class:disabled={page == 1} on:click={decrement}>PREV</div>
+<div class="pagination--item" class:disabled={page == 1} on:click={decrement}>«</div>
 
 {#each new Array(pageCount) as undefined, index}
   <div class="pagination--item" class:pagination--page-active={page == index + 1} on:click={() => update(index + 1)}>
@@ -41,4 +41,4 @@
   </div>
 {/each}
 
-<div class="pagination--item" class:disabled={page == pageCount} on:click={increment}>NEXT</div>
+<div class="pagination--item" class:disabled={page == pageCount} on:click={increment}>»</div>
