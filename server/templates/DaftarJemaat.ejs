@@ -23,6 +23,7 @@
           <td class="text-center" style="width: 2ch">JK</td>
           <td style="width: 5ch">Status dlm Keluarga</td>
           <td style="width: 10ch">TTL</td>
+          <td class="text-center" style="width: 5ch">Umur</td>
           <td class="text-center" style="width: 1ch">GD</td>
           <td class="text-center" style="width: 1ch">SB</td>
           <td class="text-center" style="width: 1ch">SS</td>
@@ -36,7 +37,7 @@
       <tbody>
         <% for (let i = 0; i < rayon.kepala_keluarga.length; i++) { %> <% const kk = rayon.kepala_keluarga[i] %>
         <tr style="background-color: rgb(223, 223, 224); font-weight: bold; orphans: 1">
-          <td class="x" colspan="12"><%= kk.nama %></td>
+          <td class="x" colspan="13"><%= kk.nama %></td>
         </tr>
         <% for (let j = 0; j < kk.anggota_kk.length; j++) { %> <% const anggota_kk = kk.anggota_kk[j] %>
         <tr>
@@ -44,6 +45,7 @@
           <td class="text-center"><%= anggota_kk.jk %></td>
           <td><%= anggota_kk.status %></td>
           <td><%= anggota_kk.tempat_lahir %>, <%= moment(anggota_kk.tanggal_lahir).format('DD/MM/YYYY') %></td>
+          <td class="text-center"><%= anggota_kk.umur %></td>
           <td class="text-center"><%= anggota_kk.golongan_darah %></td>
           <td class="text-center"><%= anggota_kk.sudah_baptis ? '✔': '✘' %></td>
           <td class="text-center"><%= anggota_kk.sudah_sidi ? '✔': '✘' %></td>

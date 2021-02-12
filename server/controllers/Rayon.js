@@ -360,6 +360,9 @@ async function getReport(req, reply) {
         as: 'kepala_keluarga',
         include: {
           model: db.anggota_kk,
+          attributes: {
+            include: [[literal('TIMESTAMPDIFF(YEAR, tanggal_lahir, CURDATE())'), 'umur']],
+          },
           as: 'anggota_kk',
           where: {
             [Op.and]: { sudah_nikah: 1, jk: 'L' },
@@ -395,6 +398,9 @@ async function getReport(req, reply) {
         as: 'kepala_keluarga',
         include: {
           model: db.anggota_kk,
+          attributes: {
+            include: [[literal('TIMESTAMPDIFF(YEAR, tanggal_lahir, CURDATE())'), 'umur']],
+          },
           as: 'anggota_kk',
           where: {
             [Op.and]: { sudah_nikah: 1, jk: 'P' },
@@ -509,6 +515,9 @@ async function getReport(req, reply) {
         as: 'kepala_keluarga',
         include: {
           model: db.anggota_kk,
+          attributes: {
+            include: [[literal('TIMESTAMPDIFF(YEAR, tanggal_lahir, CURDATE())'), 'umur']],
+          },
           as: 'anggota_kk',
         },
       },
