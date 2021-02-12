@@ -118,7 +118,7 @@
         <hr />
         <div class="flex flex-wrap gap-1 p-2">
           <Button on:click={() => openReport('list_kk')}>Daftar Kepala Keluarga</Button>
-          <Button>Daftar Jemaat</Button>
+          <Button on:click={() => openReport('list_jemaat')}>Daftar Jemaat</Button>
           <Button on:click={() => openReport('list_jemaat_lansia')}>Daftar Jemaat Lansia</Button>
           <Button on:click={() => openReport('list_kaum_bapak')}>Daftar Kaum Bapak</Button>
           <Button on:click={() => openReport('list_kaum_ibu')}>Daftar Kaum Ibu</Button>
