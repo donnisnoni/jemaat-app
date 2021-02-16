@@ -4,4 +4,5 @@ module.exports = {
   KK: require('./Kk'),
   AnggotaKK: require('./AnggotaKK'),
   Auth: require('./Auth'),
+  Report: require('./Report'),
 }

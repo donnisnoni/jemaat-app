@@ -6,168 +6,7 @@ const PDF = require('../utils/pdf')
 const path = require('path')
 const moment = require('moment')
 const utils = require('../utils')
-
-const include = [
-  [
-    literal(
-      `(SELECT 
-          COUNT(id_kk)
-        FROM
-          kepala_keluarga
-        WHERE kepala_keluarga.id_rayon = rayon.id_rayon)`
-    ),
-    'jumlah_kk',
-  ],
-  [
-    literal(
-      `(SELECT
-          COUNT(id_anggota_kk)
-        FROM
-          anggota_kk
-        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon)`
-    ),
-    'jumlah_jemaat',
-  ],
-  [
-    literal(
-      `(SELECT
-          COUNT(id_anggota_kk)
-        FROM
-          anggota_kk
-        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.jk = 'L')`
-    ),
-    'jumlah_jemaat_l',
-  ],
-  [
-    literal(
-      `(SELECT
-          COUNT(id_anggota_kk)
-        FROM
-          anggota_kk
-        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.jk = 'P')`
-    ),
-    'jumlah_jemaat_p',
-  ],
-  [
-    literal(
-      `(SELECT
-          COUNT(id_anggota_kk)
-        FROM
-          anggota_kk
-        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk WHERE kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.sudah_sidi = 1)`
-    ),
-    'jumlah_jemaat_sudah_sidi',
-  ],
-  [
-    literal(
-      `(SELECT
-          COUNT(id_anggota_kk)
-        FROM
-          anggota_kk
-        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk
-        WHERE
-          kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.sudah_sidi = 0)`
-    ),
-    'jumlah_jemaat_belum_sidi',
-  ],
-  [
-    literal(
-      `(SELECT
-          COUNT(id_anggota_kk)
-        FROM
-          anggota_kk
-        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk
-        WHERE
-          kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.jk = 'L' AND anggota_kk.sudah_sidi = 1)`
-    ),
-    'jumlah_jemaat_sudah_sidi_l',
-  ],
-  [
-    literal(
-      `(SELECT
-          COUNT(id_anggota_kk)
-        FROM
-          anggota_kk
-        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk
-        WHERE
-          kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.jk = 'P' AND anggota_kk.sudah_sidi = 1)`
-    ),
-    'jumlah_jemaat_sudah_sidi_p',
-  ],
-  [
-    literal(
-      `(SELECT
-          COUNT(id_anggota_kk)
-        FROM
-          anggota_kk
-        LEFT JOIN
-          kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk
-        WHERE
-          kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.jk = 'L' AND anggota_kk.sudah_sidi = 0)`
-    ),
-    'jumlah_jemaat_belum_sidi_l',
-  ],
-  [
-    literal(
-      `(SELECT
-          COUNT(id_anggota_kk)
-        FROM
-          anggota_kk
-        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk
-        WHERE 
-          kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.jk = 'P' AND anggota_kk.sudah_sidi = 0)`
-    ),
-    'jumlah_jemaat_belum_sidi_p',
-  ],
-  [
-    literal(
-      `(SELECT 
-          COUNT(id_anggota_kk)
-        FROM
-          anggota_kk
-        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk 
-        WHERE
-          kepala_keluarga.id_rayon = rayon.id_rayon AND TIMESTAMPDIFF(YEAR, tanggal_lahir, CURDATE()) <= 15)`
-    ),
-    'jumlah_anak_par',
-  ],
-  [
-    literal(
-      `(SELECT 
-          COUNT(id_anggota_kk)
-        FROM
-          anggota_kk
-        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk 
-        WHERE
-          kepala_keluarga.id_rayon = rayon.id_rayon AND TIMESTAMPDIFF(YEAR, tanggal_lahir, CURDATE()) >= 65)`
-    ),
-    'jumlah_jemaat_lansia',
-  ],
-  [
-    literal(
-      `(SELECT 
-          COUNT(id_anggota_kk)
-        FROM
-          anggota_kk
-        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk 
-        WHERE
-          kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.sudah_nikah = 1 AND anggota_kk.jk = 'L')`
-    ),
-    'jumlah_kaum_bapak',
-  ],
-  [
-    literal(
-      `(SELECT 
-          COUNT(id_anggota_kk)
-        FROM
-          anggota_kk
-        LEFT JOIN kepala_keluarga ON anggota_kk.id_kk = kepala_keluarga.id_kk 
-        WHERE
-          kepala_keluarga.id_rayon = rayon.id_rayon AND anggota_kk.sudah_nikah = 1 AND anggota_kk.jk = 'P')`
-    ),
-    'jumlah_kaum_ibu',
-  ],
-]
+const include = require('./shared/rayonIncludes')
 
 const respNotFound = (id) => ({ message: `Tidak dapat menemukan rayon dengan id ${id}` })
 
@@ -327,7 +166,6 @@ async function getReport(req, reply) {
 
   const date = utils.getDate()
   const respType = 'application/pdf'
-  const genHeaders = (title) => ({ 'Content-Disposition': `filename="${title}.pdf"` })
 
   // List Keluarga
   if (keyword === validKeywords[0]) {
@@ -348,7 +186,7 @@ async function getReport(req, reply) {
       landscape: true,
     })
 
-    reply.type(respType).headers(genHeaders(title)).send(pdf)
+    reply.type(respType).headers(utils.generatePdfContentDispositionHeader(title)).send(pdf)
   }
 
   // List Kaum Bapak
@@ -386,7 +224,7 @@ async function getReport(req, reply) {
       landscape: true,
     })
 
-    reply.type(respType).headers(genHeaders(title)).send(pdf)
+    reply.type(respType).headers(generatePdfContentDispositionHeader(title)).send(pdf)
   }
 
   // List Kaum Ibu
@@ -424,7 +262,7 @@ async function getReport(req, reply) {
       landscape: true,
     })
 
-    reply.type(respType).headers(genHeaders(title)).send(pdf)
+    reply.type(respType).headers(generatePdfContentDispositionHeader(title)).send(pdf)
   }
 
   // List Jemaat Lansia
@@ -463,7 +301,7 @@ async function getReport(req, reply) {
       landscape: true,
     })
 
-    reply.type(respType).headers(genHeaders(title)).send(pdf)
+    reply.type(respType).headers(generatePdfContentDispositionHeader(title)).send(pdf)
   }
 
   // List Anak PAR
@@ -503,7 +341,7 @@ async function getReport(req, reply) {
       landscape: true,
     })
 
-    reply.type(respType).headers(genHeaders(title)).send(pdf)
+    reply.type(respType).headers(generatePdfContentDispositionHeader(title)).send(pdf)
   }
 
   // List Jemaat
@@ -538,7 +376,7 @@ async function getReport(req, reply) {
       landscape: true,
     })
 
-    reply.type(respType).headers(genHeaders(title)).send(pdf)
+    reply.type(respType).headers(generatePdfContentDispositionHeader(title)).send(pdf)
   }
 }
 

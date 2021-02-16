@@ -15,8 +15,11 @@ function getOffset(page, ipp) {
 
 const getDate = () => moment().format(CONSTS.MOMENT_FORMAT)
 
+const generatePdfContentDispositionHeader = (title) => ({ 'Content-Disposition': `filename="${title}.pdf"` })
+
 module.exports = {
   hasDuplicates,
   getOffset,
   getDate,
+  generatePdfContentDispositionHeader,
 }

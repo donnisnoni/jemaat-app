@@ -51,6 +51,11 @@ const routes = {
     userData: { title: 'Jemaat' },
     conditions,
   }),
+  '/admin/rekapitulasi': wrap({
+    asyncComponent: () => import('./views/admin/rekapitulasi/Index.svelte'),
+    userData: { title: 'Rekapitulasi' },
+    conditions,
+  }),
 }
 
 export default routes

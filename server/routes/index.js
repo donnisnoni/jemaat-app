@@ -60,7 +60,7 @@ const routes = [
   {
     method: 'GET',
     url: '/api/data/rayon/:id/report',
-    // preValidation: [fastify.authenticate],
+    // preValidation: [fastify.authenticate],s
     handler: controllers.Rayon.getReport,
   },
 
@@ -102,6 +102,14 @@ const routes = [
     url: '/api/data/anggota_kk',
     preValidation: [fastify.authenticate],
     handler: controllers.AnggotaKK.get,
+  },
+
+  /* ----------------------------- GENERAL REPORT ----------------------------- */
+  {
+    method: 'GET',
+    url: '/api/data/report/:report_type',
+    // preValidation: [fastify.authenticate],
+    handler: controllers.Report.get,
   },
 ]
 

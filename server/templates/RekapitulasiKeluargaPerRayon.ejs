@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <%- include('./head'); %>
+  <body>
+    <% if (rayons.length) { %>
+    <!--  -->
+    <%- include('./header'); %>
+    <!--  -->
+    <h2 class="text-center" style="margin: 25px 0; text-decoration: underline">Rekapitulasi Keluarga per Rayon</h2>
+
+    <div style="display: flex; flex-direction: column; margin: 20px 0; font-weight: bold">
+      <div>Tanggal : <%= tanggalCetak %></div>
+    </div>
+
+    <table style="width: 100%">
+      <thead>
+        <tr>
+          <td>Rayon</td>
+          <td align="right">Jumlah Keluarga</td>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% let total_kk = 0 %>
+        <!--  -->
+        <% for (let i = 0; i < rayons.length; i++) { %>
+        <!--  -->
+        <% const rayon = rayons[i] %>
+        <tr>
+          <td><%= rayon.nama %></td>
+          <td class="text-right"><%= rayon.jumlah_kk %></td>
+        </tr>
+        <% total_kk += rayon.jumlah_kk %>
+        <!--  -->
+        <% if (i === rayons.length - 1) { %>
+        <tr>
+          <td class="font-bold">Total Keluarga</td>
+          <td class="font-bold text-right"><%= total_kk %></td>
+        </tr>
+        <% } %>
+        <!--  -->
+        <% } %>
+      </tbody>
+
+      <tfoot>
+        <tr></tr>
+      </tfoot>
+    </table>
+
+    <% } else { %>
+    <h1 class="text-center">Belum ada rayon</h1>
+    <% } %>
+  </body>
+</html>

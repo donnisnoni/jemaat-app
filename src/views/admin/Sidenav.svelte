@@ -51,6 +51,12 @@
         <span class="link-label">Jemaat</span>
       </a>
     </li>
+    <li>
+      <a href="/admin/rekapitulasi" title="Rekapitulasi Umum" use:link use:active={/admin\/rekapitulasi.*/i}>
+        <i class="mdi mdi-book-outline" />
+        <span class="link-label">Rekapitulasi</span>
+      </a>
+    </li>
   </ul>
 
   <ul class="mt-auto">
@@ -74,7 +80,8 @@
       </a>
     </li>
     <li>
-      <a href="/" title="Logout" on:click={logout} use:link><i class="mdi mdi-logout" />
+      <a href="/" title="Logout" on:click={logout} use:link
+        ><i class="mdi mdi-logout" />
         <span class="link-label">Logout</span>
       </a>
     </li>
