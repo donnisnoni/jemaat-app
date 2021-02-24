@@ -37,6 +37,19 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
+"@fastify/forwarded@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@fastify/forwarded/-/forwarded-1.0.0.tgz#cc4a3bc1f02856e56e67d6d655026e8d8c2e7429"
+  integrity sha512-VoO+6WD0aRz8bwgJZ8pkkxjq7o/782cQ1j945HWg0obZMgIadYW3Pew0+an+k1QL7IPZHM3db5WF6OP6x4ymMA==
+
+"@fastify/proxy-addr@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@fastify/proxy-addr/-/proxy-addr-3.0.0.tgz#7d3bb6474a01b206010329291f4edf6af8af582d"
+  integrity sha512-ty7wnUd/GeSqKTC2Jozsl5xGbnxUnEFC0On2/zPv/8ixywipQmVZwuWvNGnBoitJ2wixwVqofwXNua8j6Y62lQ==
+  dependencies:
+    "@fastify/forwarded" "^1.0.0"
+    ipaddr.js "^2.0.0"
+
 "@fullhuman/postcss-purgecss@^3.1.3":
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/@fullhuman/postcss-purgecss/-/postcss-purgecss-3.1.3.tgz#47af7b87c9bfb3de4bc94a38f875b928fffdf339"
@@ -288,15 +301,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.20.tgz#f7974863edd21d1f8a494a73e8e2b3658615c340"
   integrity sha512-Y93R97Ouif9JEOWPIUyU+eyIdyRqQR0I8Ez1dzku4hDx34NWh4HbtIc3WNzwB1Y9ULvNGeu5B8h8bVL5cAk4/A==
 
-"@types/node@^14.14.26":
-  version "14.14.26"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.26.tgz#e40df24c957568f350cca04e63bfb1e1556d1cbf"
-  integrity sha512-skWxepWOs+VArEBWd2S/VR3wUavioIIx9/HzW+UJiIjtwa6+kNXdsOeq7FfxDXf56hIcL0ieo2brwMgBJ1+lhw==
-
-"@types/node@^14.14.7":
-  version "14.14.14"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.14.tgz#f7fd5f3cc8521301119f63910f0fb965c7d761ae"
-  integrity sha512-UHnOPWVWV1z+VV8k6L1HhG7UbGBgIdghqF3l9Ny9ApPghbjICXkUJSd/b9gOgQfjM1r+37cipdw/HJ3F6ICEnQ==
+"@types/node@^14.14.28":
+  version "14.14.28"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.28.tgz#cade4b64f8438f588951a6b35843ce536853f25b"
+  integrity sha512-lg55ArB+ZiHHbBBttLpzD07akz0QPrZgUODNakeC09i62dnrywr9mFErHuaPlB6I7z+sEbK+IYmplahvplCj2g==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -1818,11 +1826,12 @@ fastify-warning@^0.2.0:
   resolved "https://registry.yarnpkg.com/fastify-warning/-/fastify-warning-0.2.0.tgz#e717776026a4493dc9a2befa44db6d17f618008f"
   integrity sha512-s1EQguBw/9qtc1p/WTY4eq9WMRIACkj+HTcOIK1in4MV5aFaQC9ZCIt0dJ7pr5bIf4lPpHvAtP2ywpTNgs7hqw==
 
-fastify@^3.11.0:
-  version "3.11.0"
-  resolved "https://registry.yarnpkg.com/fastify/-/fastify-3.11.0.tgz#2464c9a715603e6941308f55572d08a27ea7f2a6"
-  integrity sha512-xc0mTG3cZhBrpsHh5M+xujA/xAIfBCn6DLOWPqCbIBkt0TtfeDaXpBEtlejWp13eM8SZbyXnHcR6PJaOajbY/A==
+fastify@^3.12.0:
+  version "3.12.0"
+  resolved "https://registry.yarnpkg.com/fastify/-/fastify-3.12.0.tgz#b5e3500a98ed63934d01d5949801f5ea2dc5cd17"
+  integrity sha512-xSVzP88dkwBRl/vSm8AnMB3ICOd5p0M/ea9fJWOx0WnC8x4r1WfOUUEHeyxcwlfWoiDDtsHe7DwyeSPrfmfzqQ==
   dependencies:
+    "@fastify/proxy-addr" "^3.0.0"
     abstract-logging "^2.0.0"
     ajv "^6.12.2"
     avvio "^7.1.2"
@@ -1833,7 +1842,6 @@ fastify@^3.11.0:
     flatstr "^1.0.12"
     light-my-request "^4.2.0"
     pino "^6.2.1"
-    proxy-addr "^2.0.5"
     readable-stream "^3.4.0"
     rfdc "^1.1.4"
     secure-json-parse "^2.0.0"
@@ -1934,11 +1942,6 @@ foreach@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/foreach/-/foreach-2.0.5.tgz#0bee005018aeb260d0a3af3ae658dd0136ec1b99"
   integrity sha1-C+4AUBiusmDQo6865ljdATbsG5k=
-
-forwarded@~0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/forwarded/-/forwarded-0.1.2.tgz#98c23dab1175657b8c0573e8ceccd91b0ff18c84"
-  integrity sha1-mMI9qxF1ZXuMBXPozszZGw/xjIQ=
 
 fraction.js@^4.0.13:
   version "4.0.13"
@@ -2332,10 +2335,10 @@ ini@^1.3.4, ini@~1.3.0:
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.8.tgz#a29da425b48806f34767a4efce397269af28432c"
   integrity sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==
 
-ipaddr.js@1.9.1:
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.9.1.tgz#bff38543eeb8984825079ff3a2a8e6cbd46781b3"
-  integrity sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==
+ipaddr.js@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-2.0.0.tgz#77ccccc8063ae71ab65c55f21b090698e763fc6e"
+  integrity sha512-S54H9mIj0rbxRIyrDMEuuER86LdlgUg9FSeZ8duQb6CUG2iRrA36MYVQBSprTF/ZeAwvyQ5mDGuNvIPM0BIl3w==
 
 is-absolute-url@^2.0.0:
   version "2.1.0"
@@ -2959,17 +2962,17 @@ magic-string@^0.25.7:
   dependencies:
     sourcemap-codec "^1.4.4"
 
-mariadb@^2.5.2:
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/mariadb/-/mariadb-2.5.2.tgz#0046331541589a9c0405507d91d79bcc972b3f5e"
-  integrity sha512-SfaBl5/LiX2qJNNr7wCQvizVjtWxVm1CUWYKe+y4OMeyYMM6g0GhwX7/BbGtv/O3WthnGrM+Kj1imFnlescO0w==
+mariadb@^2.5.3:
+  version "2.5.3"
+  resolved "https://registry.yarnpkg.com/mariadb/-/mariadb-2.5.3.tgz#13a2267f7f1b572f9db997aaaa8c00f75d5a87e8"
+  integrity sha512-9ZbQ1zLqasLCQy6KDcPHtX7EUIMBlQ8p64gNR61+yfpCIWjPDji3aR56LvwbOz1QnQbVgYBOJ4J/pHoFN5MR+w==
   dependencies:
     "@types/geojson" "^7946.0.7"
-    "@types/node" "^14.14.7"
+    "@types/node" "^14.14.28"
     denque "^1.4.1"
     iconv-lite "^0.6.2"
     long "^4.0.0"
-    moment-timezone "^0.5.32"
+    moment-timezone "^0.5.33"
     please-upgrade-node "^3.2.0"
 
 mdn-data@2.0.14:
@@ -3102,10 +3105,17 @@ modern-normalize@^1.0.0:
   resolved "https://registry.yarnpkg.com/modern-normalize/-/modern-normalize-1.0.0.tgz#539d84a1e141338b01b346f3e27396d0ed17601e"
   integrity sha512-1lM+BMLGuDfsdwf3rsgBSrxJwAZHFIrQ8YR61xIqdHo0uNKI9M52wNpHSrliZATJp51On6JD0AfRxd4YGSU0lw==
 
-moment-timezone@^0.5.31, moment-timezone@^0.5.32:
+moment-timezone@^0.5.31:
   version "0.5.32"
   resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.32.tgz#db7677cc3cc680fd30303ebd90b0da1ca0dfecc2"
   integrity sha512-Z8QNyuQHQAmWucp8Knmgei8YNo28aLjJq6Ma+jy1ZSpSk5nyfRT8xgUbSQvD2+2UajISfenndwvFuH3NGS+nvA==
+  dependencies:
+    moment ">= 2.9.0"
+
+moment-timezone@^0.5.33:
+  version "0.5.33"
+  resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.33.tgz#b252fd6bb57f341c9b59a5ab61a8e51a73bbd22c"
+  integrity sha512-PTc2vcT8K9J5/9rDEPe5czSIKgLoGsH8UNpA4qZTVw0Vd/Uz19geE9abbIOQKaAQFcnQ3v5YEXrbSc5BpshH+w==
   dependencies:
     moment ">= 2.9.0"
 
@@ -4034,10 +4044,10 @@ postcss@^8.2.6:
     nanoid "^3.1.20"
     source-map "^0.6.1"
 
-prettier-plugin-svelte@^2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/prettier-plugin-svelte/-/prettier-plugin-svelte-2.1.4.tgz#ce2f441f9a8e19ae0d606c6f6c74d740f3dcd8ce"
-  integrity sha512-fQfcIyl04VNWI3+JeseT+gLljs2bJJifbKmrTe8yMnTCdv0unfM1jnY2p4etzCfOj6skC1FPFaqBayYk3+7ZZg==
+prettier-plugin-svelte@^2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-svelte/-/prettier-plugin-svelte-2.1.6.tgz#ae10e16d89c94c72a937574eb840501104ff4565"
+  integrity sha512-eg6MhH394IYsljIcLMgCx/wozObkUFZJ1GkH+Nj8sZQilnNCFTeSBcEohBaNa9hr5RExvlJQJ8a2CEjMMrwL8g==
 
 prettier@^2.2.1:
   version "2.2.1"
@@ -4064,14 +4074,6 @@ proto-list@~1.2.1:
   resolved "https://registry.yarnpkg.com/proto-list/-/proto-list-1.2.4.tgz#212d5bfe1318306a420f6402b8e26ff39647a849"
   integrity sha1-IS1b/hMYMGpCD2QCuOJv85ZHqEk=
 
-proxy-addr@^2.0.5:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/proxy-addr/-/proxy-addr-2.0.6.tgz#fdc2336505447d3f2f2c638ed272caf614bbb2bf"
-  integrity sha512-dh/frvCBVmSsDYzw6n926jv974gddhkFPfiN8hPOi30Wax25QZyZEGveluCgliBnqmuM+UJmBErbAUFIoDbjOw==
-  dependencies:
-    forwarded "~0.1.2"
-    ipaddr.js "1.9.1"
-
 proxy-from-env@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/proxy-from-env/-/proxy-from-env-1.1.0.tgz#e102f16ca355424865755d2c9e8ea4f24d58c3e2"
@@ -4095,10 +4097,10 @@ punycode@^2.1.0:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
-puppeteer@^7.0.4:
-  version "7.0.4"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-7.0.4.tgz#f4b91b8a30eef29c53ff9a334123f23f87d42821"
-  integrity sha512-uHG4wXuJ3MuIAvvWJ5cycg+FgbSQEcCPTIKc7Y/nSGKN4UlT+9uFptgV/WgEAES2Dq71k1VwWSjj4pkXYI4tFg==
+puppeteer@^7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-7.1.0.tgz#ae37f48ee13f157c5b9255d580ffe4c5c1298679"
+  integrity sha512-lqOLzqCKdh7yUAHvK6LxgOpQrL8Bv1/jvS8MLDXxcNms2rlM3E8p/Wlwc7efbRZ0twxTzUeqjN5EqrTwxOwc9g==
   dependencies:
     debug "^4.1.0"
     devtools-protocol "0.0.847576"
@@ -4807,10 +4809,10 @@ supports-color@^7.0.0, supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-svelte-check@^1.1.34:
-  version "1.1.34"
-  resolved "https://registry.yarnpkg.com/svelte-check/-/svelte-check-1.1.34.tgz#3d99d3dc48278d13509f223b2875688d5dd48b11"
-  integrity sha512-9k3XoSBiXKIu34w3R8adM35pjJhbB7PJN8aMMusYVZQoPs9+HBJ8OPRfIr6c+LCT0kqR/3WnxkQ/1ooitISbBA==
+svelte-check@^1.1.35:
+  version "1.1.35"
+  resolved "https://registry.yarnpkg.com/svelte-check/-/svelte-check-1.1.35.tgz#062f08ff6b4ff0fa326a0b67fdf5173c14e1a166"
+  integrity sha512-ZTMTkLbdfDwdYtKYHySy7DSCXett9KLl+zpV0CQKhZjXKB95EiRpjmV61+TbIU0/oaljmkCovkHOT2WLiLqWOQ==
   dependencies:
     chalk "^4.0.0"
     chokidar "^3.4.1"
@@ -4836,10 +4838,10 @@ svelte-preprocess@^4.0.0:
     detect-indent "^6.0.0"
     strip-indent "^3.0.0"
 
-svelte-preprocess@^4.6.8:
-  version "4.6.8"
-  resolved "https://registry.yarnpkg.com/svelte-preprocess/-/svelte-preprocess-4.6.8.tgz#bad8a3a1a03163f3941f0dc264b64a40c44a7ae0"
-  integrity sha512-yrT+vuHPoGnNx5Oxa6gMqWV5ZhLgA4isfhUOBwv9iVqZAro9/Nyy8XF5sahAglfMmnCxJkDZSwg7CdAwGpVxhw==
+svelte-preprocess@^4.6.9:
+  version "4.6.9"
+  resolved "https://registry.yarnpkg.com/svelte-preprocess/-/svelte-preprocess-4.6.9.tgz#073d923eb351b98b6c6a454ba5feee981cd9dbf5"
+  integrity sha512-SROWH0rB0DJ+0Ii264cprmNu/NJyZacs5wFD71ya93Cg/oA2lKHgQm4F6j0EWA4ktFMzeuJJm/eX6fka39hEHA==
   dependencies:
     "@types/pug" "^2.0.4"
     "@types/sass" "^1.16.0"
