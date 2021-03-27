@@ -9,8 +9,7 @@
     "watch:ts": "tsc --noEmit --watch",
     "start": "run-p watch:* dev",
     "build": "run-s check compile",
-    "serve": "sirv dist",
-    "postinstall": "rm -rf ./node_modules/@vue/compiler-sfc/node_modules/postcss/ &&  cp -r ./node_modules/postcss/ ./node_modules/@vue/compiler-sfc/node_modules/"
+    "serve": "sirv dist"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^4.0.3",
